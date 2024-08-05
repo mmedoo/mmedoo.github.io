@@ -1,0 +1,60 @@
+.page {
+	--mini-w: calc(100vw / 2);
+	--mini-h: calc(100vh / 2);
+}
+
+
+.page {
+	position: fixed;
+	transition: 0.5s;
+	color: #ffffff;
+	font: bold 30px sans-serif;
+	overflow: hidden;
+
+	top: calc(50% - var(--mini-h)/2);
+	z-index: 999;
+	width: var(--mini-w);
+	height: var(--mini-h);
+	border-radius: 10px;
+	border: 1px solid white;
+
+}
+
+
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: black;
+}
+
+::-webkit-scrollbar-thumb {
+	border-radius: 2px;
+	background-color: #aaa;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: white;
+
+}
+
+
+.open > div {
+	overflow: auto;
+}
+
+.open {
+	border-color: black;
+	border-radius: 0;
+	width: 100vw;
+	height: 100vh;
+	left: 0 !important;
+	z-index: 9999;
+	top: 0;
+	overflow: hidden;
+}
+
+
+
+
+
