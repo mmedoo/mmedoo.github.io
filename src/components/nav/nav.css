@@ -33,7 +33,7 @@
 
 
 
-.cntnr:hover {
+.openNav {
 	height: calc( var(--opened-radius) * 2 + var(--item-width) + 20px );
 	width: calc( var(--opened-radius) * 2 + var(--item-width) + 20px );
 	transition-delay: 0s;
@@ -43,13 +43,14 @@
 
 
 
-.cntnr:hover .item {
+.openNav .item {
 	--current-radius: var(--opened-radius);
 	--current-angle: var(--angle);
+	pointer-events: all;
 }
 
 
-.cntnr:hover .item_content {
+.openNav .item_content {
 	opacity: 1;
 }
 
@@ -84,6 +85,7 @@
 		rotate var(--animat);
 
 	color: white;
+	pointer-events: none;
 }
 
 
@@ -116,4 +118,19 @@
 .item:hover svg {
 	fill: black;
 	stroke: black;
+}
+
+
+.fix {
+	translate: -50% -50%;
+	background-color: transparent;
+	border-color: transparent;
+	cursor: default;
+	width: calc(var(--item-width));
+	height: calc(var(--item-width));
+	pointer-events: all;
+}
+
+.fix:hover {
+	background-color: transparent;
 }

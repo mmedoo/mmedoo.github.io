@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { useContext, useMemo, useRef } from "react";
 import "./nav.css";
 import data from "./nav_data"
 import { SetPageContext } from "../../context";
@@ -31,7 +31,15 @@ function rToAngle (r){
 
 function Nav(){
 
-	const setIndex = useContext(SetPageContext);
+	const setPageContextObj = useContext(SetPageContext);
+	
+	const setIndex = setPageContextObj.setIndex;
+
+	const setHovered = setPageContextObj.setHovered;
+
+	const setOpened = setPageContextObj.setOpened;
+
+	const cntnrRef = useRef(null);
 
 	const items = useMemo(() =>
 		
@@ -42,7 +50,12 @@ function Nav(){
 					key={i}
 					onClick={() => {
 						setIndex(i);
+						cntnrRef.current.classList.remove("openNav");
 					}}
+					onMouseOver={() => {
+						setHovered(i);
+					}}
+					
 					className="item"
 					style={{
 						'--angle': `${  ( unitAngle * (i+1) ) + ( (2*i+1) * rToAngle(itemRadius) ) }deg`,
@@ -57,7 +70,9 @@ function Nav(){
 						<svg>
 							<use xlinkHref={option.icon} />
 						</svg>
-						<text>{option.title}</text>
+						<text>
+							{option.title}
+						</text>
 					</div>
 				</div>
 			)
@@ -68,13 +83,27 @@ function Nav(){
 	
 	return (
 		<div
+			ref={cntnrRef}
 			className="cntnr"
+			onMouseLeave={() => {
+				cntnrRef.current.classList.remove("openNav");
+				setOpened(false);
+			}}
 			style={{
 				'--opened-radius': `${openedRadius}px`,
 				'--item-width': `${itemRadius * 2}px`,
 			}}
-		>			
+		>
 			{items}
+			<div
+				className="item fix"
+				onMouseOver={() => {
+					cntnrRef.current.classList.add("openNav");
+					setOpened(true);
+				}}
+			>
+
+			</div>
 		</div>
 	);
 }

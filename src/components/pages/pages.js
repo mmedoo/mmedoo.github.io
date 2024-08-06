@@ -10,28 +10,47 @@ import { PageContext } from "../../context";
 
 function Page({Element, i}){
 	
-	const index = useContext(PageContext);
+	const pageContextObj = useContext(PageContext);
+	const index = pageContextObj.index;
+	const hovered = pageContextObj.hover;
+	const opened = pageContextObj.open;
 
 	const pageRef = useRef(null);
 
+	function getOut(){
+		pageRef.current.classList.remove("open");
+	}
+	
+	function centerPage(n){
+		pageRef.current.style.left = `calc(50% - var(--mini-w)/2 + ${i-n} * (var(--mini-w) + 30px) )`;
+	}
+	
+	function getIn(n) {
+		pageRef.current.classList.toggle("open", i === n);
+	}
+
+
 	useEffect(() => {
-		(async () => {
-			pageRef.current.classList.remove("open");
-			await new Promise((resolve) => setTimeout(resolve, 500));
-			pageRef.current.style.left = `calc(50% - var(--mini-w)/2 + ${i-index} * (var(--mini-w) + 30px) )`;
-			await new Promise((resolve) => setTimeout(resolve, 500));
-			if (i === index)
-				pageRef.current.classList.add("open")
-			else
-				pageRef.current.classList.remove("open")
-		})();
+		centerPage(hovered)
+	}, [hovered]);
+
+	useEffect(() => {
+		centerPage(index);
+		getIn(index);
 	}, [index]);
 
+	useEffect(() => {
+		centerPage(index);
+		if (opened)
+			getOut();
+		else
+			getIn(index);
+	}, [opened]);
 	
 	return (
 		<div
 			ref={pageRef}
-			className={ `page` }
+			className={ `page open` }
 		>
 			<Backg/>
 			<div className="page-container">

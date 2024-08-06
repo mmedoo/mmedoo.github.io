@@ -38,7 +38,7 @@ const basicSketch = (p) => {
 
 		var grad = p.drawingContext.createLinearGradient(x1, y1, x2, y2);
 
-		grad.addColorStop(0.8, "transparent");
+		grad.addColorStop(1, "transparent");
 		grad.addColorStop(0.5, color2);
 		grad.addColorStop(0, color3);
 
@@ -55,7 +55,7 @@ const basicSketch = (p) => {
 			return;
 
 		p.stroke(255)
-		gradientLine(this.x, this.y, mouseX, mouseY, `rgba(150,150,150,${vsblty})`, `rgba(55,55,55,${vsblty})`);
+		gradientLine(this.x, this.y, mouseX, mouseY, `rgba(80,80,80,${vsblty})`, `rgba(55,55,55,${vsblty})`);
 
 	}
 	
@@ -84,7 +84,7 @@ const basicSketch = (p) => {
 	p.draw = () => {
 		p.background(bgColor);
 
-		vsblty > 0 ? vsblty -= 0.03 : vsblty = 0;
+		vsblty > 0 ? vsblty -= 0.0075 : vsblty = 0;
 
 		sects.connectMouse(p.mouseX, p.mouseY);
 	};

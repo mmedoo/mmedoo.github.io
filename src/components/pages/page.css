@@ -33,13 +33,8 @@
 	width: var(--mini-w);
 	height: var(--mini-h);
 	border-radius: 10px;
-	border: 1px solid white;
-
+	border: 2px solid rgb(80,80,80);
 }
-
-
-
-
 
 
 .open {
@@ -67,4 +62,13 @@
 	scroll-behavior: smooth;
 	transition: 3s;
 	scroll-snap-align: start;
+}
+
+.view {
+	font: bold 20px 'Google Sans';
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
 }
