@@ -1,9 +1,10 @@
 import "./page.css"
+import Backg from "./background/background"
 import Hero from "./hero/hero"
 import Proj from "./projects/proj"
 import Contect from "./contact/contact"
 import About from "./about/about"
-import { useContext, useEffect, useMemo, useRef } from "react"
+import { useContext, useEffect, useMemo, useRef, useState } from "react"
 import { PageContext } from "../../context";
 
 
@@ -14,9 +15,10 @@ function Page({Element, i}){
 	const pageRef = useRef(null);
 
 	useEffect(() => {
-		pageRef.current.classList.remove("open");
-		pageRef.current.style.left = `calc(50% - var(--mini-w)/2 + ${i-index} * (var(--mini-w) + 30px) )`;
 		(async () => {
+			pageRef.current.classList.remove("open");
+			await new Promise((resolve) => setTimeout(resolve, 500));
+			pageRef.current.style.left = `calc(50% - var(--mini-w)/2 + ${i-index} * (var(--mini-w) + 30px) )`;
 			await new Promise((resolve) => setTimeout(resolve, 500));
 			if (i === index)
 				pageRef.current.classList.add("open")
@@ -24,15 +26,19 @@ function Page({Element, i}){
 				pageRef.current.classList.remove("open")
 		})();
 	}, [index]);
+
 	
 	return (
 		<div
 			ref={pageRef}
 			className={ `page` }
 		>
-
-			<Element/>
-
+			<Backg/>
+			<div className="page-container">
+				<Element/>
+				<Element/>
+				<Element/>
+			</div>
 		</div>
 	)
 }
