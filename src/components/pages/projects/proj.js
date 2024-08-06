@@ -3,7 +3,7 @@ import "./proj.css"
 
 function Proj() {
 	return (
-		<div className="hero">
+		<div className="view">
 			<div className="intro">
 				PROJECTS
 			</div>

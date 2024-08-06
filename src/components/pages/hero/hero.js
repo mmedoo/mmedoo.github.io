@@ -2,13 +2,20 @@ import "./hero.css"
 
 function Hero() {
 	return (
-		<div className="hero">
-			<div className="intro">
-				I'M
-				<br/>
-				MOHAMED
+		<>
+			<div className="view">
+				<div className="intro">
+					I'm
+					<br/>
+					Mohamed
+				</div>
 			</div>
-		</div>
+			<div className="view">
+				<div className="intro">
+					A Developer.
+				</div>
+			</div>
+		</>
 	);
 }
 

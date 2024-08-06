@@ -2,7 +2,7 @@ import "./about.css"
 
 function Hero() {
 	return (
-		<div className="hero">
+		<div className="view">
 			<div className="intro">
 				About
 			</div>

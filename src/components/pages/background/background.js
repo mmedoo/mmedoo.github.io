@@ -83,14 +83,6 @@ const basicSketch = (p) => {
 
 	p.draw = () => {
 		p.background(bgColor);
-		if (p.mouseX < 0)
-			return;
-		if (p.mouseY < 0)
-			return;
-		if (p.mouseX > window.innerWidth)
-			return;
-		if (p.mouseY > window.innerHeight)
-			return;
 
 		vsblty > 0 ? vsblty -= 0.03 : vsblty = 0;
 
