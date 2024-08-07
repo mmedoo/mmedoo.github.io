@@ -15,22 +15,27 @@ function Page({Element, i}){
 	const pageRef = useRef(null);
 	
 	function centerPage(n){
-		pageRef.current.style.left = `calc(50% - var(--mini-w)/2 + ${i-n} * (var(--mini-w) + 30px) )`;
+		let v = `calc(50% - var(--mini-w)/2 + ${i-n} * (var(--mini-w) + 30px) )`;
+		pageRef.current.style.setProperty('--left-shrink', v);
 	}
 	
 	useEffect(() => {
-		centerPage(pageContextObj.hover);
-	}, [pageContextObj.hover]);
+		if (pageContextObj.open) {
+			centerPage(pageContextObj.hover);
+		}
+	}, [pageContextObj]);
 	
 	return (
 		<div
 			ref={pageRef}
-			className={ `page ${(!pageContextObj.open && pageContextObj.index === i) ? "open" : ""}` }
+			className={ `
+				page
+				${ pageContextObj.index === i ? "active" : "" }
+				${ pageContextObj.open ? "shrink" : "" }`
+			}
 		>
 			<Backg/>
 			<div className="page-container">
-				<Element/>
-				<Element/>
 				<Element/>
 			</div>
 		</div>

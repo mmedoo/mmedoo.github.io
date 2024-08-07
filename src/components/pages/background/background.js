@@ -55,7 +55,7 @@ const basicSketch = (p) => {
 			return;
 
 		p.stroke(255)
-		gradientLine(this.x, this.y, mouseX, mouseY, `rgba(80,80,80,${vsblty})`, `rgba(55,55,55,${vsblty})`);
+		gradientLine(this.x, this.y, mouseX, mouseY, `rgba(120,120,120,${vsblty})`, `rgba(55,55,55,${vsblty})`);
 
 	}
 	
