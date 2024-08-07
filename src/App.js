@@ -6,22 +6,16 @@ import { useState } from "react"
 
 function App() {
 	
-	const [pageIndex, setPageIndex] = useState(0);
-	const [pageHovered, setPageHovered] = useState(null);
-	const [isOpened, setOpened] = useState(false);
+	const [pageObjects, setPageObjects] = useState({
+		index: 0,
+		hover: 0,
+		open: false,
+	});
 	
 	return (
-		<PageContext.Provider value={{
-			index: pageIndex,
-			hover: pageHovered,
-			open: isOpened,
-		}}>
+		<PageContext.Provider value={pageObjects}>
 		
-		<SetPageContext.Provider value={{
-			setIndex: setPageIndex,
-			setHovered: setPageHovered,
-			setOpened: setOpened
-		}}>
+		<SetPageContext.Provider value={setPageObjects}>
 		<Navbar />
 		</SetPageContext.Provider>
 		

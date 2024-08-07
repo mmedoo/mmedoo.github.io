@@ -1,7 +1,7 @@
 import { useContext, useMemo, useRef } from "react";
 import "./nav.css";
 import data from "./nav_data"
-import { SetPageContext } from "../../context";
+import { PageContext, SetPageContext } from "../../context";
 
 // customizations
 // customizations
@@ -31,13 +31,17 @@ function rToAngle (r){
 
 function Nav(){
 
-	const setPageContextObj = useContext(SetPageContext);
+	const pageContextObj = useContext(PageContext);
+
+	const opened = pageContextObj.open;
+
+	const setPageObj = useContext(SetPageContext);
 	
-	const setIndex = setPageContextObj.setIndex;
+	// const setIndex = setPageContextObj;
 
-	const setHovered = setPageContextObj.setHovered;
+	// const setHovered = setPageContextObj.setHovered;
 
-	const setOpened = setPageContextObj.setOpened;
+	// const setOpened = setPageContextObj.setOpened;
 
 	const cntnrRef = useRef(null);
 
@@ -49,11 +53,19 @@ function Nav(){
 				<div
 					key={i}
 					onClick={() => {
-						setIndex(i);
-						cntnrRef.current.classList.remove("openNav");
+						setPageObj({
+							index: i,
+							hover: i,
+							open: false,
+						});
 					}}
 					onMouseOver={() => {
-						setHovered(i);
+						setPageObj(prev =>
+							({
+								...prev,
+								hover: i,
+							})
+						)
 					}}
 					
 					className="item"
@@ -84,10 +96,15 @@ function Nav(){
 	return (
 		<div
 			ref={cntnrRef}
-			className="cntnr"
+			className={`cntnr ${opened ? "openNav" : ""}`}
 			onMouseLeave={() => {
-				cntnrRef.current.classList.remove("openNav");
-				setOpened(false);
+				setPageObj(prev =>
+					({
+						...prev,
+						hover: prev.index,
+						open: false,
+					})
+				)
 			}}
 			style={{
 				'--opened-radius': `${openedRadius}px`,
@@ -97,9 +114,13 @@ function Nav(){
 			{items}
 			<div
 				className="item fix"
-				onMouseOver={() => {
-					cntnrRef.current.classList.add("openNav");
-					setOpened(true);
+				onMouseOver={async (e) => {
+					setPageObj(prev =>
+						({
+							...prev,
+							open: true,
+						})
+					)
 				}}
 			>
 

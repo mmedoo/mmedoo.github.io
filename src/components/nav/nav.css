@@ -13,7 +13,7 @@
 
 	transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1) 0.7s , width 0s, height 0s;
 
-	/* rotate: 250deg; */
+	rotate: 250deg;
 
 	--current-radius: 0px;
 	--current-angle: 0deg;
@@ -119,6 +119,7 @@
 	fill: black;
 	stroke: black;
 }
+
 
 
 .fix {
