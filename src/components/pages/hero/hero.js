@@ -1,51 +1,45 @@
 import "./hero.css"
+import Animated_Text from "../load_animation/animate_text";
+
+
+const skillset = [
+		"Data Structures & Algorithms",
+		"Object Oriented Programming",
+		"Javascript",
+		"C++",
+		"Python",
+		"Django",
+		"Node.js",
+		"NPM",
+		"SQL",
+		"React.js",
+		"ORM",
+		"RESTFUL API",
+		"Git",
+		"Github",
+		"Github Actions"
+	].map((skill, i) => <Animated_Text text={skill} i={i} key={i} />);
 
 function Hero() {
 	return (
 		<>
 			<div className="view">
 				<div className="view_content">
-					I'm
-					<br/>
-					Mohamed
+					<Animated_Text text="I'm" i={0} />
+					<Animated_Text text="Mohmaed" i={1} />
 				</div>
 			</div>
 			<div className="view">
 				<div className="view_content">
-					A Developer.
+					<div className="dev">
+						<Animated_Text text={"A Develo"} i={0}/>
+						<Animated_Text text={"per"} i={1}/>
+					</div>
 				</div>
 			</div>
 			<div className="view">
 				<div className="view_content">
-					Data Structures & Algorithms
-					<br/>
-					Object Oriented Programming
-					<br/>
-					Javascript
-					<br/>
-					C++
-					<br/>
-					Python
-					<br/>
-					Django
-					<br/>
-					Node.js
-					<br/>
-					NPM
-					<br/>
-					SQL
-					<br/>
-					React.js
-					<br/>
-					ORM
-					<br/>
-					RESTFUL API
-					<br/>
-					Git
-					<br/>
-					Github
-					<br/>
-					Github Actions
+					{skillset}
 				</div>
 			</div>
 		</>

@@ -5,12 +5,14 @@ import Proj from "./projects/proj"
 import Contect from "./contact/contact"
 import About from "./about/about"
 import { useContext, useEffect, useMemo, useRef } from "react"
-import { PageContext } from "../../context";
+import { PageContext, SetPageContext } from "../../context";
 
 
 function Page({Element, i}){
 	
 	const pageContextObj = useContext(PageContext);
+
+	const setPageContextObj = useContext(SetPageContext);
 	
 	const pageRef = useRef(null);
 	
@@ -18,6 +20,9 @@ function Page({Element, i}){
 		let v = `calc(50% - var(--mini-w)/2 + ${i-n} * (var(--mini-w) + 30px) )`;
 		pageRef.current.style.setProperty('--left-shrink', v);
 	}
+
+	const pageContRef = useRef(null);
+	
 	
 	useEffect(() => {
 		if (pageContextObj.open) {
@@ -35,7 +40,10 @@ function Page({Element, i}){
 			}
 		>
 			<Backg/>
-			<div className="page-container">
+			<div
+				className="page-container"
+				ref={pageContRef}
+			>
 				<Element/>
 			</div>
 		</div>

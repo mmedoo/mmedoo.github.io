@@ -1,0 +1,18 @@
+.text_anim {
+	overflow: hidden;
+	display: block;
+}
+
+.text_wrap {
+	font: inherit;
+	font-size: 100%;
+	display: block;
+	transform: translate(0, 100%);
+	transition: 0.5s;
+	transition-delay: 0s;
+}
+
+.text_wrap_appear {
+	transition-delay: calc(var(--order) * 0.05s);
+	transform: none;
+}
