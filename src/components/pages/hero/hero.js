@@ -25,15 +25,15 @@ function Hero() {
 		<>
 			<div className="view">
 				<div className="view_content">
-					<Animated_Text text="I'm" i={0} />
-					<Animated_Text text="Mohmaed" i={1} />
+					<Animated_Text text="I'm" i={1} />
+					<Animated_Text text="Mohmaed" i={2} />
 				</div>
 			</div>
 			<div className="view">
 				<div className="view_content">
 					<div className="dev">
-						<Animated_Text text={"A Develo"} i={0}/>
-						<Animated_Text text={"per"} i={1}/>
+						<Animated_Text text={"A Develo"} i={1}/>
+						<Animated_Text text={"per"} i={2}/>
 					</div>
 				</div>
 			</div>

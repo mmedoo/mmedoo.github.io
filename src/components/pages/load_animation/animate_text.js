@@ -14,7 +14,9 @@ function Animated_Text({text, i}) {
 				animatedDiv.current?.classList.toggle("text_wrap_appear", entry.isIntersecting);
             });
         }
-        const observer = new IntersectionObserver(callback);
+        const observer = new IntersectionObserver(callback,{
+			threshold: 1
+		});
 
         observer.observe(contRef.current);
 	}, []);
