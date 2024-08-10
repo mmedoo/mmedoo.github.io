@@ -17,17 +17,25 @@ function Page({Element, i}){
 	const pageRef = useRef(null);
 	
 	function centerPage(n){
+		
 		let v = `calc(-50% + ${i-n} * (100% + 30px) )`;
-		pageRef.current.style.setProperty('--left-shrink', v);
+		
+		// pageRef.current.style.setProperty('--left-shrink', v);
+		
+		pageRef.current.animate({
+			translate: `${v} -50%`
+		},
+		{
+			fill: "both",
+			duration: 500,
+		})
 	}
 
 	const pageContRef = useRef(null);
 		
 	useEffect(() => {
 
-		if (pageContextObj.open) {
-			centerPage(pageContextObj.hover);
-		}
+		centerPage(pageContextObj.hover);
 		
 		pageContRef.current.style.left = `calc( ${(pageContextObj.hover-i) * 50/3}% + 50%)`;
 		
@@ -52,14 +60,14 @@ function Page({Element, i}){
 		if (e.deltaY < 0) {
 			setPageContextObj(prev => ({
 				...prev,
-				hover: (prev.hover <= 0) ? (0) : (prev.hover - 0.15)
+				hover: (prev.hover <= 0) ? (0) : (prev.hover - 0.03)
 			}))
 		}
 
 		else {
 			setPageContextObj(prev => ({
 				...prev,
-				hover: (prev.hover >= 3) ? (3) : (prev.hover + 0.15)
+				hover: (prev.hover >= 3) ? (3) : (prev.hover + 0.03)
 			}))
 		}
 	}
@@ -132,11 +140,12 @@ function Page({Element, i}){
 			}
 			onClick={() => {
 				if (pageContextObj.open) {
-					setPageContextObj(prev => ({
+					// centerPage(i);
+					setPageContextObj({
 						hover: i,
 						index: i,
 						open: false
-					}));
+					});
 				}
 			}}
 		>

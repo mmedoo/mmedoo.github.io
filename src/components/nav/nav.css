@@ -117,8 +117,10 @@
 	width: calc(var(--item-width));
 	height: calc(var(--item-width));
 	pointer-events: all;
+	cursor: pointer;
 }
 
-.fix:hover {
+.ignoreFixedItem:hover {
 	background-color: transparent;
+	cursor: default;
 }

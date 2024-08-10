@@ -97,7 +97,7 @@ function Nav(){
 		<div
 			ref={cntnrRef}
 			className={`cntnr ${opened ? "openNav" : ""}`}
-			onMouseLeave={() => {
+			onBlur={() => {
 				setPageObj(prev =>
 					({
 						...prev,
@@ -113,8 +113,8 @@ function Nav(){
 		>
 			{items}
 			<div
-				className="item fix"
-				onMouseOver={async (e) => {
+				className={`item fix ${pageContextObj.open ? "ignoreFixedItem" : ""}`}
+				onClick={async (e) => {
 					setPageObj(prev =>
 						({
 							...prev,

@@ -1,13 +1,15 @@
 .text_anim {
-	overflow: hidden;
+	overflow-y: hidden;
+	overflow-x: visible;
 	display: block;
+	white-space: nowrap;
 }
 
 .text_wrap {
 	font: inherit;
 	font-size: 100%;
 	display: block;
-	transform: translate(0, 100%);
+	transform: translate(0, 110%);
 	transition: 0.5s;
 	transition-delay: 0s;
 }

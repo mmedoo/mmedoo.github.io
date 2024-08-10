@@ -1,10 +1,46 @@
-
-
-
 .dev {
-	font-size: 27vw;
+	font-size: 25vw;
 	line-height: 0.85;
-	letter-spacing: -0.1em;
+	letter-spacing: -0.05em;
 	align-self: flex-start;
+	
 }
 
+.credits {
+	position: relative;
+	/* border: 1px solid white; */
+}
+
+.credits , .credits div {
+}
+
+.credits div {
+	position: absolute;
+	margin: 0 10px;
+}
+
+.credits div > * {
+	height: 25px;
+	display: flex;
+	align-items:last baseline;
+	/* border: 1px solid white; */
+}
+
+.credits div:first-child {
+	right: 0;
+	font: 400 16px "Google Sans";
+}
+
+.credits div:last-child {
+	left: 0;
+	font: 400 20px "Google Sans";
+}
+
+.credits div:first-child > * {
+	text-align: right;
+	right: 0;
+}
+
+.credits div:first-child > * {
+	justify-content: end;
+}
