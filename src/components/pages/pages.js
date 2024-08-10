@@ -35,16 +35,18 @@ function Page({Element, i}){
 		
 	useEffect(() => {
 
+		let node = pageContRef.current;
+
 		centerPage(pageContextObj.hover);
 		
-		pageContRef.current.style.left = `calc( ${(pageContextObj.hover-i) * 50/3}% + 50%)`;
+		node.style.left = `calc( ${(pageContextObj.hover-i) * 50/3}% + 50%)`;
 		
 		window.addEventListener("wheel",handleOpenWheel)
 		
-		pageContRef.current?.addEventListener("wheel", handleWheel);
+		node?.addEventListener("wheel", handleWheel);
 
 		return () => {
-			pageContRef.current?.removeEventListener("wheel", handleWheel);
+			node?.removeEventListener("wheel", handleWheel);
 			window.removeEventListener("wheel",handleOpenWheel)
 		}
 		
@@ -60,14 +62,14 @@ function Page({Element, i}){
 		if (e.deltaY < 0) {
 			setPageContextObj(prev => ({
 				...prev,
-				hover: (prev.hover <= 0) ? (0) : (prev.hover - 0.03)
+				hover: (prev.hover <= 0) ? (0) : (prev.hover - 0.025)
 			}))
 		}
 
 		else {
 			setPageContextObj(prev => ({
 				...prev,
-				hover: (prev.hover >= 3) ? (3) : (prev.hover + 0.03)
+				hover: (prev.hover >= 3) ? (3) : (prev.hover + 0.025)
 			}))
 		}
 	}

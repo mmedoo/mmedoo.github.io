@@ -3,9 +3,11 @@
 	overflow-x: visible;
 	display: block;
 	white-space: nowrap;
+	/* margin: 5px 0; */
 }
 
 .text_wrap {
+	
 	font: inherit;
 	font-size: 100%;
 	display: block;

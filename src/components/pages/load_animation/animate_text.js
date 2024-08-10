@@ -15,7 +15,7 @@ function Animated_Text({text, i}) {
             });
         }
         const observer = new IntersectionObserver(callback,{
-			threshold: 0.8
+			threshold: 0.1
 		});
 
         observer.observe(contRef.current);

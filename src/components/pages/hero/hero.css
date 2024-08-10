@@ -1,29 +1,49 @@
 .dev {
 	font-size: 25vw;
 	line-height: 0.85;
-	letter-spacing: -0.05em;
+	letter-spacing: -0.1em;
 	align-self: flex-start;
-	
 }
+
+.lang {
+	letter-spacing: 9px;
+	translate: 4px 0;
+	font-weight: normal;
+	text-align: center;
+}
+
+
+.dot {
+	height: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.dot::after {
+	content: '';
+	height: 3px;
+	width: 3px;
+	background: rgb(40,40,40);
+	border-radius: 50%;
+	translate: -3px 0;
+}
+
+
 
 .credits {
 	position: relative;
-	/* border: 1px solid white; */
 }
 
-.credits , .credits div {
-}
-
-.credits div {
+.credits > div {
 	position: absolute;
-	margin: 0 10px;
+	margin: 0 8px;
 }
 
-.credits div > * {
-	height: 25px;
+.credits > div > * {
+	min-height: 30px;
 	display: flex;
 	align-items:last baseline;
-	/* border: 1px solid white; */
 }
 
 .credits div:first-child {
@@ -43,4 +63,12 @@
 
 .credits div:first-child > * {
 	justify-content: end;
+}
+
+.cw > div {
+	position: static;
+}
+
+.cw div:first-child > * {
+	justify-content: center;
 }
