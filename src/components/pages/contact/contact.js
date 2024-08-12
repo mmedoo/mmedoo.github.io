@@ -2,7 +2,7 @@
 function Contact() {
 	return (
 		<div className="view">
-			<div className="intro">
+			<div className="view_content">
 				Contact
 			</div>
 		</div>

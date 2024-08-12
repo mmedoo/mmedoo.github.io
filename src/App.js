@@ -41,7 +41,7 @@ function App() {
 			<PageContext.Provider value={pageObjects}>
 				<SetPageContext.Provider value={setPageObjects}>
 
-					<Navbar />
+					{/* <Navbar /> */}
 					<Pages/>
 
 				</SetPageContext.Provider>

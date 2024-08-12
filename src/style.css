@@ -27,3 +27,9 @@ body {
 	left: -100%;
 	top: 50%;
 }
+
+@media screen and (max-width: 800px) {
+	.curs {
+		display: none;
+	}
+}

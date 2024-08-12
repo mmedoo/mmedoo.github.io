@@ -9,7 +9,7 @@ const mouseCircum = 120;
 
 var vsblty = 0;
 
-var bgColor = 0;
+var bgColor = "rgba(0,0,0,0)";
 
 const basicSketch = (p) => {
 
@@ -61,19 +61,19 @@ const basicSketch = (p) => {
 	
 
 	Pool.prototype.connectMouse = function (mouseX, mouseY) {
-		for (const p of this.particles) {
-			p.connectMouse(mouseX, mouseY);
+		for (const part of this.particles) {
+			part.connectMouse(mouseX, mouseY);
 		}
 	}
 	
 
 	p.setup = () => {
 
-		// if (window.innerWidth < 1000)
-			// p.noLoop();
+		if (window.innerWidth < 800)
+			p.noLoop();
 		
 		p.createCanvas(window.innerWidth, window.innerHeight);
-		p.background(bgColor);
+		// p.background(bgColor);
 		sects = new Pool(particlesNo);
 	};
 	
@@ -82,18 +82,22 @@ const basicSketch = (p) => {
 	}
 
 	p.draw = () => {
-		p.background(bgColor);
-
+		// p.background(bgColor);
+		p.clear();
+		
 		vsblty > 0 ? vsblty -= 0.0075 : vsblty = 0;
-
+		
 		sects.connectMouse(p.mouseX, p.mouseY);
 	};
 	
 	
 	p.windowResized = () => {
-		// if (window.innerWidth >= 1000)
-		// 	p.loop();
 		
+		if (window.innerWidth >= 800)
+			p.loop();
+		else
+			p.noLoop();
+
 		particlesNo = window.innerWidth/5.5;
 		p.resizeCanvas(window.innerWidth, window.innerHeight);
 		sects = new Pool(particlesNo);
