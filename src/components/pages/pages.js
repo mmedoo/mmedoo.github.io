@@ -184,7 +184,7 @@ function Page({Element, i}){
 
 		let deltaX = swipeEndX - swipeStartX;
 		
-		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 3);
+		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 5);
 
 		if (deltaX > 0) {
 			setPageContextObj(prev => ({
