@@ -4,7 +4,7 @@ import Hero from "./hero/hero"
 import Proj from "./projects/proj"
 import Contect from "./contact/contact"
 import About from "./about/about"
-import { useContext, useEffect, useMemo, useRef } from "react"
+import React, { useCallback, useContext, useEffect, useMemo, useRef } from "react"
 import { PageContext, SetPageContext } from "../../context";
 
 function map(value, start1, stop1, start2, stop2){
@@ -29,25 +29,22 @@ const icons = [
 	</svg>
 ];
 
+const arr = [Hero, Proj, Contect, About];
 
 var swipeStartX = 0,
 	swipeStartY = 0,
-	swipeEndX = 0,
-	swipeEndY = 0;
-
-var currentHover = 0;
+	currentHover = 0;
 	
-function Page({Element, i}){
+const Page = React.memo (({Element, i}) => {
 	
 	const pageContextObj = useContext(PageContext);
-
 	const setPageContextObj = useContext(SetPageContext);
 	
 	const pageRef = useRef(null);
-
+	const pageContRef = useRef(null);
 	const pageIconRef = useRef(null);
 	
-	function centerPage(n){
+	const centerPage = useCallback((n) => {
 	
 		let v = `calc(-50% + ${i-n} * (100% + 30px) )`;
 
@@ -62,31 +59,80 @@ function Page({Element, i}){
 			easing: "ease-in-out"
 		}
 		
-		pageRef.current.animate({
-			translate: `${v} -50%`
-		},
+		pageRef.current.animate(
+			{ translate: `${v} -50%` },
 			animation_option
 		);
-
-		pageContRef.current.animate({
-			left: `calc( ${(pageContextObj.hover-i) * 50/3}% + 50%)`
-		},
-			animation_option	
+	  
+		pageContRef.current.animate(
+			{ left: `calc(${(pageContextObj.hover - i) * 50 / 3}% + 50%)` },
+			animation_option
 		);
-		
-		pageIconRef.current.animate({
-			translate: `calc( ${(pageContextObj.hover-i)} * 100%)`
-		},
-			animation_option	
+	  
+		pageIconRef.current.animate(
+			{ translate: `calc(${(pageContextObj.hover - i)} * 100%)` },
+			animation_option
 		);
-	}
-	
-	const pageContRef = useRef(null);
+	}, [pageContextObj.hover, pageContextObj.open]);
 	
 	useEffect(() => {
-	
 		centerPage(pageContextObj.hover);
-
+		
+		const handleOpenWheel = (e) => {
+			if (!pageContextObj.open) return;
+			let move = map(Math.abs(e.deltaY), 0, 100, 0, 0.1);
+			setPageContextObj(prev => ({
+				...prev,
+				hover: e.deltaY < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, 3),
+			}));
+		}
+	
+		const handleCloseWheel = (e) => {
+			if (pageContextObj.open) return;
+			let scrolled = parseInt(pageContRef.current.dataset.scrolled);
+			let target = scrolled + e.deltaY / 4;
+			let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
+			
+			if (target > maximum + 80 || target < 0) {
+				setPageContextObj(prev => ({ ...prev, open: true }));
+				pageContRef.current.removeEventListener("wheel", handleCloseWheel);
+				return;
+			}
+			pageContRef.current.animate(
+				{ transform: `translate(0,-${target}px)` },
+				{ fill: "both",duration: 500,easing: "ease-in-out" }
+			)
+			pageContRef.current.dataset.scrolled = target;
+		}
+		
+		const handleOpenSwipe = (e) => {	
+			if (!pageContextObj.open) return;
+			let deltaX = e.touches[0].clientX - swipeStartX;		
+			let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 6);
+			setPageContextObj((prev) => ({
+				...prev,
+				hover: deltaX > 0 ? Math.max(currentHover - move, 0) : Math.min(currentHover + move, 3),
+			}));
+		}
+		
+		const handleCloseSwipe = (e) => {
+			if (pageContextObj.open) return;
+			let deltaY = swipeStartY - e.touches[0].clientY;
+			let scrolled = parseInt(pageContRef.current?.dataset.scrolled);
+			let target = scrolled + deltaY * 2;
+			let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
+	
+			if (target > maximum + 80 || target < 0) {
+				setPageContextObj((prev) => ({ ...prev, open: true }));
+				return;
+			}
+			pageContRef.current.animate(
+				{ transform: `translate(0,-${target}px)` },
+				{ fill: "both", duration: 500, easing: "ease-in-out" }
+			);
+			pageContRef.current.dataset.lastScroll = target;
+		}
+		
 		window.addEventListener("wheel",handleOpenWheel,{passive: true});
 
 		window.addEventListener("touchstart", (e) => {
@@ -95,13 +141,10 @@ function Page({Element, i}){
 			swipeStartY = touch.clientY;
 			currentHover = pageContextObj.hover;
 		});
-		
 		window.addEventListener("touchmove", handleOpenSwipe, {passive: true});
-
 		window.addEventListener("touchend", () => {
 			pageContRef.current.dataset.scrolled = pageContRef.current.dataset.lastScroll;
 		});
-
 		pageContRef.current?.addEventListener("wheel", handleCloseWheel, {passive: true});
 		pageContRef.current?.addEventListener("touchmove", handleCloseSwipe, {passive: true});
 		
@@ -111,169 +154,20 @@ function Page({Element, i}){
 			window.removeEventListener("wheel",handleOpenWheel)
 			window.removeEventListener("touchmove", handleOpenSwipe);
 		}
-	
-	}, [pageContextObj]);
-	
-
-	function handleOpenWheel(e){
-			
-		if (!pageContextObj.open)
-			return;
-
-		let move = map(Math.abs(e.deltaY), 0, 100, 0, 0.1);
-		
-		if (e.deltaY < 0) {
-			setPageContextObj(prev => ({
-				...prev,
-				hover: (prev.hover <= 0) ? (0) : (prev.hover - move)
-			}))
-		}
-
-		else {
-			setPageContextObj(prev => ({
-				...prev,
-				hover: (prev.hover >= 3) ? (3) : (prev.hover + move)
-			}))
-		}
-	}
-
-	function handleCloseWheel(e){
-		
-		if (pageContextObj.open)
-			return;
-
-		let scrolled = parseInt(this.dataset.scrolled);
-
-		let target = scrolled + e.deltaY / 4;
-		
-		let maximum = this.scrollHeight - this.offsetHeight;
-		
-		if (target > maximum + 80 || target < 0) {
-			
-			setPageContextObj(prev => ({
-				...prev,
-				open: true
-			}));
-			
-			this.removeEventListener("wheel", handleCloseWheel);
-			
-			return;
-		}
-
-		this.animate(
-			{
-				transform: `translate(0,-${target}px)` 
-			},
-			{
-				fill: "both",
-				duration: 500,
-				easing: "ease-in-out"
-			}
-		)
-
-		this.dataset.scrolled = target;
-
-	}
-	
-	function handleOpenSwipe(e){	
-		
-		if (!pageContextObj.open)
-			return;
-
-		const touch = e.touches[0];
-		swipeEndX = touch.clientX;
-		swipeEndY = touch.clientY;
-		
-		let deltaX = swipeEndX - swipeStartX;
-		
-		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 6);
-
-		if (deltaX > 0) {
-			setPageContextObj(prev => ({
-				...prev,
-				hover: (currentHover - move < 0) ? (0) : (currentHover - move)
-			}))
-		}
-
-		else {
-			setPageContextObj(prev => ({
-				...prev,
-				hover: (currentHover + move > 3) ? (3) : (currentHover + move)
-			}))
-		}
-	};
-	
-	function handleCloseSwipe(e){
-
-		if (pageContextObj.open)
-			return;
-
-		const touch = e.touches[0];
-
-		swipeEndY = touch.clientY;
-
-		let deltaY = swipeStartY - swipeEndY;
-
-		let scrolled = parseInt(pageContRef.current?.dataset.scrolled);
-
-		let target = scrolled + deltaY * 2;
-
-		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
-
-		if (target > maximum + 80 || target < 0) {
-
-			setPageContextObj(prev => ({
-				...prev,
-				open: true
-			}));
-			
-			return;
-		}
-
-		pageContRef.current.animate(
-			{
-				transform: `translate(0,-${target}px)` 
-			},
-			{
-				fill: "both",
-				duration: 500,
-				easing: "ease-in-out"
-			}
-		)
-
-		pageContRef.current.dataset.lastScroll = target;
-	}
+	}, [pageContextObj])	
 
 	
-
-	function pageClicked(e){
-
+	const pageClicked = useCallback((e) => {
 		if (pageContextObj.open) {
-
 			centerPage(i);
-			
-			setPageContextObj({
-				hover: i,
-				index: i,
-				open: false
-			});
-			
-		} else {
-			let next;
-			
-			if (e.clientX < window.innerWidth / 2) {
-				next = pageContextObj.index - 1 <= 0 ? 0 : pageContextObj.index - 1;
-			} else {
-				next = pageContextObj.index + 1 >= 3 ? 3 : pageContextObj.index + 1;
-			}
-			
-			setPageContextObj({
-				index: next,
-				hover: next,
-				open: false
-			});
+			setPageContextObj({hover: i,index: i,open: false});
+		} else {			
+			let next = e.clientX < window.innerWidth / 2 ?
+				Math.max(pageContextObj.index - 1, 0)
+			: Math.min(pageContextObj.index + 1, 3);
+			setPageContextObj({index: next,hover: next,open: false});
 		}
-	}
+	}, [pageContextObj]);
 
 	return (
 		<div
@@ -304,25 +198,15 @@ function Page({Element, i}){
 			</div>
 		</div>
 	)
-}
+});
 
 
 
-
-
-
-
-const arr = [Hero, Proj, Contect, About];
-
-function Pages(){
+const Pages = React.memo(() => {
 
 	const pageList = useMemo(() => {
 		return arr.map((comp, i) =>
-			<Page
-				Element={comp}
-				i={i}
-				key={i}
-			/>
+			<Page Element={comp} i={i} key={i} />
 		);
 	}, []);
 	
@@ -331,6 +215,6 @@ function Pages(){
 			{pageList}
 		</>
 	)
-}
+});
 
 export default Pages;
