@@ -95,15 +95,18 @@ function Page({Element, i}){
 			swipeStartY = touch.clientY;
 			currentHover = pageContextObj.hover;
 		});
-
+		
 		window.addEventListener("touchmove", handleOpenSwipe, {passive: true});
 
-		pageContRef.current?.addEventListener("wheel", handleWheel, {passive: true});
+		window.addEventListener("touchend", () => {
+			pageContRef.current.dataset.scrolled = pageContRef.current.dataset.lastScroll;
+		});
 
+		pageContRef.current?.addEventListener("wheel", handleCloseWheel, {passive: true});
 		pageContRef.current?.addEventListener("touchmove", handleCloseSwipe, {passive: true});
-			
+		
 		return () => {
-			pageContRef.current?.removeEventListener("wheel", handleWheel);
+			pageContRef.current?.removeEventListener("wheel", handleCloseWheel);
 			pageContRef.current?.removeEventListener("touchmove", handleCloseSwipe);
 			window.removeEventListener("wheel",handleOpenWheel)
 			window.removeEventListener("touchmove", handleOpenSwipe);
@@ -135,7 +138,7 @@ function Page({Element, i}){
 		}
 	}
 
-	function handleWheel(e){
+	function handleCloseWheel(e){
 		
 		if (pageContextObj.open)
 			return;
@@ -153,7 +156,7 @@ function Page({Element, i}){
 				open: true
 			}));
 			
-			this.removeEventListener("wheel", handleWheel);
+			this.removeEventListener("wheel", handleCloseWheel);
 			
 			return;
 		}
@@ -174,14 +177,14 @@ function Page({Element, i}){
 	}
 	
 	function handleOpenSwipe(e){	
+		
+		if (!pageContextObj.open)
+			return;
 
 		const touch = e.touches[0];
 		swipeEndX = touch.clientX;
 		swipeEndY = touch.clientY;
 		
-		if (!pageContextObj.open)
-			return;
-
 		let deltaX = swipeEndX - swipeStartX;
 		
 		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 5);
@@ -202,28 +205,29 @@ function Page({Element, i}){
 	};
 	
 	function handleCloseSwipe(e){
-		const touch = e.touches[0];
-		swipeEndX = touch.clientX;
-		swipeEndY = touch.clientY;
 
 		if (pageContextObj.open)
 			return;
 
-		let deltaY =  swipeStartY - swipeEndY;
+		const touch = e.touches[0];
+
+		swipeEndY = touch.clientY;
+
+		let deltaY = swipeStartY - swipeEndY;
 
 		let scrolled = parseInt(pageContRef.current?.dataset.scrolled);
 
 		let target = scrolled + deltaY / 5;
 
 		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
-		
+
 		if (target > maximum + 80 || target < 0) {
-			
+
 			setPageContextObj(prev => ({
 				...prev,
 				open: true
 			}));
-						
+			
 			return;
 		}
 
@@ -238,8 +242,10 @@ function Page({Element, i}){
 			}
 		)
 
-		pageContRef.current.dataset.scrolled = target;
+		pageContRef.current.dataset.lastScroll = target;
 	}
+
+	
 
 	function pageClicked(e){
 
@@ -279,17 +285,21 @@ function Page({Element, i}){
 			}
 			onClick={pageClicked}
 		>
+		
 			<Backg/>
+			
 			<div
 				className="page-icon"
 				ref={pageIconRef}
 			>
 				{icons[i]}
 			</div>
+			
 			<div
 				className="page-container"
 				ref={pageContRef}
 				data-scrolled="0"
+				data-last-scroll="0"
 			>
 				<Element/>
 			</div>
