@@ -7,6 +7,11 @@ import About from "./about/about"
 import { useContext, useEffect, useMemo, useRef } from "react"
 import { PageContext, SetPageContext } from "../../context";
 
+function map(value, start1, stop1, start2, stop2){
+	return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
+}
+
+
 const icons = [
 	<svg>
 		<use xlinkHref="icons/home.svg#home"/>
@@ -23,8 +28,16 @@ const icons = [
 	<svg>
 		<use xlinkHref="icons/about.svg#about"/>
 	</svg>
-]
+];
 
+
+var swipeStartX = 0,
+	swipeStartY = 0,
+	swipeEndX = 0,
+	swipeEndY = 0;
+
+var currentHover = 0;
+	
 function Page({Element, i}){
 	
 	const pageContextObj = useContext(PageContext);
@@ -34,65 +47,73 @@ function Page({Element, i}){
 	const pageRef = useRef(null);
 
 	const pageIconRef = useRef(null);
-
 	
 	function centerPage(n){
 	
-		let v;
-	
-		if (pageContextObj.open) {
-			v = `calc(-50% + ${i-n} * (100% + 30px) )`;
-		} else {
+		let v = `calc(-50% + ${i-n} * (100% + 30px) )`;
+
+		if (!pageContextObj.open)
 			v = `calc(-50% + ${i-n} * (100%) )`;
-		}
 		
 		// pageRef.current.style.setProperty('--left-shrink', v);
+
+		const animation_option = {
+			duration: 400,
+			fill: "both",
+			easing: "ease-in-out"
+		}
 		
 		pageRef.current.animate({
 			translate: `${v} -50%`
 		},
-		{
-			fill: "both",
-			duration: 650,
-		});
-	}
+			animation_option
+		);
 
+		pageContRef.current.animate({
+			left: `calc( ${(pageContextObj.hover-i) * 50/3}% + 50%)`
+		},
+			animation_option	
+		);
+		
+		pageIconRef.current.animate({
+			translate: `calc( ${(pageContextObj.hover-i)} * 100%)`
+		},
+			animation_option	
+		);
+	}
+	
 
 	const pageContRef = useRef(null);
-		
 	
 	useEffect(() => {
 	
-		let pageNode = pageContRef.current;
-
-		let iconNode = pageIconRef.current;
-	
 		centerPage(pageContextObj.hover);
-		
-		pageNode.animate({
-			left: `calc( ${(pageContextObj.hover-i) * 50/3}% + 50%)`
-		},{
-			duration: 650,
-			fill: "both"
-		})
-		
-		iconNode.animate({
-			translate: `calc( ${(pageContextObj.hover-i)} * 100%)`
-		},{
-			duration: 650,
-			fill: "both"
-		})
-	
-		window.addEventListener("wheel",handleOpenWheel)
-		
-		pageNode?.addEventListener("wheel", handleWheel);
 
+		window.addEventListener("wheel",handleOpenWheel,{passive: true});
+
+		window.addEventListener("touchstart", (e) => {
+			const touch = e.touches[0];
+			swipeStartX = touch.clientX;
+			swipeStartY = touch.clientY;
+			currentHover = pageContextObj.hover;
+		});
+
+		window.addEventListener("touchmove", handleOpenSwipe);
+
+		pageContRef.current?.addEventListener("wheel", handleWheel, {passive: true});
+
+		pageContRef.current?.addEventListener("touchmove", handleCloseSwipe);
+			
 		return () => {
-			pageNode?.removeEventListener("wheel", handleWheel);
+			pageContRef.current?.removeEventListener("wheel", handleWheel);
+			pageContRef.current?.removeEventListener("touchmove", handleCloseSwipe);
 			window.removeEventListener("wheel",handleOpenWheel)
+			window.removeEventListener("touchmove", handleOpenSwipe);
 		}
-		
+	
 	}, [pageContextObj]);
+	
+	
 
 
 	function handleOpenWheel(e){
@@ -100,24 +121,25 @@ function Page({Element, i}){
 		if (!pageContextObj.open)
 			return;
 
-										
+		let move = map(Math.abs(e.deltaY), 0, 100, 0, 0.1);
+		
 		if (e.deltaY < 0) {
 			setPageContextObj(prev => ({
 				...prev,
-				hover: (prev.hover <= 0) ? (0) : (prev.hover - 0.025)
+				hover: (prev.hover <= 0) ? (0) : (prev.hover - move)
 			}))
 		}
 
 		else {
 			setPageContextObj(prev => ({
 				...prev,
-				hover: (prev.hover >= 3) ? (3) : (prev.hover + 0.025)
+				hover: (prev.hover >= 3) ? (3) : (prev.hover + move)
 			}))
 		}
 	}
+	
 
-	async function handleWheel(e){
-		e.preventDefault();
+	function handleWheel(e){
 		
 		if (pageContextObj.open)
 			return;
@@ -125,30 +147,16 @@ function Page({Element, i}){
 		let scrolled = parseInt(this.dataset.scrolled);
 
 		let target = scrolled + e.deltaY / 4;
-				
+		
 		let maximum = this.scrollHeight - this.offsetHeight;
 		
 		if (target > maximum + 80 || target < 0) {
-
-			// this.dataset.scrolled = 0;
-				
+			
 			setPageContextObj(prev => ({
 				...prev,
 				open: true
 			}));
 			
-			
-			// this.animate(
-			// 	{
-			// 		transform: `translate3d(0,0,0)` 
-			// 	},
-			// 	{
-			// 		fill: "both",
-			// 		duration: 1000,
-			// 		iterations: 1
-			// 	}
-			// )
-
 			this.removeEventListener("wheel", handleWheel);
 			
 			return;
@@ -161,25 +169,85 @@ function Page({Element, i}){
 			{
 				fill: "both",
 				duration: 500,
-				iterations: 1
+				easing: "ease-in-out"
 			}
 		)
-
-		pageIconRef.current?.animate(
-			{
-				translate: `0 -${target/25}px` 
-			},
-			{
-				fill: "both",
-				duration: 500,
-				iterations: 1
-			}
-		)
-
 
 		this.dataset.scrolled = target;
 
 	}
+	
+	function handleOpenSwipe(e){	
+
+		const touch = e.touches[0];
+		swipeEndX = touch.clientX;
+		swipeEndY = touch.clientY;
+		
+		if (!pageContextObj.open)
+			return;
+
+		let deltaX = swipeEndX - swipeStartX;
+		
+		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 3);
+
+
+		if (deltaX > 0) {
+			setPageContextObj(prev => ({
+				...prev,
+				hover: (currentHover - move < 0) ? (0) : (currentHover - move)
+			}))
+		}
+
+		else {
+			setPageContextObj(prev => ({
+				...prev,
+				hover: (currentHover + move > 3) ? (3) : (currentHover + move)
+			}))
+		}
+	};
+	
+	function handleCloseSwipe(e){
+		const touch = e.touches[0];
+		swipeEndX = touch.clientX;
+		swipeEndY = touch.clientY;
+
+		if (pageContextObj.open)
+			return;
+
+		let deltaY =  swipeStartY - swipeEndY;
+
+		let scrolled = parseInt(pageContRef.current?.dataset.scrolled);
+
+		let target = scrolled + deltaY / 10;
+
+		console.log(target);
+		
+		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
+		
+		if (target > maximum + 80 || target < 0) {
+			
+			setPageContextObj(prev => ({
+				...prev,
+				open: true
+			}));
+						
+			return;
+		}
+
+		pageContRef.current.animate(
+			{
+				transform: `translate(0,-${target}px)` 
+			},
+			{
+				fill: "both",
+				duration: 500,
+				easing: "ease-in-out"
+			}
+		)
+
+		pageContRef.current.dataset.scrolled = target;
+	}
+	
 
 	function pageClicked(e){
 
@@ -195,16 +263,12 @@ function Page({Element, i}){
 			
 		} else {
 			let next;
-
-			console.log(e.clientX, window.innerWidth / 2);
 			
 			if (e.clientX < window.innerWidth / 2) {
 				next = pageContextObj.index - 1 <= 0 ? 0 : pageContextObj.index - 1;
 			} else {
 				next = pageContextObj.index + 1 >= 3 ? 3 : pageContextObj.index + 1;
 			}
-
-			centerPage(next);
 			
 			setPageContextObj({
 				index: next,
@@ -240,6 +304,10 @@ function Page({Element, i}){
 		</div>
 	)
 }
+
+
+
+
 
 
 
