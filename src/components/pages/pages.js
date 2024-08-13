@@ -11,7 +11,6 @@ function map(value, start1, stop1, start2, stop2){
 	return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
 }
 
-
 const icons = [
 	<svg>
 		<use xlinkHref="icons/home.svg#home"/>
@@ -82,7 +81,6 @@ function Page({Element, i}){
 		);
 	}
 	
-
 	const pageContRef = useRef(null);
 	
 	useEffect(() => {
@@ -113,7 +111,6 @@ function Page({Element, i}){
 	
 	}, [pageContextObj]);
 	
-	
 
 
 	function handleOpenWheel(e){
@@ -137,7 +134,6 @@ function Page({Element, i}){
 			}))
 		}
 	}
-	
 
 	function handleWheel(e){
 		
@@ -220,8 +216,6 @@ function Page({Element, i}){
 
 		let target = scrolled + deltaY / 10;
 
-		console.log(target);
-		
 		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
 		
 		if (target > maximum + 80 || target < 0) {
@@ -247,7 +241,6 @@ function Page({Element, i}){
 
 		pageContRef.current.dataset.scrolled = target;
 	}
-	
 
 	function pageClicked(e){
 
