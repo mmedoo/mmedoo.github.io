@@ -115,7 +115,6 @@ function Page({Element, i}){
 	}, [pageContextObj]);
 	
 
-
 	function handleOpenWheel(e){
 			
 		if (!pageContextObj.open)
@@ -187,7 +186,7 @@ function Page({Element, i}){
 		
 		let deltaX = swipeEndX - swipeStartX;
 		
-		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 5);
+		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 6);
 
 		if (deltaX > 0) {
 			setPageContextObj(prev => ({
@@ -217,7 +216,7 @@ function Page({Element, i}){
 
 		let scrolled = parseInt(pageContRef.current?.dataset.scrolled);
 
-		let target = scrolled + deltaY / 5;
+		let target = scrolled + deltaY * 2;
 
 		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
 
