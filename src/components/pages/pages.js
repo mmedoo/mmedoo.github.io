@@ -96,11 +96,11 @@ function Page({Element, i}){
 			currentHover = pageContextObj.hover;
 		});
 
-		window.addEventListener("touchmove", handleOpenSwipe);
+		window.addEventListener("touchmove", handleOpenSwipe, {passive: true});
 
 		pageContRef.current?.addEventListener("wheel", handleWheel, {passive: true});
 
-		pageContRef.current?.addEventListener("touchmove", handleCloseSwipe);
+		pageContRef.current?.addEventListener("touchmove", handleCloseSwipe, {passive: true});
 			
 		return () => {
 			pageContRef.current?.removeEventListener("wheel", handleWheel);
@@ -186,7 +186,6 @@ function Page({Element, i}){
 		
 		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 3);
 
-
 		if (deltaX > 0) {
 			setPageContextObj(prev => ({
 				...prev,
@@ -214,7 +213,7 @@ function Page({Element, i}){
 
 		let scrolled = parseInt(pageContRef.current?.dataset.scrolled);
 
-		let target = scrolled + deltaY / 10;
+		let target = scrolled + deltaY / 5;
 
 		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
 		
