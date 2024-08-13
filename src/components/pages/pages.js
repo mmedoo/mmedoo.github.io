@@ -90,7 +90,7 @@ const Page = React.memo (({Element, i}) => {
 		const handleCloseWheel = (e) => {
 			if (pageContextObj.open) return;
 			let scrolled = parseInt(pageContRef.current.dataset.scrolled);
-			let target = scrolled + e.deltaY / 4;
+			let target = scrolled + e.deltaY / 1.5;
 			let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
 			
 			if (target > maximum + 80 || target < 0) {
