@@ -24,7 +24,7 @@ body {
 	top: 0;
 	bottom: -1px;
 	right: -1px;
-	filter: brightness(2.5);
+	filter: invert(0.04);
 	background: url("./imgs/random_dots.jpg");
 }
 
