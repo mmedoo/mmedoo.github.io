@@ -21,22 +21,23 @@ function App() {
 	}, []);
 
 	useEffect(() => {
-		window.addEventListener("mousemove", handleMouseMove)
-		return () => {
-			window.removeEventListener("mousemove", handleMouseMove)
+		if (window.innerWidth > 800) {
+			window.addEventListener("mousemove", handleMouseMove)
+			return () => {
+				window.removeEventListener("mousemove", handleMouseMove)
+			}
 		}
-	}, [])
+	}, [window.innerWidth])
 	
 	const pageContextValue = useMemo(() => pageObjects, [pageObjects]);
 	const setPageContextValue = useMemo(() => setPageObjects, []);
 	
 	return (
 		<>
-			<div
-				ref={cursorRef}
-				className="curs"
-			>
-			</div>
+			<div ref={cursorRef} className="curs"></div>
+
+			<img id="bodybg" alt="bg" src="./imgs/random_dots.jpg" />
+			
 			<PageContext.Provider value={pageContextValue}>
 				<SetPageContext.Provider value={setPageContextValue}>
 

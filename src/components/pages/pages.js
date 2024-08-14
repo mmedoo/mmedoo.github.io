@@ -215,23 +215,17 @@ const Pages = React.memo(() => {
 	const setPageContextObj = useContext(SetPageContext);
 
 	const cntnr = useRef(null);
-	
-	
-	
-	
 
 
 	const centerCont = useCallback((obj) => {
 
-		console.log("I'm going " + n++)
-		
 		let v = `calc(-${obj.hover} * ( var(--mini-w) + var(--gap)) )`;
 
 		if (!obj.open)
 			v = `calc(-${obj.hover} * ( 100vw + var(--gap)) )`
 				
 		let animation_option = {
-			duration: 800,
+			duration: 500,
 			fill: "forwards",
 			easing: "ease-out",
 		}
@@ -244,7 +238,7 @@ const Pages = React.memo(() => {
 	
 
 	const handleOpenWheel = useCallback((e) => {
-		let move = map(Math.abs(e.deltaY), 0, 100, 0, 0.25);
+		let move = map(Math.abs(e.deltaY), 0, 100, 0, 0.15);
 		setPageContextObj(prev => ({
 			...prev,
 			hover: e.deltaY < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, 3),
@@ -297,7 +291,7 @@ const Pages = React.memo(() => {
 			return;
 
 		(async () => {
-			await new Promise(r => setTimeout(r, 500));		
+			await new Promise(r => setTimeout(r, 500));
 			window.addEventListener("touchmove", handleOpenSwipe, {passive: true});
 			window.addEventListener("wheel",handleOpenWheel,{passive: true});
 		})();
