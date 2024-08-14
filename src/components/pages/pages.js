@@ -47,7 +47,7 @@ const Page = React.memo (({Element, i}) => {
 	const centerPageContent = useCallback((n) => {
 	
 		const animation_option = {
-			duration: 1000,
+			duration: 1100,
 			fill: "both",
 			easing: "ease-out"
 		}
@@ -81,7 +81,7 @@ const Page = React.memo (({Element, i}) => {
 		let target = scrolled + e.deltaY / 1.5;
 		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
 		
-		if (target > maximum + 80 || target < 0) {
+		if (target > maximum + 60 || target < 0) {
 			setPageContextObj(prev => ({ ...prev, open: true }));
 			// pageContRef.current.removeEventListener("wheel", handleCloseWheel);
 			return;
@@ -217,7 +217,7 @@ const Pages = React.memo(() => {
 			...prev,
 			hover: deltaX > 0 ? Math.max(currentHover - move, 0) : Math.min(currentHover + move, 3),
 		}));
-	});
+	}, []);
 	
 	useEffect(() => {
 

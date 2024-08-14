@@ -23,6 +23,7 @@
 .pages-cont {
 	display: flex;	
 	width: max-content;
+	height: max-content;
 	position: fixed;
 	left: 50%;
 	top: 50%;
@@ -41,7 +42,7 @@
 	overflow: hidden;
 	border: 2px solid black;
 
-	transition: all 0.8s ease-out, box-shadow 0.15s 0s;
+	transition: all 0.8s ease-out, box-shadow 0.5s;
 	
 	color: #ffffff;
 	font: bold 30px sans-serif;
@@ -82,10 +83,6 @@
 	overflow: visible;
 	z-index: 998;
 	transition: 0.5s ease-out;
-}
-
-.active {
-	z-index: 1000;
 }
 
 .page-icon {
