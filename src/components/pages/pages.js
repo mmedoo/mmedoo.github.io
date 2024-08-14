@@ -83,7 +83,7 @@ const Page = React.memo (({Element, i}) => {
 		
 		if (target > maximum + 80 || target < 0) {
 			setPageContextObj(prev => ({ ...prev, open: true }));
-			pageContRef.current.removeEventListener("wheel", handleCloseWheel);
+			// pageContRef.current.removeEventListener("wheel", handleCloseWheel);
 			return;
 		}
 		pageContRef.current.animate(
@@ -150,10 +150,7 @@ const Page = React.memo (({Element, i}) => {
 	return (
 		<div
 			ref={pageRef}
-			className={ `
-				page
-				${ pageContextObj.open ? "shrink" : "" }`
-			}
+			className={ `page ${ pageContextObj.open ? "shrink" : "" }` }
 		>
 		
 			<Backg/>
@@ -193,7 +190,7 @@ const Pages = React.memo(() => {
 			v = `calc(-${obj.hover} * ( 100vw + var(--gap)) )`
 				
 		let animation_option = {
-			duration: 1000,
+			duration: 800,
 			fill: "both",
 			easing: "ease-out"
 		}
