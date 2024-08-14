@@ -36,7 +36,7 @@ function App() {
 		<>
 			<div ref={cursorRef} className="curs"></div>
 
-			<img id="bodybg" alt="bg" src="./imgs/random_dots.jpg" />
+			<div id="bodybg"></div>
 			
 			<PageContext.Provider value={pageContextValue}>
 				<SetPageContext.Provider value={setPageContextValue}>

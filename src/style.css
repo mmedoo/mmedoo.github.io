@@ -13,14 +13,19 @@ html, body {
 body {
 	margin: 0;
 	user-select: none;
+	background-color: black;
 }
 
 #bodybg {
+	background-color: black;
 	position: fixed;
 	z-index: -1000000;
 	left: 0;
 	top: 0;
-	filter: brightness(1.5);
+	bottom: -1px;
+	right: -1px;
+	filter: brightness(2.5);
+	background: url("./imgs/random_dots.jpg");
 }
 
 
