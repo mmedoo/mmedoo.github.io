@@ -6,10 +6,11 @@
 }
 
 .lang {
-	letter-spacing: 9px;
-	translate: 4px 0;
+	letter-spacing: 15px;
+	translate: 8px 0;
 	font-weight: normal;
 	text-align: center;
+	font-size: 25px;
 }
 
 

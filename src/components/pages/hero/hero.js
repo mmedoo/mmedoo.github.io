@@ -28,6 +28,9 @@ function Hero() {
 						<ANIM_TEXT text={"oper"} i={2}/>
 					</div>
 				</div>
+				<div className="view_content">
+					<ANIM_TEXT text={"I code ideas."} i={1}/>
+				</div>
 			</div>
 			
 			<Lang/>

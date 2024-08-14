@@ -24,9 +24,9 @@ function Stack (){
 					<div className="credits cw">
 						<div>
 							<AnimatedText text={"MySQL"} i={5}/>
-							<AnimatedText text={"Node.js"} i={6.5}/>
-							<AnimatedText text={"Django"} i={8}/>
-							<AnimatedText text={"React.js"} i={9.5}/>
+							<AnimatedText text={"Express"} i={6.5}/>
+							<AnimatedText text={"React"} i={8}/>
+							<AnimatedText text={"Node"} i={9.5}/>
 						</div>
 					</div>
 				</div>
