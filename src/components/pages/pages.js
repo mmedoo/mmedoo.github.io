@@ -29,11 +29,16 @@ const icons = [
 	</svg>
 ];
 
+
+
 const arr = [Hero, Proj, Contect, About];
+
 
 var swipeStartX = 0,
 	swipeStartY = 0,
 	currentHover = 0;
+	
+	
 	
 const Page = React.memo (({Element, i}) => {
 		
@@ -43,12 +48,16 @@ const Page = React.memo (({Element, i}) => {
 	const pageRef = useRef(null);
 	const pageContRef = useRef(null);
 	const pageIconRef = useRef(null);
+
+	
+	
+	
 	
 	const centerPageContent = useCallback((n) => {
 	
 		const animation_option = {
-			duration: 1100,
-			fill: "both",
+			duration: 1000,
+			fill: "forwards",
 			easing: "ease-out"
 		}
 			  
@@ -62,6 +71,8 @@ const Page = React.memo (({Element, i}) => {
 			animation_option
 		);
 	}, []);
+	
+	
 
 	const pageClicked = useCallback((e, obj) => {
 		if (obj.open) {
@@ -75,8 +86,9 @@ const Page = React.memo (({Element, i}) => {
 		}
 	}, []);
 	
-	const handleCloseWheel = useCallback((e, obj) => {
-		if (obj.open) return;
+	
+	
+	const handleCloseWheel = useCallback((e) => {
 		let scrolled = parseInt(pageContRef.current.dataset.scrolled);
 		let target = scrolled + e.deltaY / 1.5;
 		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
@@ -88,13 +100,14 @@ const Page = React.memo (({Element, i}) => {
 		}
 		pageContRef.current.animate(
 			{ transform: `translate(0,-${target}px)` },
-			{ fill: "both",duration: 1000,easing: "ease-out" }
+			{ fill: "forwards",duration: 1000,easing: "ease-out" }
 		)
 		pageContRef.current.dataset.scrolled = target;
 	}, []);
+	
+	
 
-	const handleCloseSwipe = useCallback((e, obj) => {
-		if (obj.open) return;
+	const handleCloseSwipe = useCallback((e) => {
 		let deltaY = swipeStartY - e.touches[0].clientY;
 		let scrolled = parseInt(pageContRef.current?.dataset.scrolled);
 		let target = scrolled + deltaY * 2;
@@ -106,45 +119,55 @@ const Page = React.memo (({Element, i}) => {
 		}
 		pageContRef.current.animate(
 			{ transform: `translate(0,-${target}px)` },
-			{ fill: "both", duration: 1000, easing: "ease-out" }
+			{ fill: "forwards", duration: 1000, easing: "ease-out" }
 		);
 		pageContRef.current.dataset.lastScroll = target;
 	}, []);
+
+	
+
+	const updateScrolled = useCallback(() => {
+		pageContRef.current.dataset.scrolled = pageContRef.current.dataset.lastScroll;
+	}, []);
+	
 	
 
 	useEffect(() => {
-		centerPageContent(pageContextObj.hover);
-	
-		const removableHandleCloseWheel = (e) => {
-			handleCloseWheel(e,pageContextObj)
-		}
-		
-		const removableHandleCloseSwipe = (e) => {
-			handleCloseSwipe(e,pageContextObj)
-		}
-		
-		const updateScrolled = () => {
-			pageContRef.current.dataset.scrolled = pageContRef.current.dataset.lastScroll;
-		}
 
+		centerPageContent(pageContextObj.hover);
+		
 		const removablePageClicked = (e) => {
 			pageClicked(e, pageContextObj);
 		}
 		
-		pageContRef.current?.addEventListener("touchend", updateScrolled);
-		pageContRef.current?.addEventListener("wheel", removableHandleCloseWheel, {passive: true});
-		pageContRef.current?.addEventListener("touchmove", removableHandleCloseSwipe, {passive: true});
 		pageRef.current?.addEventListener("click", removablePageClicked);
 		
 		return () => {
-			pageContRef.current?.removeEventListener("touchend", updateScrolled);
 			pageRef.current?.removeEventListener("click", removablePageClicked);
-			pageContRef.current?.removeEventListener("wheel", removableHandleCloseWheel);
-			pageContRef.current?.removeEventListener("touchmove", removableHandleCloseSwipe);
 		}
-		
-	}, [pageContextObj])	
+	}, [pageContextObj]);
+	
+	
+	
+	useEffect(() => {
 
+		if (pageContextObj.open)
+			return;
+		
+		pageContRef.current?.addEventListener("touchend", updateScrolled);
+		pageContRef.current?.addEventListener("wheel", handleCloseWheel, {passive: true});
+		pageContRef.current?.addEventListener("touchmove", handleCloseSwipe, {passive: true});
+
+		return () => {
+			pageContRef.current?.removeEventListener("touchend", updateScrolled);
+			pageContRef.current?.removeEventListener("wheel", handleCloseWheel);
+			pageContRef.current?.removeEventListener("touchmove", handleCloseSwipe);
+		}
+	}, [pageContextObj.open]);
+	
+	
+	
+	
 	
 
 	return (
@@ -176,14 +199,32 @@ const Page = React.memo (({Element, i}) => {
 
 
 
+
+
+
+
+
+
+
+
+
+
 const Pages = React.memo(() => {
 
 	const pageContextObj = useContext(PageContext);
 	const setPageContextObj = useContext(SetPageContext);
 
 	const cntnr = useRef(null);
+	
+	
+	
+	
+
 
 	const centerCont = useCallback((obj) => {
+
+		console.log("I'm going " + n++)
+		
 		let v = `calc(-${obj.hover} * ( var(--mini-w) + var(--gap)) )`;
 
 		if (!obj.open)
@@ -191,26 +232,28 @@ const Pages = React.memo(() => {
 				
 		let animation_option = {
 			duration: 800,
-			fill: "both",
-			easing: "ease-out"
+			fill: "forwards",
+			easing: "ease-out",
 		}
 		cntnr.current.animate(
 			{ translate: `${v} -50%` },
 			animation_option
 		);
 	}, []);
+	
+	
 
-	const handleOpenWheel = useCallback((e, obj) => {
-		if (!obj.open) return;
+	const handleOpenWheel = useCallback((e) => {
 		let move = map(Math.abs(e.deltaY), 0, 100, 0, 0.25);
 		setPageContextObj(prev => ({
 			...prev,
 			hover: e.deltaY < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, 3),
 		}));
 	}, []);
+	
+	
 
-	const handleOpenSwipe = useCallback((e, obj) => {	
-		if (!obj.open) return;
+	const handleOpenSwipe = useCallback((e) => {
 		let deltaX = e.touches[0].clientX - swipeStartX;		
 		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 6);
 		setPageContextObj((prev) => ({
@@ -219,17 +262,17 @@ const Pages = React.memo(() => {
 		}));
 	}, []);
 	
+	
+	
+	
+	
 	useEffect(() => {
-
 		centerCont(pageContextObj);
-
-		const removableHandleOpenWheel = (e) => {
-			handleOpenWheel(e, pageContextObj);
-		}
-
-		const removableHandleOpenSwipe = (e) => {
-			handleOpenSwipe(e, pageContextObj)
-		}
+	}, [pageContextObj.hover, pageContextObj.open]);
+	
+	
+	
+	useEffect(() => {
 
 		const updateTouches = (e) => {
 			const touch = e.touches[0];
@@ -238,17 +281,36 @@ const Pages = React.memo(() => {
 			currentHover = pageContextObj.hover;
 		}
 
-		window.addEventListener("touchmove", removableHandleOpenSwipe, {passive: true});
-		window.addEventListener("wheel",removableHandleOpenWheel,{passive: true});
 		window.addEventListener("touchstart", updateTouches);
 		
 		return () => {
 			window.removeEventListener("touchstart", updateTouches);
-			window.removeEventListener("touchmove", removableHandleOpenSwipe);
-			window.removeEventListener("wheel",removableHandleOpenWheel);
 		}
 		
 	}, [pageContextObj]);
+	
+	
+
+	useEffect(() => {
+
+		if (!pageContextObj.open)
+			return;
+
+		(async () => {
+			await new Promise(r => setTimeout(r, 500));		
+			window.addEventListener("touchmove", handleOpenSwipe, {passive: true});
+			window.addEventListener("wheel",handleOpenWheel,{passive: true});
+		})();
+
+		return () => {
+			window.removeEventListener("touchmove", handleOpenSwipe);
+			window.removeEventListener("wheel",handleOpenWheel);
+		}
+
+	}, [pageContextObj.open]);
+	
+	
+	
 	
 	
 	const pageList = useMemo(() => {
