@@ -30,8 +30,7 @@ const icons = [
 ];
 
 
-
-const arr = [Hero, Proj, Contect, About];
+const pgs = [Hero, Proj, Contect];
 
 
 var swipeStartX = 0,
@@ -55,21 +54,10 @@ const Page = React.memo (({Element, i}) => {
 	
 	const centerPageContent = useCallback((n) => {
 	
-		const animation_option = {
-			duration: 1000,
-			fill: "forwards",
-			easing: "ease-out"
-		}
-			  
-		pageContRef.current.animate(
-			{ left: `calc(${(n - i) * 50 / 3}% + 50%)` },
-			animation_option
-		);
-	  
-		pageIconRef.current.animate(
-			{ translate: `calc(${(n - i)} * 100%)` },
-			animation_option
-		);
+		pageContRef.current.style.left = `calc(${(n - i) * 50 / (pgs.length-1)}% + 50%)`;
+		
+		pageIconRef.current.style.translate = `calc(${(n - i)} * 100%)`;
+
 	}, []);
 	
 	
@@ -82,7 +70,7 @@ const Page = React.memo (({Element, i}) => {
 			return;
 			let next = e.clientX < window.innerWidth / 2 ?
 				Math.max(obj.index - 1, 0)
-			: Math.min(obj.index + 1, 3);
+			: Math.min(obj.index + 1, pgs.length - 1);
 			setPageContextObj({index: next,hover: next,open: false});
 		}
 	}, []);
@@ -154,15 +142,17 @@ const Page = React.memo (({Element, i}) => {
 
 		if (pageContextObj.open)
 			return;
+
+		const pageContNode = pageContRef.current;
 		
-		pageContRef.current?.addEventListener("touchend", updateScrolled);
-		pageContRef.current?.addEventListener("wheel", handleCloseWheel, {passive: true});
-		pageContRef.current?.addEventListener("touchmove", handleCloseSwipe, {passive: true});
+		pageContNode?.addEventListener("touchend", updateScrolled);
+		pageContNode?.addEventListener("wheel", handleCloseWheel, {passive: true});
+		pageContNode?.addEventListener("touchmove", handleCloseSwipe, {passive: true});
 
 		return () => {
-			pageContRef.current?.removeEventListener("touchend", updateScrolled);
-			pageContRef.current?.removeEventListener("wheel", handleCloseWheel);
-			pageContRef.current?.removeEventListener("touchmove", handleCloseSwipe);
+			pageContNode?.removeEventListener("touchend", updateScrolled);
+			pageContNode?.removeEventListener("wheel", handleCloseWheel);
+			pageContNode?.removeEventListener("touchmove", handleCloseSwipe);
 		}
 	}, [pageContextObj.open]);
 	
@@ -224,25 +214,18 @@ const Pages = React.memo(() => {
 
 		if (!obj.open)
 			v = `calc(-${obj.hover} * ( 100vw + var(--gap)) )`
-				
-		let animation_option = {
-			duration: 500,
-			fill: "forwards",
-			easing: "ease-out",
-		}
-		cntnr.current.animate(
-			{ translate: `${v} -50%` },
-			animation_option
-		);
+		
+		cntnr.current.style.translate = `${v} -50%`;
+
 	}, []);
 	
 	
 
 	const handleOpenWheel = useCallback((e) => {
-		let move = map(Math.abs(e.deltaY), 0, 100, 0, 0.15);
+		let move = map(Math.abs(e.deltaY), 0, 100, 0, 0.1);
 		setPageContextObj(prev => ({
 			...prev,
-			hover: e.deltaY < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, 3),
+			hover: e.deltaY < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, pgs.length-1),
 		}));
 	}, []);
 	
@@ -250,10 +233,10 @@ const Pages = React.memo(() => {
 
 	const handleOpenSwipe = useCallback((e) => {
 		let deltaX = e.touches[0].clientX - swipeStartX;		
-		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 6);
+		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 5);
 		setPageContextObj((prev) => ({
 			...prev,
-			hover: deltaX > 0 ? Math.max(currentHover - move, 0) : Math.min(currentHover + move, 3),
+			hover: deltaX > 0 ? Math.max(currentHover - move, 0) : Math.min(currentHover + move, pgs.length-1),
 		}));
 	}, []);
 	
@@ -309,7 +292,7 @@ const Pages = React.memo(() => {
 	
 	
 	const pageList = useMemo(() => {
-		return arr.map((comp, i) =>
+		return pgs.map((comp, i) =>
 			<Page Element={comp} i={i} key={i} />
 		);
 	}, []);
