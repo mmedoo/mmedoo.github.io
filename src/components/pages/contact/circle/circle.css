@@ -1,0 +1,80 @@
+.cntnr {
+	border-radius: 50%;
+	overflow: visible;
+
+	position: relative;
+
+	transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1) 0.7s , width 0s, height 0s;
+	height: calc( var(--opened-radius) * 2 + var(--item-width) + 20px );
+	width: calc( var(--opened-radius) * 2 + var(--item-width) + 20px );
+	animation: rotating 6s linear infinite;
+}
+
+
+@keyframes rotating {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.cntnr:hover , .cntnr:hover .item {
+	animation-play-state: paused;
+}
+
+.item {
+	border: 2px solid rgba(175, 175, 175);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	width: var(--item-width);
+	height: var(--item-width);
+	position: absolute;
+	background-color: rgba(150,150,150);
+	background-color: black;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	border-radius: 50%;
+	top: 50%;
+	left: 50%;
+
+	translate:
+		calc( var(--opened-radius) * cos(var(--angle)) - 50% )
+		calc( var(--opened-radius) * sin(var(--angle)) - 50% );
+
+	color: white;
+	animation: rotating 6s linear infinite reverse;
+}
+
+
+
+.item:hover {
+	background-color: rgba(255, 255, 255);
+	color: black;
+}
+
+.item_content {
+	transition: opacity var(--animat);
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	font: bold 18px 'Google Sans';
+}
+
+
+.item_content svg {
+	width: 70%;
+	height: 70%;
+	fill: none;
+	stroke: white;
+}
+
+.item:hover svg {
+	fill: black;
+	stroke: white;
+}

@@ -92,8 +92,6 @@ const basicSketch = (p) => {
 	
 	
 	p.windowResized = () => {
-
-		p.clear();
 		
 		if (window.innerWidth >= 800)
 			p.loop();

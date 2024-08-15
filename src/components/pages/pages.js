@@ -78,7 +78,8 @@ const Page = React.memo (({Element, i}) => {
 		if (obj.open) {
 			centerPageContent(i);
 			setPageContextObj({hover: i,index: i,open: false});
-		} else {			
+		} else {
+			return;
 			let next = e.clientX < window.innerWidth / 2 ?
 				Math.max(obj.index - 1, 0)
 			: Math.min(obj.index + 1, 3);

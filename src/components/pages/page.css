@@ -101,6 +101,7 @@
 	width: 100%;
 	background-color: transparent;
 	scale: 1.1;
+	stroke-width: 0.65;
 }
 
 .view {
@@ -109,6 +110,10 @@
 	width: 100vw;
 	overflow: hidden;
 	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .view_content {
