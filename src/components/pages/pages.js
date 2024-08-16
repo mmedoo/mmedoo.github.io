@@ -50,8 +50,6 @@ const Page = React.memo (({Element, i}) => {
 
 	
 	
-	
-	
 	const centerPageContent = useCallback((n) => {
 	
 		pageContRef.current.style.left = `calc(${(n - i) * 50 / (pgs.length-1)}% + 50%)`;
@@ -164,7 +162,7 @@ const Page = React.memo (({Element, i}) => {
 	return (
 		<div
 			ref={pageRef}
-			className={ `page ${ pageContextObj.open ? "shrink" : "" }` }
+			className={ `page ${ (pageContextObj.index === i && !pageContextObj.open) ? "open-page" : "" }` }
 		>
 		
 			<Backg/>
@@ -212,15 +210,16 @@ const Pages = React.memo(() => {
 
 		let v = `calc(-${obj.hover} * ( var(--mini-w) + var(--gap)) )`;
 
-		if (!obj.open)
-			v = `calc(-${obj.hover} * ( 100vw + var(--gap)) )`
+		// if (!obj.open)
+			// v = `calc(-${obj.hover} * ( 100vw + var(--gap)) )`
+
+		cntnr.current.style.translate = `${v} 0`;
 		
-		cntnr.current.style.translate = `${v} -50%`;
+		// cntnr.current.style.transition = `translate 1.2s cubic-bezier(0.19, 1, 0.22, 1)`;
 
 	}, []);
 	
 	
-
 	const handleOpenWheel = useCallback((e) => {
 		let move = map(Math.abs(e.deltaY), 0, 100, 0, 0.1);
 		setPageContextObj(prev => ({
