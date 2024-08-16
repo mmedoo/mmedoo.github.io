@@ -71,7 +71,13 @@ const Page = React.memo (({Element, i}) => {
 			return;
 		}
 
-		pageContRef.current.style.transform = `translate(0,-${target}px)`;
+		pageContRef.current.animate({
+			transform: `translate(0,-${target}px)`
+		}, {
+			duration: 1000,
+			easing: "cubic-bezier(0.19, 1, 0.22, 1)",
+			fill: "forwards",
+		})
 		
 		pageContRef.current.dataset.lastScroll = target;
 	}, []);
