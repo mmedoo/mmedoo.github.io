@@ -34,7 +34,7 @@ function App() {
 	
 	return (
 		<>
-			<div ref={cursorRef} className="curs"></div>
+			{/* <div ref={cursorRef} className="curs"></div> */}
 
 			<div id="bodybg"></div>
 			
