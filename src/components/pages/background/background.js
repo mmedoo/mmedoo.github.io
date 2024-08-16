@@ -93,6 +93,9 @@ const basicSketch = (p) => {
 	
 	p.windowResized = () => {
 		
+		vsblty = 0;		
+		sects.connectMouse(p.mouseX, p.mouseY);
+		
 		if (window.innerWidth >= 800)
 			p.loop();
 		else

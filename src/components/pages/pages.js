@@ -37,10 +37,11 @@ const Pages = React.memo(() => {
 	
 	
 	const handleOpenWheel = useCallback((e) => {
-		let move = map(Math.abs(e.deltaY), 0, 100, 0, 0.1);
+		let max = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+		let move = map(Math.abs(max), 0, 100, 0, 0.1);
 		setPageContextObj(prev => ({
 			...prev,
-			hover: e.deltaY < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, pgs.length-1),
+			hover: max < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, pgs.length-1),
 		}));
 	}, []);
 	
