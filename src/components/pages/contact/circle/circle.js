@@ -1,7 +1,23 @@
 import { useMemo, useRef } from "react";
 import "./circle.css";
-import data from "./circle_data"
 
+const data = [
+	{
+		"title": "Github",
+		"icon": "./icons/github.svg#github",
+		"link": "https://github.com/mmedoo"
+	},
+	{
+		"title": "Email",
+		"icon": "./icons/email.svg#email",
+		"link": "mailto:mohaibrat@gmail.com"
+	},
+	{
+		"title": "Linkedin",
+		"icon": "./icons/linkedin.svg#linkedin",
+		"link": "https://www.linkedin.com/in/mmedoo-special/"
+	}
+];
 
 const itemsNo = data.length;
 
@@ -21,21 +37,21 @@ const range = 360;
 // 	return r * 180 / (Math.PI * openedRadius);
 // }
 
-function Nav(){
-	
+function Nav() {
+
 
 	const cntnrRef = useRef(null);
 
 	const items = useMemo(() =>
-		
+
 		data.map((option, i) => {
 			return (
-				<Item key={i} option={option} i={i}/>
+				<Item key={i} option={option} i={i} />
 			)
 		})
-		
-	, []);
-	
+
+		, []);
+
 	return (
 		<div
 			ref={cntnrRef}
@@ -56,27 +72,27 @@ function Item({ option, i }) {
 
 	const itemRef = useRef(null);
 
-	const angle =  useMemo(() => range * (i) / (itemsNo), []);
-	
+	const angle = useMemo(() => range * (i) / (itemsNo), []);
+
 	return (
 		<a href={option.link} target="_blank" rel="noreferrer">
-		<div
-			ref={itemRef}
-			className="item"
-			style={{
-				'--angle': `${angle}deg`,
-			}}
-		>
-			<div className="item_content">
-					<svg>
+			<div
+				ref={itemRef}
+				className="item"
+				style={{
+					'--angle': `${angle}deg`,
+				}}
+			>
+				<div className="item_content">
+					<svg id={Date.now()}>
 						<use xlinkHref={option.icon} />
 					</svg>
 					<b>
 						{option.title}
 					</b>
+				</div>
 			</div>
-		</div>
-				</a>
+		</a>
 	)
 }
 

@@ -48,11 +48,12 @@
 	animation: rotating 6s linear infinite reverse;
 }
 
-
+.item * {
+	mix-blend-mode: difference;
+}
 
 .item:hover {
 	background-color: rgba(255, 255, 255);
-	color: black;
 }
 
 .item_content {
@@ -67,14 +68,9 @@
 }
 
 
-.item_content svg {
+.item svg {
 	width: 70%;
 	height: 70%;
 	fill: none;
-	stroke: white;
-}
-
-.item:hover svg {
-	fill: black;
 	stroke: white;
 }

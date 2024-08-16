@@ -1,7 +1,14 @@
 <svg id="linkedin" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg">
 	<defs>
 		<style>
-			.c{stroke-linecap:round;stroke-linejoin:round;}
+			.b , .c {
+				<!-- mix-blend-mode: difference; -->
+			}
+			.c {
+				fill: none;
+				stroke-linecap:round;
+				stroke-linejoin:round;
+			}
 		</style>
 	</defs>
 	<circle class="b" cx="15.64" cy="13.46" r=".75" />

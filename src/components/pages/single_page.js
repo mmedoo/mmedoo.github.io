@@ -16,7 +16,6 @@ const Page = React.memo (({Element, i}) => {
 	const pageIconRef = useRef(null);
 
 	
-	
 	const centerPageContent = useCallback((n) => {
 	
 		pageContRef.current.style.left = `calc(${(n - i) * 50 / (pgs.length-1)}% + 50%)`;

@@ -1,3 +1,47 @@
-.name {
-	
+.proj-cont {
+	width: 80%;
+}
+
+.project {
+	border: 2px solid #555;
+	border-radius: 10px;
+	padding: 0 10%;
+	margin-bottom: 30px;
+}
+
+.project > div {
+	margin: 10px 0;
+}
+
+.pjt-header {
+	letter-spacing: -2px;
+	font: 400 2em Google Sans;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.pjt-link {
+	margin-left: 10px;
+	border: 3px solid #fff;
+	padding: 0 10px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.pjt-link a {
+	text-decoration: none;
+	color: white;
+}
+
+.pjt-link > * {
+	mix-blend-mode: difference;
+}
+
+.pjt-link:hover {
+	background-color: #fff;
+}
+
+.pjt-desc {
+	font: 400 1em Google Sans;
 }
