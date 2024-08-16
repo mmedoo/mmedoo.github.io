@@ -10,4 +10,7 @@
 	.contact-cont {
 		flex-direction: column;
 	}
+	.contact-cont > div {
+		margin: 100px 0;
+	}
 }
