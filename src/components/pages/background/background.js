@@ -69,11 +69,11 @@ const basicSketch = (p) => {
 
 	p.setup = () => {
 
+		p.createCanvas(window.innerWidth, window.innerHeight);
+		
 		if (window.innerWidth < 800)
 			p.noLoop();
-		
-		p.createCanvas(window.innerWidth, window.innerHeight);
-		// p.background(bgColor);
+
 		sects = new Pool(particlesNo);
 	};
 	
@@ -93,8 +93,8 @@ const basicSketch = (p) => {
 	
 	p.windowResized = () => {
 		
-		vsblty = 0;		
-		sects.connectMouse(p.mouseX, p.mouseY);
+		vsblty = -1;
+		p.loop();
 		
 		if (window.innerWidth >= 800)
 			p.loop();
@@ -120,7 +120,7 @@ const P5Wrapper = () => {
 		return () => {
 			p5Instance.remove();
 		};
-	}, []);
+	}, [window.innerWidth]);
 
 
 	return (
