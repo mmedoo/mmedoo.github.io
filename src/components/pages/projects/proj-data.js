@@ -5,10 +5,15 @@ const data = [
 		description: "Interactive Visualized Algorithms in p5.js"
 	},
 	{
-		title: "URL Shortener",
+		title: "Nodejs URL Shortener",
 		link: "https://github.com/mmedoo/nodejs-url-shortener",
-		description: "Simple RESTful URL Shortening App"
-	}
+		description: "Simple RESTful URL Shortening Nodejs App"
+	},
+	{
+		title: "Django URL Shortener",
+		link: "https://github.com/mmedoo/django-url-shortener",
+		description: "Simple RESTful URL Shortening Django App"
+	}	
 ];
 
 export default data;
