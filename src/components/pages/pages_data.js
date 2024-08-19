@@ -13,7 +13,7 @@ const components = [
 
 const icons = [
 	<svg>
-		<use xlinkHref="icons/home.svg#home"/>
+		<use xlinkHref="icons/about.svg#about"/>
 	</svg>
 	,
 	<svg>
@@ -22,10 +22,6 @@ const icons = [
 	,
 	<svg>
 		<use xlinkHref="icons/send.svg#send"/>
-	</svg>
-	,
-	<svg>
-		<use xlinkHref="icons/about.svg#about"/>
 	</svg>
 ];
 
