@@ -9,25 +9,25 @@ export default function Tools(){
 					<div className="lang">
 						<ANIM_TEXT
 							text={"TOOLS"}
-							i={3}
+							i={1}
+						/>
+						<ANIM_TEXT
+							text={<div className="dot"></div>} i={1}
+						/>
+						<ANIM_TEXT
+							text={<div className="dot"></div>} i={2}
 						/>
 						<ANIM_TEXT
 							text={<div className="dot"></div>} i={3}
-						/>
-						<ANIM_TEXT
-							text={<div className="dot"></div>} i={4}
-						/>
-						<ANIM_TEXT
-							text={<div className="dot"></div>} i={5}
 						/>
 					</div>
 
 					<div className="credits cw">
 						<div>
-							<ANIM_TEXT text={"Git & GitHub"} i={5}/>
-							<ANIM_TEXT text={"VSCODE"} i={6.5}/>
-							<ANIM_TEXT text={"GitHub Actions"} i={8}/>
-							<ANIM_TEXT text={"Linux"} i={9.5}/>
+							<ANIM_TEXT text={"Git & GitHub"} i={3}/>
+							<ANIM_TEXT text={"VSCODE"} i={4}/>
+							<ANIM_TEXT text={"GitHub Actions"} i={5}/>
+							<ANIM_TEXT text={"Linux"} i={6}/>
 						</div>
 					</div>
 				</div>

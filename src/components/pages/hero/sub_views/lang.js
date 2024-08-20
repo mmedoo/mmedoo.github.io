@@ -8,29 +8,29 @@ function Lang(){
 
 				<div className="lang">
 					<ANIM_TEXT
-						text={"LANGUAGES"} i={3}
+						text={"LANGUAGES"} i={1}
+					/>
+					<ANIM_TEXT
+						text={<div className="dot"></div>} i={1}
+					/>
+					<ANIM_TEXT
+						text={<div className="dot"></div>} i={2}
 					/>
 					<ANIM_TEXT
 						text={<div className="dot"></div>} i={3}
-					/>
-					<ANIM_TEXT
-						text={<div className="dot"></div>} i={4}
-					/>
-					<ANIM_TEXT
-						text={<div className="dot"></div>} i={5}
 					/>
 				</div>
 
 				<div className="credits">
 					<div>
-						<ANIM_TEXT text={"Advanced"} i={5}/>
-						<ANIM_TEXT text={"Advanced"} i={6.5}/>
-						<ANIM_TEXT text={"intermediate"} i={8}/>
+						<ANIM_TEXT text={"Advanced"} i={3}/>
+						<ANIM_TEXT text={"Advanced"} i={4}/>
+						<ANIM_TEXT text={"intermediate"} i={5}/>
 					</div>
 					<div>
-						<ANIM_TEXT text={"C++"} i={5}/>
-						<ANIM_TEXT text={"Javascript"} i={6.5}/>
-						<ANIM_TEXT text={"Python"} i={8}/>
+						<ANIM_TEXT text={"C++"} i={3}/>
+						<ANIM_TEXT text={"Javascript"} i={4}/>
+						<ANIM_TEXT text={"Python"} i={5}/>
 					</div>
 				</div>
 			</div>

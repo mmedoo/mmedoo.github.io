@@ -16,10 +16,12 @@ function Proj() {
 					<Cont/>
 				</div>
 			</div>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
+			
+			<div className="view">
+				<div className="view_content">
+					PROJECTS
+				</div>
+			</div>
 		</>
 	);
 }

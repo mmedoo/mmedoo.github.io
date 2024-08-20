@@ -9,24 +9,24 @@ function Know(){
 					<div className="lang">
 						<ANIM_TEXT
 							text={"KNOWLEDGE"}
-							i={3}
+							i={1}
+						/>
+						<ANIM_TEXT
+							text={<div className="dot"></div>} i={1}
+						/>
+						<ANIM_TEXT
+							text={<div className="dot"></div>} i={2}
 						/>
 						<ANIM_TEXT
 							text={<div className="dot"></div>} i={3}
-						/>
-						<ANIM_TEXT
-							text={<div className="dot"></div>} i={4}
-						/>
-						<ANIM_TEXT
-							text={<div className="dot"></div>} i={5}
 						/>
 					</div>
 
 					<div className="credits cw">
 						<div>
-							<ANIM_TEXT text={"Object-Relational Mapping"} i={5}/>
-							<ANIM_TEXT text={"Design Patterns"} i={6.5}/>
-							<ANIM_TEXT text={"RESTFul API Design"} i={8}/>
+							<ANIM_TEXT text={"Object-Relational Mapping"} i={3}/>
+							<ANIM_TEXT text={"Design Patterns"} i={4}/>
+							<ANIM_TEXT text={"RESTFul API Design"} i={5}/>
 						</div>
 					</div>
 				</div>

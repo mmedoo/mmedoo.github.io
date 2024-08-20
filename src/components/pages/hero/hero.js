@@ -38,6 +38,17 @@ function Hero() {
 			<Know/>
 			<Stack/>
 			<Tools/>
+
+			<div className="view">
+				<div className="view_content">
+					<span style={{
+						textAlign: 'left'
+					}}>
+						<ANIM_TEXT text="Mohamed" i={1} />
+						<ANIM_TEXT text="Ibrahim" i={2} />
+					</span>
+				</div>
+			</div>
 			
 		</>
 	);

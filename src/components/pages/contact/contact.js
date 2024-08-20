@@ -9,7 +9,7 @@ function Contact() {
 			<div className="view">
 
 				<div className="view_content">
-					<ANIMATED_TEXT text="Contact" i={2} />
+					<ANIMATED_TEXT text="CONTACT" i={1} />
 				</div>
 			</div>
 
@@ -21,12 +21,13 @@ function Contact() {
 					</div>
 				{/* </div> */}
 				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
+			</div>
+
+			<div className="view">
+
+				<div className="view_content">
+					<ANIMATED_TEXT text="CONTACT" i={1} />
+				</div>
 			</div>
 		</>
 	);
