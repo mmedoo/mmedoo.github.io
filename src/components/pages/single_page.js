@@ -45,18 +45,16 @@ const Page = React.memo (({Element, i}) => {
 		let target = scrolled + e.deltaY / 1.5;
 		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
 		
-		if (target > maximum + 60 || target < 0) {
+		if (target > maximum + 30 || target < 0) {
 			setPageContextObj(prev => ({ ...prev, open: true }));
-			// pageContRef.current.removeEventListener("wheel", handleCloseWheel);
 			return;
 		}
 		
 		pageContRef.current.style.transform = `translate(0,-${target}px)`;
 		
 		pageContRef.current.dataset.scrolled = target;
-
 	}, []);
-	
+		
 	
 
 	const handleCloseSwipe = useCallback((e) => {
@@ -65,7 +63,7 @@ const Page = React.memo (({Element, i}) => {
 		let target = scrolled + deltaY * 2;
 		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
 
-		if (target > maximum + 80 || target < 0) {
+		if (target > maximum + 30 || target < 0) {
 			setPageContextObj((prev) => ({ ...prev, open: true }));
 			return;
 		}
@@ -102,11 +100,13 @@ const Page = React.memo (({Element, i}) => {
 
 		window.addEventListener("touchstart", updateTouches);
 		
-		pageRef.current?.addEventListener("click", removablePageClicked);
+		const pageNode = pageRef.current;
+		
+		pageNode?.addEventListener("click", removablePageClicked);
 		
 		return () => {
 			window.removeEventListener("touchstart", updateTouches);
-			pageRef.current?.removeEventListener("click", removablePageClicked);
+			pageNode?.removeEventListener("click", removablePageClicked);
 		}
 	}, [pageContextObj]);
 	

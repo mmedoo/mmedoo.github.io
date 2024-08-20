@@ -12,9 +12,9 @@ function Proj() {
 			</div>
 
 			<div className="view">
-				<div className="view_content">
+				{/* <div className="view_content"> */}
 					<Cont/>
-				</div>
+				{/* </div> */}
 			</div>
 			
 			<div className="view">

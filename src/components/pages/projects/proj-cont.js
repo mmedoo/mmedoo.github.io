@@ -7,16 +7,44 @@ function Project(props) {
 	return (
 		<div className="project">
 			<div className="pjt-header">
-				{props.name}
-				<div className="pjt-link">
-					<a href={props.link} target="_blank" rel="noreferrer">
-						<div>
-							Link
+
+				{props.title}
+
+				<div className="pjt-link-wrapper">
+					
+					<div className="pjt-link">
+						<a href={props.link} target="_blank" rel="noreferrer">
+							<div>
+								Link
+							</div>
+						</a>
+					</div>
+					
+					{
+						props.preview
+						&&
+						<div className="pjt-link">
+							<a href={props.preview} target="_blank" rel="noreferrer">
+								<div>
+									Preview
+								</div>
+							</a>
 						</div>
-					</a>
+					}
+					
 				</div>
 			</div>
+			
 			<div className="pjt-desc">{props.description}</div>
+			<div className="pjt-tags">
+				{
+					props.tags.map((tag, i) =>
+						<div key={i} className="pjt-tag">
+							{tag}
+						</div>
+					)
+				}
+			</div>
 		</div>
 	);
 }
@@ -27,7 +55,9 @@ function PROJ_CONT() {
 	const projList = useMemo(() => {
 		return data.map((p, i) =>
 			<ANIMATED_TEXT key={i} text={(
-				<Project link={p.link} name={p.title} description={p.description} />
+				<Project
+					{...data[i]}
+				/>
 			)} i={i + 3} />
 		);
 	}, []);
