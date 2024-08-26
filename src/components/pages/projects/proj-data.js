@@ -13,10 +13,11 @@ const data = [
 		tags: ["React.js", "p5.js", "HTML", "CSS", "API"]
 	},
 	{
-		title: "Nodejs URL Shortener",
-		link: "https://github.com/mmedoo/nodejs-url-shortener",
-		description: "Simple RESTful URL Shortening Nodejs App.",
-		tags: ["Node", "Express", "Sequelize", "SQLite", "EJS"]
+		title: "Serverless URL Shortener",
+		link: "https://github.com/mmedoo/serverless-url-shortener",
+		description: "Simple Serverless RESTful URL Shortening Nodejs App.",
+		tags: ["Node", "Express", "Sequelize", "PostgreSQL", "EJS"],
+		preview: "https://shrtnurl.vercel.app"
 	},
 	{
 		title: "Django URL Shortener",
