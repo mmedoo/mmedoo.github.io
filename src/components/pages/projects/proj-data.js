@@ -23,18 +23,18 @@ const data = [
 		title: "Django URL Shortener",
 		link: "https://github.com/mmedoo/django-url-shortener",
 		description: "Simple RESTful URL Shortening Django App.",
-		tags: ["ORM", "Django"]
+		tags: ["ORM", "Django", "SQLite"]
 	},
 	{
 		title: "Build React Action",
 		link: "https://github.com/mmedoo/build-react-on-push",
 		description: "A GitHub Action to build React app on every push and publishes it to a branch and directory of user's choice.",
-		tags: ["GitHub Actions", "React.js"]
+		tags: ["GitHub Actions", "React.js", "CI/CD"]
 	},
 	{
 		title: "Transcription Dashboard",
 		link: "https://github.com/mmedoo/react-project-dashboard",
-		description: "A Dashboard for making video captions request.",
+		description: "A Dashboard for making subtitles request.",
 		tags: ["React.js", "HTML", "CSS"],
 		preview: "https://mmedoo.github.io/react-project-dashboard"
 	}
