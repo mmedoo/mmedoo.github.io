@@ -56,18 +56,12 @@ const Pages = React.memo(() => {
 		}));
 	}, []);
 	
-	
-	
+		
 	
 	
 	useEffect(() => {
 		centerCont(pageContextObj);
-	}, [pageContextObj.hover, pageContextObj.open]);
-	
-	
-	
-	useEffect(() => {
-
+		
 		const updateTouches = (e) => {
 			swipeStartX = e.touches[0].clientX;
 			currentHover = pageContextObj.hover;
