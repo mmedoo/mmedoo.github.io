@@ -24,11 +24,20 @@ body {
 	top: 0;
 	bottom: -1px;
 	right: -1px;
-	background-position: center center;
-	background-size: cover;
-	filter: brightness(0.65);
+	display: flex;
 }
 
+#bodybg picture {
+	display: flex;
+	width: 100%;
+}
+
+#bodybg img {
+	width: 100%;
+	filter: brightness(0.65);
+	object-fit: cover;
+	object-position: center center;
+}
 
 .curs {
 	position: fixed;
@@ -47,7 +56,6 @@ body {
 .bg-credits {
 	position: fixed;
 	z-index: 999;
-	width: 100%;
 	left: 5%;
 	bottom: 5%;
 	color: white;

@@ -5,12 +5,12 @@ import { useState, useMemo } from "react"
 
 const bgno = () => {
 	let n = Math.floor((Math.random() * 11)) + 1;
-	if (n > 11)
-		n = bgno();
+	if (n > 11) n = 11;
 	return n;
 }
 
 const bgnum = bgno();
+
 
 function App() {
 
@@ -47,10 +47,12 @@ function App() {
 
 			<div
 				id="bodybg"
-				style={{
-					backgroundImage: `url("./imgs/bgs/${bgnum}.jpg")`,
-				}}
-			></div>
+			>
+				<picture>
+					<source type="image/avif" srcset={`./imgs/bgs/${bgnum}.avif`} />
+					<img src={`./imgs/bgs/${bgnum}.jpg`} alt="background" />
+				</picture>
+			</div>
 
 			<div className="bg-credits">
 				<div>
