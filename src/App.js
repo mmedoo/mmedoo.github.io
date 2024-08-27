@@ -54,7 +54,7 @@ function App() {
 
 			<div className="bg-credits">
 				<div>
-					Backgrounds
+					backgrounds
 				</div>
 				<div>
 					by /
