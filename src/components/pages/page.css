@@ -30,13 +30,14 @@
 	column-gap: var(--gap);
 	transition: translate 1.2s cubic-bezier(0.19, 1, 0.22, 1);
 	align-items: center;
+	z-index: 998;
 }
 
 
 .page {
 	position: relative;
-	z-index: 999;
-	background: black;
+	z-index: 1000;
+	background: rgba(0,0,0,0.3);
 
 	translate: -50% 0;
 	
@@ -50,10 +51,12 @@
 	font: bold 30px sans-serif;
 	border-radius: 10px;
 	cursor: pointer;
-	box-shadow: 0 0 12px 0px hsla(0, 0%, 40%);
+	box-shadow: 0 0 12px 0px rgb(152, 152, 152);
+	backdrop-filter: blur(12px);
 }
 
 .open-page {
+	background-color: black;
 	cursor: default;
 	border-radius: 0;
 	z-index: 1000;
@@ -71,7 +74,7 @@
 }
 
 .page:hover .page-icon {
-	filter: brightness(0.4);
+	filter: brightness(0.65);
 }
 
 .open-page:hover .page-icon {
@@ -106,7 +109,7 @@
 	overflow: visible;
 	z-index: -9999;
 	transition: 0.4s ease-out, translate 1.6s cubic-bezier(0.19, 1, 0.22, 1);
-	filter: brightness(0.3);
+	filter: brightness(0.45);
 	scale: none;
 }
 

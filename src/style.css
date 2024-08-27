@@ -24,8 +24,9 @@ body {
 	top: 0;
 	bottom: -1px;
 	right: -1px;
-	filter: invert(0.06);
-	background: url("./imgs/random_dots.jpg");
+	background-position: center center;
+	background-size: cover;
+	filter: brightness(0.65);
 }
 
 
@@ -42,6 +43,21 @@ body {
 	left: -100%;
 	top: 50%;
 }
+
+.bg-credits {
+	position: fixed;
+	z-index: 999;
+	width: 100%;
+	left: 5%;
+	bottom: 5%;
+	color: white;
+	font: 400 15px Google Sans;
+}
+
+.bg-credits a {
+	color: inherit;
+}
+
 
 @media screen and (max-width: 800px) {
 	.curs {

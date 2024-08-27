@@ -3,6 +3,15 @@ import Pages from "./components/pages/pages"
 import { PageContext, SetPageContext } from "./context"
 import { useEffect, useRef, useState, useCallback, useMemo } from "react"
 
+const bgno = () => {
+	let n = Math.floor((Math.random() * 11)) + 1;
+	if (n > 11)
+		n = bgno();
+	return n;
+}
+
+const bgnum = bgno();
+
 function App() {
 
 	const cursorRef = useRef(null);
@@ -36,7 +45,28 @@ function App() {
 		<>
 			{/* <div ref={cursorRef} className="curs"></div> */}
 
-			<div id="bodybg"></div>
+			<div
+				id="bodybg"
+				style={{
+					backgroundImage: `url("./imgs/bgs/${bgnum}.jpg")`,
+				}}
+			></div>
+
+			<div className="bg-credits">
+				<div>
+					Backgrounds
+				</div>
+				<div>
+					by /
+					<a
+						href="https://www.deviantart.com/bisbiswas"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						bisbiswas
+					</a>
+				</div>
+			</div>
 			
 			<PageContext.Provider value={pageContextValue}>
 				<SetPageContext.Provider value={setPageContextValue}>
