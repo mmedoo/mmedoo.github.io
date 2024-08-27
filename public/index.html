@@ -1,17 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Mohamed Ibrahim's Portfolio"
-    />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <title>Mohamed Ibrahim</title>
-    <link rel="shortcut icon" href="./imgs/favicon/planet2.svg" type="image/x-icon">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Mohamed Ibrahim's Portfolio" />
+	<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+	<title>Mohamed Ibrahim</title>
+	<link rel="shortcut icon" id="favicon" href="./imgs/favicon/planet2.svg" type="image/x-icon">
+	<script>
+		const favicon = document.querySelector('#favicon');
+		
+		const updateFavicon = (isDark) => {
+			favicon.href = `./imgs/favicon/planet2-${isDark ? "white" : "black"}.svg`
+		}
+		
+		updateFavicon(window.matchMedia('(prefers-color-scheme: dark)').matches);
+		
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+			updateFavicon(e.matches);
+		});
+	</script>
+</head>
+
+<body>
+	<div id="root"></div>
+	
+</body>
+
 </html>
