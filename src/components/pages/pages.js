@@ -9,7 +9,6 @@ function map(value, start1, stop1, start2, stop2){
 }
 
 
-
 var swipeStartX = 0,
 	currentHover = 0;
 
@@ -83,7 +82,7 @@ const Pages = React.memo(() => {
 			return;
 
 		(async () => {
-			await new Promise(r => setTimeout(r, 500));
+			await new Promise(r => setTimeout(r, 300));
 			window.addEventListener("touchmove", handleOpenSwipe, {passive: true});
 			window.addEventListener("wheel",handleOpenWheel,{passive: true});
 		})();
@@ -109,11 +108,15 @@ const Pages = React.memo(() => {
 	
 	
 	return (
-		<div ref={cntnr} className="pages-cont">
+		<>
+			<div ref={cntnr} className="pages-cont">
+				{pageList}
+				
+			</div>
+			{/* <Backg/> */}
+		</>
 
-			{pageList}
-			
-		</div>
+
 	)
 });
 

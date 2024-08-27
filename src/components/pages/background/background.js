@@ -9,7 +9,7 @@ const mouseCircum = 120;
 
 var vsblty = 0;
 
-var bgColor = "rgba(0,0,0,0)";
+// var bgColor = "rgba(0,0,0,0)";
 
 const basicSketch = (p) => {
 
@@ -120,19 +120,16 @@ const P5Wrapper = () => {
 		return () => {
 			p5Instance.remove();
 		};
-	}, [window.innerWidth]);
+	}, []);
 
 
 	return (
 		<div
 			ref={canvasRef}
 			style={{
-				"position": "absolute",
-				"zIndex": "-1000",
-				"left": "0",
-				"right": "0",
-				"top": "0",
-				"bottom": "0"
+				"position": "fixed",
+				"zIndex": "10000",
+				inset: "0",
 			}}
 		>
 		</div>

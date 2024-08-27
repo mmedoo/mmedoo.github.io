@@ -33,8 +33,6 @@
 	width: var(--item-width);
 	height: var(--item-width);
 	position: absolute;
-	background-color: rgba(150,150,150);
-	background-color: black;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 	border-radius: 50%;
 	top: 50%;

@@ -1,4 +1,3 @@
-import Backg from "./background/background"
 import React, { useCallback, useContext, useEffect, useRef } from "react"
 import { components as pgs , icons } from "./pages_data"
 import { PageContext, SetPageContext } from "../../context";
@@ -17,8 +16,8 @@ const Page = React.memo (({Element, i}) => {
 
 	
 	const centerPageContent = useCallback((n) => {
-	
-		pageContRef.current.style.left = `calc(${(n - i) * 50 / (pgs.length-1)}% + 50%)`;
+
+		pageContRef.current.style.translate = `calc(${(n - i).toFixed(2) * 20 / (pgs.length-1)}% - 50%) -50%`;
 		
 		pageIconRef.current.style.translate = `${ (n - i) * 100 }%`;
 	}, []);
@@ -51,7 +50,7 @@ const Page = React.memo (({Element, i}) => {
 		}
 		
 		pageContRef.current.style.transform = `translate(0,-${target}px)`;
-		
+
 		pageContRef.current.dataset.scrolled = target;
 	}, []);
 		
@@ -140,7 +139,7 @@ const Page = React.memo (({Element, i}) => {
 			className={ `page ${ (pageContextObj.index === i && !pageContextObj.open) ? "open-page" : "" }` }
 		>
 		
-			<Backg/>
+			{/* <Backg/> */}
 			
 			<div
 				className="page-icon"
