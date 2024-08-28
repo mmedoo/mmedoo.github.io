@@ -140,4 +140,7 @@
 	.page {
 		will-change: width, height, background-color;
 	}
+	.page .page-container {
+		will-change: transform;
+	}
 }
