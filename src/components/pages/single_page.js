@@ -4,7 +4,7 @@ import { PageContext, SetPageContext } from "../../context";
 
 var swipeStartY = 0;
 
-	
+
 const Page = React.memo (({Element, i}) => {
 		
 	const pageContextObj = useContext(PageContext);
@@ -17,9 +17,9 @@ const Page = React.memo (({Element, i}) => {
 	
 	const centerPageContent = useCallback((n) => {
 
-		pageContRef.current.style.translate = `calc(${(n - i).toFixed(2) * 20 / (pgs.length-1)}% - 50%) -50%`;
+		pageContRef.current.style.translate = `calc(${(n - i).toFixed(3) * 20 / (pgs.length-1)}% - 50%) -50%`;
 		
-		pageIconRef.current.style.translate = `${ (n - i) * 100 }%`;
+		pageIconRef.current.style.translate = `${ (n - i).toFixed(3) * 100 }%`;
 	}, []);
 	
 	
@@ -49,9 +49,9 @@ const Page = React.memo (({Element, i}) => {
 			return;
 		}
 		
-		pageContRef.current.style.transform = `translate(0,-${target}px)`;
+		pageContRef.current.style.transform = `translate(0,-${target.toFixed(3)}px)`;
 
-		pageContRef.current.dataset.scrolled = target;
+		pageContRef.current.dataset.scrolled = target.toFixed(3);
 	}, []);
 		
 	
@@ -68,14 +68,14 @@ const Page = React.memo (({Element, i}) => {
 		}
 
 		pageContRef.current.animate({
-			transform: `translate(0,-${target}px)`
+			transform: `translate(0,-${target.toFixed(3)}px)`
 		}, {
 			duration: 1000,
 			easing: "cubic-bezier(0.19, 1, 0.22, 1)",
 			fill: "forwards",
 		})
 		
-		pageContRef.current.dataset.lastScroll = target;
+		pageContRef.current.dataset.lastScroll = target.toFixed(3);
 	}, []);
 
 	

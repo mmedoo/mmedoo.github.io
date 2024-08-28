@@ -49,26 +49,28 @@ function App() {
 				id="bodybg"
 			>
 				<picture>
-					<source type="image/avif" srcset={`./imgs/bgs/${bgnum}.avif`} />
+					<source type="image/avif" srcSet={`./imgs/bgs/${bgnum}.avif`} />
 					<img src={`./imgs/bgs/${bgnum}.jpg`} alt="background" />
 				</picture>
+				
+				<div className="bg-credits">
+					<div>
+						backgrounds
+					</div>
+					<div>
+						by /
+						<a
+							href="https://www.deviantart.com/bisbiswas"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							bisbiswas
+						</a>
+					</div>
+				</div>
+				
 			</div>
 
-			<div className="bg-credits">
-				<div>
-					backgrounds
-				</div>
-				<div>
-					by /
-					<a
-						href="https://www.deviantart.com/bisbiswas"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						bisbiswas
-					</a>
-				</div>
-			</div>
 			
 			<PageContext.Provider value={pageContextValue}>
 				<SetPageContext.Provider value={setPageContextValue}>

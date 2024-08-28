@@ -21,9 +21,9 @@ const Pages = React.memo(() => {
 	const cntnr = useRef(null);
 
 
-	const centerCont = useCallback((obj) => {
+	const centerCont = useCallback((obj) => {	
 
-		let v = `calc(-${obj.hover} * ( var(--mini-w) + var(--gap)) )`;
+		let v = `calc(-${(obj.hover).toFixed(3)} * ( var(--mini-w) + var(--gap)) )`;
 
 		// if (!obj.open)
 			// v = `calc(-${obj.hover} * ( 100vw + var(--gap)) )`

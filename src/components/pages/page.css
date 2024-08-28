@@ -45,11 +45,11 @@
 	height: var(--mini-h);
 	width: var(--mini-w);
 
-	transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+	/* transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1), width 0.6s Fast Out, Slow In, height 0.6s Fast Out, Slow In; */
+	transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
 	
 	color: #ffffff;
 	font: bold 30px sans-serif;
-	border-radius: 10px;
 	cursor: pointer;
 	border: 4px solid rgba(255, 255, 255,0.4);
 	will-change: transform, width, height;
@@ -61,14 +61,12 @@
 .open-page {
 	background-color: black;
 	cursor: default;
-	border-radius: 0;
-	z-index: 1000;
 	width: 100vw;
 	height: 100vh;
 }
 
 .page:not(.open-page) .page-container {
-	scale: 0.8;
+	scale: 0.6;
 	translate: -50% var(--topScroll);
 }
 
@@ -93,7 +91,6 @@
 	overflow: visible;
 	z-index: 998;
 	transition: 1.6s cubic-bezier(0.19, 1, 0.22, 1);
-	will-change: scale;
 }
 
 
@@ -108,7 +105,6 @@
 	z-index: -9999;
 	--stroke-alpha: 0.45;
 	transition: 0.4s ease-out, translate 1.6s cubic-bezier(0.19, 1, 0.22, 1);
-	will-change: translate;
 }
 
 .page-icon svg {

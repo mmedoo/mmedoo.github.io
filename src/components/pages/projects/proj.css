@@ -52,7 +52,7 @@
 
 .pjt-desc {
 	font: 400 1.4rem Google Sans;
-	padding: 15px 0;
+	padding: 14px 0;
 }
 
 
@@ -69,4 +69,26 @@
 	border-radius: 20px;
 	background: rgb(25,25,25);
 	font: 400 16px Google Sans;
+}
+
+
+@media screen and (max-width: 768px) {
+	.proj-cont {
+		width: 100%;
+	}
+	.project {
+		border: none;
+		border-radius: none;
+		padding: 0 5%;
+		margin-bottom: 65px;
+	}
+	.pjt-header {
+		font-size: 1.5em;
+	}
+	.pjt-desc {
+		font-size: 1.2rem;
+	}
+	.pjt-tag {
+		font-size: 12px;
+	}
 }
