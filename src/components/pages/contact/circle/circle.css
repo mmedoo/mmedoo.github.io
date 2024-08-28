@@ -1,4 +1,4 @@
-.cntnr {
+#cntnr {
 	border-radius: 50%;
 	overflow: visible;
 
@@ -20,11 +20,11 @@
 	}
 }
 
-.cntnr:hover , .cntnr:hover .item {
+#cntnr:hover , #cntnr:hover .item {
 	animation-play-state: paused;
 }
 
-.item {
+#cntnr .item {
 	border: 2px solid rgba(175, 175, 175);
 	display: flex;
 	justify-content: center;
@@ -46,15 +46,15 @@
 	animation: rotating 6s linear infinite reverse;
 }
 
-.item * {
+#cntnr .item > * {
 	mix-blend-mode: difference;
 }
 
-.item:hover {
+#cntnr .item:hover {
 	background-color: rgba(255, 255, 255);
 }
 
-.item_content {
+#cntnr .item_content {
 	transition: opacity var(--animat);
 	width: 100%;
 	height: 100%;
@@ -66,9 +66,15 @@
 }
 
 
-.item svg {
+#cntnr .item_content svg {
 	width: 70%;
 	height: 70%;
 	fill: none;
 	stroke: white;
+}
+
+@media screen and (max-width: 768px) {
+	#cntnr .item , #cntnr {
+		animation: none;
+	}
 }

@@ -55,7 +55,7 @@ function Nav() {
 	return (
 		<div
 			ref={cntnrRef}
-			className={`cntnr`}
+			id={`cntnr`}
 			style={{
 				'--opened-radius': `${openedRadius}px`,
 				'--item-width': `${itemRadius * 2}px`,
