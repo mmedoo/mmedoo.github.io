@@ -32,11 +32,11 @@ const data = [
 		tags: ["GitHub Actions", "React.js", "CI/CD"]
 	},
 	{
-		title: "Transcription Dashboard",
-		link: "https://github.com/mmedoo/react-project-dashboard",
-		description: "A Dashboard for making subtitles request.",
-		tags: ["React.js", "HTML", "CSS"],
-		preview: "https://mmedoo.github.io/react-project-dashboard"
+		title: "Serverless E2EE Mailbox",
+		link: "https://github.com/mmedoo/serverless-e2ee-mailbox",
+		description: "Simple yet efficient end-to-end encrypted Mailbox to import and export messages securely.",
+		tags: ["crypto-js", "Express", "PostgreSQL", "React.js"],
+		preview: "https://serverless-mailbox.vercel.app"
 	}
 ];
 
