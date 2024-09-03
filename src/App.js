@@ -17,7 +17,7 @@ function App() {
 	// const cursorRef = useRef(null);
 	
 	const [pageObjects, setPageObjects] = useState({
-		index: 0,
+		// index: 0,
 		hover: 0,
 		open: false,
 	});

@@ -28,13 +28,13 @@ const Page = React.memo (({Element, i}) => {
 	const pageClicked = useCallback((e, obj) => {
 		if (obj.open) {
 			centerPageContent(i);
-			setPageContextObj({hover: i,index: i,open: false});
+			setPageContextObj({hover: i,open: false});
 		} else {
 			return;
 			let next = e.clientX < window.innerWidth / 2 ?
-				Math.max(obj.index - 1, 0)
-			: Math.min(obj.index + 1, pgs.length - 1);
-			setPageContextObj({index: next,hover: next,open: false});
+				Math.max(obj.hover - 1, 0)
+			: Math.min(obj.hover + 1, pgs.length - 1);
+			setPageContextObj({hover: next,open: false});
 		}
 	}, []);
 	
@@ -68,15 +68,15 @@ const Page = React.memo (({Element, i}) => {
 			return;
 		}
 
-		// pageContRef.current.animate({
-		// 	transform: `translate(0,-${target.toFixed(3)}px)`
-		// }, {
-		// 	duration: 1000,
-		// 	easing: "cubic-bezier(0.19, 1, 0.22, 1)",
-		// 	fill: "forwards",
-		// })
+		pageContRef.current.animate({
+			transform: `translate(0,-${target.toFixed(3)}px)`
+		}, {
+			duration: 1100,
+			easing: "cubic-bezier(0.19, 1, 0.22, 1)",
+			fill: "forwards",
+		})
 
-		pageContRef.current.style.transform = `translate(0,-${target}px)`;
+		// pageContRef.current.style.transform = `translate(0,-${target}px)`;
 		
 		pageContRef.current.dataset.lastScroll = target;
 	}, []);
@@ -139,7 +139,7 @@ const Page = React.memo (({Element, i}) => {
 	return (
 		<div
 			ref={pageRef}
-			className={ `page ${ (pageContextObj.index === i && !pageContextObj.open) ? "open-page" : "" }` }
+			className={ `page ${ (pageContextObj.hover === i && !pageContextObj.open) ? "open-page" : "" }` }
 		>
 		
 			{/* <Backg/> */}
