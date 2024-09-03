@@ -69,7 +69,7 @@ const Page = React.memo (({Element, i}) => {
 		}
 
 		pageContRef.current.animate({
-			transform: `translate(0,-${target.toFixed(3)}px)`
+			transform: `translate(0,-${target}px)`
 		}, {
 			duration: 1100,
 			easing: "cubic-bezier(0.19, 1, 0.22, 1)",
