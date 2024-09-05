@@ -37,6 +37,11 @@ const data = [
 		description: "Simple yet efficient end-to-end encrypted Mailbox to import and export messages securely.",
 		tags: ["crypto-js", "Express", "PostgreSQL", "React.js"],
 		preview: "https://serverless-mailbox.vercel.app"
+	},{
+		title: "Basic Todo App",
+		link: "https://github.com/mmedoo/todo-app",
+		description: "Basic Todo list app with documented API using Swagger.",
+		tags: ["Swagger", "Express", "SQLite", "React.js", "Express", "Sequelize.js"]
 	}
 ];
 
