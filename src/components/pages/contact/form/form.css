@@ -81,13 +81,11 @@ form > div label {
 #submit {
 	transition: none;
 	width: 150px;
+	color: rgb(150, 150, 150);
 }
 
 #submit:hover {
 	border-color: white;
-}
-
-#submit:hover > input {
 	color: white;
 }
 
@@ -95,25 +93,25 @@ input:focus {
 	outline: none;
 }
 
-input[type="submit"] {
+#submit input {
 	display: flex;
 	justify-content: center;
 	cursor: pointer;
 	margin-left: auto;
-	color: rgb(150, 150, 150);
 	background-color: transparent;
+	color: inherit;
 }
 
-input[type="submit"]:active {
+
+#submit input:active {
 	background-color: rgb(240, 240, 240);
 }
 
-.disabled {
+#submit input:disabled {
 	cursor: not-allowed;
-	color: rgb(200, 200, 200);
 }
 
-.disabled>div,
-.disabled textarea {
-	border-color: rgb(200, 200, 200);
+#submit:has(input:disabled) {
+	border-color: rgb(50, 50, 50);
+	color: rgb(150, 150, 150);
 }

@@ -13,15 +13,23 @@ function focusOut(e) {
 
 function submitMessage(e) {
 	e.preventDefault();
-	var formData = new FormData(e.currentTarget);
+	const formData = new FormData(e.currentTarget);
+	
 	formData.append('service_id', 'service_port');
 	formData.append('template_id', 'port');
 	formData.append('user_id', 'VlIZlX3XpFdgpVYZR');
-	for (let input of e.currentTarget.elements) {
-		if (input.type !== "submit") {
-			formData.append(input.name, input.value);
-		}
-	}
+
+	// for (let input of e.currentTarget.elements) {
+	// 	if (input.type !== "submit") {
+	// 		// console.log(input.name, input.value);
+	// 		formData.append(input.name, input.value);
+	// 	}
+	// }
+
+	const submit_button = e.currentTarget.querySelector("input[type='submit']");
+
+	submit_button.disabled = true;
+	
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', 'https://api.emailjs.com/api/v1.0/email/send-form');
 	xhr.onload = function () {
@@ -30,6 +38,7 @@ function submitMessage(e) {
 		} else {
 			alert('Oops... ' + xhr.responseText);
 		}
+		submit_button.disabled = false;
 	};
 	xhr.onerror = function () {
 		alert('Oops... Something went wrong.');
