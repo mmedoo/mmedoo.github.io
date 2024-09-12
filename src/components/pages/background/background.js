@@ -128,7 +128,7 @@ const P5Wrapper = () => {
 			ref={canvasRef}
 			style={{
 				"position": "fixed",
-				"zIndex": "10000",
+				"zIndex": "-10000",
 				inset: "0",
 			}}
 		>

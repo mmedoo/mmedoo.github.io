@@ -11,6 +11,8 @@ html, body {
 	overscroll-behavior: none;
 }
 
+/* Style the scroll bar */
+
 body {
 	margin: 0;
 	user-select: none;
@@ -59,8 +61,8 @@ body {
 }
 
 .bg-credits {
-	position: absolute;
-	z-index: 999;
+	position: fixed;
+	z-index: 1000;
 	left: 5%;
 	bottom: 5%;
 	color: white;

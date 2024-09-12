@@ -1,5 +1,5 @@
-/* ::-webkit-scrollbar {
-	width: 5px;
+::-webkit-scrollbar {
+	width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -8,11 +8,11 @@
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 2px;
-	background-color: #aaa;
+	background-color: #666;
 }
 ::-webkit-scrollbar-thumb:hover {
-	background-color: white;
-} */
+	background-color: #888;
+}
 
 .pages-cont {
 	--mini-w: calc(100vw * 0.45);
@@ -31,7 +31,6 @@
 	transition: translate 1.2s cubic-bezier(0.19, 1, 0.22, 1);
 	align-items: center;
 	z-index: 998;
-	will-change: translate;
 }
 
 
@@ -51,10 +50,8 @@
 	color: #ffffff;
 	font: bold 30px sans-serif;
 	cursor: pointer;
-	will-change: transform, width, height;
-	background-color: rgba(255,255,255,0.05);
-	backdrop-filter: blur(10px);
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.55);
+	background-color: rgba(255,255,255,0.1);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 	border-radius: 15px;
 }
 
@@ -63,11 +60,15 @@
 	cursor: default;
 	width: 100vw;
 	height: 100vh;
+	border-radius: 0;
+}
+
+.open-page .page-container {
+	overflow-y: auto;
 }
 
 .page:not(.open-page) .page-container {
 	scale: 0.75;
-	translate: -50% var(--topScroll);
 }
 
 
@@ -78,7 +79,6 @@
 }
 
 .page-container {
-	--topScroll: -50%;
 	width: 100vw;
 	height: 100vh;
 	position: absolute;
@@ -88,6 +88,7 @@
 	overflow: visible;
 	z-index: 998;
 	transition: 1.6s cubic-bezier(0.19, 1, 0.22, 1), transform 1s cubic-bezier(0.19, 1, 0.22, 1);
+	overflow: hidden;
 }
 
 
@@ -136,11 +137,9 @@
 }
 
 
-@media screen and (max-width: 768px) {
-	.page {
-		will-change: width, height, background-color;
+@media screen and (max-width: 800px) {
+	::-webkit-scrollbar {
+		display: none;
 	}
-	.page .page-container {
-		will-change: transform;
-	}
+		
 }

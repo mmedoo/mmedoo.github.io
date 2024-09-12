@@ -42,11 +42,14 @@ function Hero() {
 			<div className="view">
 				<div className="view_content">
 					<span style={{
-						textAlign: 'left'
+						textAlign: 'left',
+						margin: "auto",
+						paddingTop: "75px"
 					}}>
 						<ANIM_TEXT text="Mohamed" i={1} />
 						<ANIM_TEXT text="Ibrahim" i={2} />
 					</span>
+					<ANIM_TEXT style={{paddingBottom: "60px"}} text="Keep Scrolling" i={2} />
 				</div>
 			</div>
 			

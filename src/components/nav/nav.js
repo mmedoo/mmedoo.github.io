@@ -1,7 +1,8 @@
-import { useContext, useMemo, useRef } from "react";
+import { useContext, useMemo, useRef, useState } from "react";
 import "./nav.css";
 import data from "./nav_data"
-import { PageContext, SetPageContext } from "../../context";
+import { SetPageContext } from "../../context";
+
 
 // customizations
 // customizations
@@ -9,7 +10,7 @@ import { PageContext, SetPageContext } from "../../context";
 
 const itemsNo = data.length;
 
-const openedRadius = 110;
+const openedRadius = 90;
 
 const itemRadius = 35;
 
@@ -31,18 +32,10 @@ function rToAngle (r){
 
 function Nav(){
 
-	const pageContextObj = useContext(PageContext);
-
-	const opened = pageContextObj.open;
+	const [navOpen, setNavOpen] = useState(false);
 
 	const setPageObj = useContext(SetPageContext);
 	
-	// const setIndex = setPageContextObj;
-
-	// const setHovered = setPageContextObj.setHovered;
-
-	// const setOpened = setPageContextObj.setOpened;
-
 	const cntnrRef = useRef(null);
 
 	const items = useMemo(() =>
@@ -54,10 +47,10 @@ function Nav(){
 					key={i}
 					onClick={() => {
 						setPageObj({
-							index: i,
 							hover: i,
 							open: false,
 						});
+						setNavOpen(false);
 					}}
 					onMouseOver={() => {
 						setPageObj(prev =>
@@ -82,45 +75,40 @@ function Nav(){
 						<svg>
 							<use xlinkHref={option.icon} />
 						</svg>
-						<text>
-							{option.title}
-						</text>
+						<b>
+							{/* {option.title} */}
+						</b>
 					</div>
 				</div>
 			)
-
 		})
 		
 	, []);
 	
 	return (
 		<div
+			tabIndex={0}
 			ref={cntnrRef}
-			className={`cntnr ${opened ? "openNav" : ""}`}
+			className={`cntnr ${navOpen ? "openNav" : ""}`}
 			onBlur={() => {
-				setPageObj(prev =>
-					({
-						...prev,
-						hover: prev.index,
-						open: false,
-					})
-				)
+				setNavOpen(false);
 			}}
 			style={{
 				'--opened-radius': `${openedRadius}px`,
 				'--item-width': `${itemRadius * 2}px`,
 			}}
 		>
+
 			{items}
+			
 			<div
-				className={`item fix ${pageContextObj.open ? "ignoreFixedItem" : ""}`}
-				onClick={async (e) => {
-					setPageObj(prev =>
-						({
-							...prev,
-							open: true,
-						})
-					)
+				className={`item fix ${navOpen ? "ignoreFixedItem" : ""}`}
+				onClick={() => {
+					setNavOpen(true);
+					setPageObj(prev => ({
+						...prev,
+						open: true,
+					}));
 				}}
 			>
 

@@ -2,6 +2,7 @@ import "./style.css"
 import Pages from "./components/pages/pages"
 import { PageContext, SetPageContext } from "./context"
 import { useState, useMemo } from "react"
+import Nav from "./components/nav/nav"
 
 const bgno = () => {
 	let n = Math.floor((Math.random() * 11)) + 1;
@@ -53,29 +54,31 @@ function App() {
 					<img src={`./imgs/bgs/${bgnum}.jpg`} alt="background" />
 				</picture>
 				
-				<div className="bg-credits">
-					<div>
-						backgrounds
-					</div>
-					<div>
-						by /
-						<a
-							href="https://www.deviantart.com/bisbiswas"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							bisbiswas
-						</a>
-					</div>
-				</div>
 				
 			</div>
 
+			<div className="bg-credits">
+				<div>
+					backgrounds
+				</div>
+				<div>
+					by /
+					<a
+						href="https://www.deviantart.com/bisbiswas"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						bisbiswas
+					</a>
+				</div>
+			</div>
 			
 			<PageContext.Provider value={pageContextValue}>
 				<SetPageContext.Provider value={setPageContextValue}>
 
 					<Pages/>
+
+					{window.innerWidth > 800 && <Nav/>}
 
 				</SetPageContext.Provider>
 			</PageContext.Provider>

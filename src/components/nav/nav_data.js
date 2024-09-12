@@ -1,7 +1,7 @@
 export default [
 	{
-		"title": "Home",
-		"icon": "./icons/home.svg#home",
+		"title": "About",
+		"icon": "./icons/about.svg#about",
 	},
 	{
 		"title": "Projects",
@@ -10,9 +10,5 @@ export default [
 	{
 		"title": "Contact",
 		"icon": "./icons/send.svg#send",
-	},
-	{
-		"title": "About",
-		"icon": "./icons/about.svg#about",
-	},
+	}
 ];

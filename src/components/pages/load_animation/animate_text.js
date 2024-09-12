@@ -2,7 +2,7 @@ import "./animate_text.css";
 import { useEffect, useRef } from "react";
 
 
-function Animated_Text({text, i}) {
+function Animated_Text({style, text, i}) {
 
 	const animatedDiv = useRef(null);
 	const contRef = useRef(null);
@@ -30,6 +30,7 @@ function Animated_Text({text, i}) {
 		<span
 			className="text_anim"
 			ref={contRef}
+			style={style}
 		>
 			<span
 				className="text_wrap"

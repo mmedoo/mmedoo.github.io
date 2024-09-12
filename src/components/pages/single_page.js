@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useRef } from "react"
 import { components as pgs , icons } from "./pages_data"
 import { PageContext, SetPageContext } from "../../context";
+import Backg from "./background/background"
 
 var swipeStartY = 0;
 
@@ -38,56 +39,24 @@ const Page = React.memo (({Element, i}) => {
 		}
 	}, []);
 	
+
 	
-	
-	const handleCloseWheel = useCallback((e) => {
-		let scrolled = parseInt(pageContRef.current.dataset.scrolled);
-		let target = Number((scrolled + e.deltaY / 1.5).toFixed(3));
-		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
+	const handleOverScroll = useCallback((e) => {
+		let target = (e.deltaY !== undefined) ?
+			e.deltaY
+		: (swipeStartY - e.touches[0].clientY);
+		let scrolled = pageContRef.current.scrollTop / (pageContRef.current.scrollHeight - pageContRef.current.offsetHeight);
 		
-		if (target > maximum + 30 || target < 0) {
+		if (
+			(scrolled == 0 && target < 0)
+			||
+			(scrolled >= 1 && target > 0)
+		){
 			setPageContextObj(prev => ({ ...prev, open: true }));
-			return;
 		}
-		
-		pageContRef.current.style.transform = `translate(0,-${target}px)`;
-
-		pageContRef.current.dataset.scrolled = target;
-	}, []);
-		
-	
-
-	const handleCloseSwipe = useCallback((e) => {
-		let deltaY = swipeStartY - e.touches[0].clientY;
-		let scrolled = parseInt(pageContRef.current?.dataset.scrolled);
-		let target = Number((scrolled + deltaY * 2).toFixed(3));
-		let maximum = pageContRef.current.scrollHeight - pageContRef.current.offsetHeight;
-
-		if (target > maximum + 30 || target < 0) {
-			setPageContextObj((prev) => ({ ...prev, open: true }));
-			return;
-		}
-
-		pageContRef.current.animate({
-			transform: `translate(0,-${target}px)`
-		}, {
-			duration: 800,
-			// easing: "cubic-bezier(0.19, 1, 0.22, 1)",
-			easing: "ease-out",
-			fill: "forwards",
-		})
-
-		// pageContRef.current.style.transform = `translate(0,-${target}px)`;
-		
-		pageContRef.current.dataset.lastScroll = target;
 	}, []);
 
-	
 
-	const updateScrolled = useCallback(() => {
-		pageContRef.current.dataset.scrolled = pageContRef.current.dataset.lastScroll;
-	}, []);
-	
 
 	useEffect(() => {
 
@@ -103,15 +72,14 @@ const Page = React.memo (({Element, i}) => {
 
 		window.addEventListener("touchstart", updateTouches);
 		
-		const pageNode = pageRef.current;
-		
-		pageNode?.addEventListener("click", removablePageClicked);
+		pageRef.current?.addEventListener("click", removablePageClicked);
 		
 		return () => {
 			window.removeEventListener("touchstart", updateTouches);
-			pageNode?.removeEventListener("click", removablePageClicked);
+			pageRef.current?.removeEventListener("click", removablePageClicked);
 		}
 	}, [pageContextObj]);
+	
 	
 	
 	useEffect(() => {
@@ -121,19 +89,16 @@ const Page = React.memo (({Element, i}) => {
 
 		const pageContNode = pageContRef.current;
 		
-		pageContNode?.addEventListener("touchend", updateScrolled);
-		pageContNode?.addEventListener("wheel", handleCloseWheel, {passive: true});
-		pageContNode?.addEventListener("touchmove", handleCloseSwipe, {passive: true});
-
+		pageContNode?.addEventListener("wheel", handleOverScroll);
+		pageContNode?.addEventListener("touchmove", handleOverScroll);
+		
 		return () => {
-			pageContNode?.removeEventListener("touchend", updateScrolled);
-			pageContNode?.removeEventListener("wheel", handleCloseWheel);
-			pageContNode?.removeEventListener("touchmove", handleCloseSwipe);
+			
+			pageContNode?.removeEventListener("wheel", handleOverScroll);
+			pageContNode?.removeEventListener("touchmove", handleOverScroll);
 		}
+
 	}, [pageContextObj.open]);
-	
-	
-	
 	
 	
 
@@ -143,7 +108,7 @@ const Page = React.memo (({Element, i}) => {
 			className={ `page ${ (pageContextObj.hover === i && !pageContextObj.open) ? "open-page" : "" }` }
 		>
 		
-			{/* <Backg/> */}
+			<Backg/>
 			
 			<div
 				className="page-icon"
