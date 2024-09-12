@@ -108,7 +108,7 @@ const Page = React.memo (({Element, i}) => {
 			className={ `page ${ (pageContextObj.hover === i && !pageContextObj.open) ? "open-page" : "" }` }
 		>
 		
-			<Backg/>
+			{window.innerWidth > 800 && <Backg/>}
 			
 			<div
 				className="page-icon"

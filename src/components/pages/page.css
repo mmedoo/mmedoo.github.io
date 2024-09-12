@@ -28,7 +28,7 @@
 	left: 50%;
 	height: 100vh;
 	column-gap: var(--gap);
-	transition: translate 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+	transition: translate 1s cubic-bezier(0.19, 1, 0.22, 1);
 	align-items: center;
 	z-index: 998;
 }
@@ -46,6 +46,8 @@
 
 	/* transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1), width 0.6s Fast Out, Slow In, height 0.6s Fast Out, Slow In; */
 	transition: 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+
+	/* backdrop-filter: blur(10px); */
 	
 	color: #ffffff;
 	font: bold 30px sans-serif;
