@@ -89,7 +89,7 @@ function Nav(){
 		<div
 			tabIndex={0}
 			ref={cntnrRef}
-			className={`cntnr ${navOpen ? "openNav" : ""}`}
+			className={`nav ${navOpen ? "openNav" : ""}`}
 			onBlur={() => {
 				setNavOpen(false);
 			}}

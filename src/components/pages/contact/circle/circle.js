@@ -87,9 +87,9 @@ function Item({ option, i }) {
 					<svg id={Date.now()}>
 						<use xlinkHref={option.icon} />
 					</svg>
-					<b>
-						{option.title}
-					</b>
+					{/* <b> */}
+						{/* {option.title} */}
+					{/* </b> */}
 				</div>
 			</div>
 		</a>

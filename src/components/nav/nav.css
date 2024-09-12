@@ -1,4 +1,4 @@
-.cntnr {
+.nav {
 	position: fixed;
 	z-index: 10000;
 	translate: -50% -50%;
@@ -20,33 +20,8 @@
 
 
 
-.openNav {
-	height: calc( var(--opened-radius) * 2 + var(--item-width) + 20px );
-	width: calc( var(--opened-radius) * 2 + var(--item-width) + 20px );
-	transition-delay: 0s;
-	rotate: 0deg;
-	animation: none;
-}
 
-
-
-.openNav .item:not(.fix) {
-	--current-radius: var(--opened-radius);
-	--current-angle: var(--angle);
-	pointer-events: all;
-	backdrop-filter: blur(3px) brightness(1.5);
-}
-
-
-.openNav .item_content {
-	opacity: 1;
-}
-
-.openNav .item:not(.fix):hover {
-	backdrop-filter: blur(3px) brightness(0.7);
-}
-
-.item {
+.nav .item {
 	border: 1px solid rgba(175, 175, 175);
 	display: flex;
 	justify-content: center;
@@ -80,7 +55,7 @@
 
 
 
-.item_content {
+.nav .item_content {
 	opacity: 0;
 	transition: opacity var(--animat);
 	width: 100%;
@@ -93,7 +68,7 @@
 }
 
 
-.item_content svg {
+.nav .item_content svg {
 	width: 55%;
 	height: 55%;
 	fill: none;
@@ -107,7 +82,7 @@
 
 
 
-.fix {
+.nav .fix {
 	translate: -50% -50%;
 	background-color: transparent;
 	border-color: transparent;
@@ -119,11 +94,37 @@
 	cursor: pointer;
 }
 
-.fix:hover {
+.nav .fix:hover {
 	background-color: rgba(255, 255, 255, 0.3);
 }
 
-.ignoreFixedItem:hover {
+.nav .ignoreFixedItem:hover {
 	background-color: transparent;
 	cursor: default;
+}
+
+.openNav {
+	height: calc( var(--opened-radius) * 2 + var(--item-width) + 20px );
+	width: calc( var(--opened-radius) * 2 + var(--item-width) + 20px );
+	transition-delay: 0s;
+	rotate: 0deg;
+	animation: none;
+}
+
+
+
+.openNav .item:not(.fix) {
+	--current-radius: var(--opened-radius);
+	--current-angle: var(--angle);
+	pointer-events: all;
+	backdrop-filter: blur(3px) brightness(1.5);
+}
+
+
+.openNav .item_content {
+	opacity: 1;
+}
+
+.openNav .item:not(.fix):hover {
+	backdrop-filter: blur(3px) brightness(0.7);
 }

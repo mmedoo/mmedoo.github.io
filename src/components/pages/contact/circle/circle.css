@@ -7,7 +7,7 @@
 	transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1) 0.7s , width 0s, height 0s;
 	height: calc( var(--opened-radius) * 2 + var(--item-width) + 20px );
 	width: calc( var(--opened-radius) * 2 + var(--item-width) + 20px );
-	animation: rotating 6s linear infinite;
+	animation: rotating 10s linear infinite;
 }
 
 
@@ -25,7 +25,7 @@
 }
 
 #cntnr .item {
-	border: 2px solid rgba(175, 175, 175);
+	border: 1px solid rgba(60, 60, 60);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -43,7 +43,7 @@
 		calc( var(--opened-radius) * sin(var(--angle)) - 50% );
 
 	color: white;
-	animation: rotating 6s linear infinite reverse;
+	animation: rotating 10s linear infinite reverse;
 }
 
 #cntnr .item > * {
@@ -51,7 +51,7 @@
 }
 
 #cntnr .item:hover {
-	background-color: rgba(255, 255, 255);
+	background-color: rgba(255, 255, 255, 0.1);
 }
 
 #cntnr .item_content {
