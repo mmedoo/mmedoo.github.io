@@ -71,8 +71,9 @@ const Page = React.memo (({Element, i}) => {
 		pageContRef.current.animate({
 			transform: `translate(0,-${target}px)`
 		}, {
-			duration: 1100,
-			easing: "cubic-bezier(0.19, 1, 0.22, 1)",
+			duration: 800,
+			// easing: "cubic-bezier(0.19, 1, 0.22, 1)",
+			easing: "ease-out",
 			fill: "forwards",
 		})
 
