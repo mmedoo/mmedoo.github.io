@@ -1,8 +1,8 @@
-import { useMemo } from "react";
+import { useMemo, memo } from "react";
 import ANIMATED_TEXT from "../load_animation/animate_text"
 import data from "./proj-data"
 
-function Project(props) {
+const Project = memo((props) => {
 	
 	return (
 		<div className="project">
@@ -47,10 +47,10 @@ function Project(props) {
 			</div>
 		</div>
 	);
-}
+})
 
 
-function PROJ_CONT() {
+const PROJ_CONT = memo(() => {
 
 	const projList = useMemo(() => {
 		return data.map((p, i) =>
@@ -67,7 +67,7 @@ function PROJ_CONT() {
 			{projList}
 		</div>
 	);
-}
+})
 
 
 export default PROJ_CONT;

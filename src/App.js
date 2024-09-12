@@ -1,50 +1,39 @@
 import "./style.css"
 import Pages from "./components/pages/pages"
 import { PageContext, SetPageContext } from "./context"
-import { useState, useMemo } from "react"
+import { useState, useEffect, useCallback, memo } from "react"
 import Nav from "./components/nav/nav"
 
-const bgno = () => {
+const bgnum = (() => {
 	let n = Math.floor((Math.random() * 11)) + 1;
 	if (n > 11) n = 11;
 	return n;
-}
-
-const bgnum = bgno();
+})();
 
 
-function App() {
+const App = memo(() => {
 
-	// const cursorRef = useRef(null);
-	
 	const [pageObjects, setPageObjects] = useState({
-		// index: 0,
 		hover: 0,
 		open: false,
 	});
+		
+	const [showNav, setShowNav] = useState(window.innerWidth > 800);
 
-	// const handleMouseMove = useCallback((e) => {			
-	// 	cursorRef.current?.animate(
-	// 		{ left: `${e.x}px`, top: `${e.y}px` },
-	// 		{ duration: 1000, fill: "both", easing: "ease-in-out" }
-	// 	);
-	// }, []);
+	const handleResize = useCallback(() => {
+		setShowNav(window.innerWidth > 800);
+	}, []);
 
-	// useEffect(() => {
-	// 	if (window.innerWidth > 800) {
-	// 		window.addEventListener("mousemove", handleMouseMove)
-	// 		return () => {
-	// 			window.removeEventListener("mousemove", handleMouseMove)
-	// 		}
-	// 	}
-	// }, [window.innerWidth])
-	
-	const pageContextValue = useMemo(() => pageObjects, [pageObjects]);
-	const setPageContextValue = useMemo(() => setPageObjects, []);
-	
+	useEffect(() => {
+		
+		window.addEventListener("resize", handleResize);
+		
+		return () => 
+			window.removeEventListener("resize", handleResize);
+	}, []);
+		
 	return (
 		<>
-			{/* <div ref={cursorRef} className="curs"></div> */}
 
 			<div
 				id="bodybg"
@@ -73,17 +62,17 @@ function App() {
 				</div>
 			</div>
 			
-			<PageContext.Provider value={pageContextValue}>
-				<SetPageContext.Provider value={setPageContextValue}>
+			<PageContext.Provider value={pageObjects}>
+				<SetPageContext.Provider value={setPageObjects}>
 
 					<Pages/>
 
-					{window.innerWidth > 800 && <Nav/>}
+					{showNav && <Nav/>}
 
 				</SetPageContext.Provider>
 			</PageContext.Provider>
 		</>
 	);
-}
+}, []);
 
 export default App;

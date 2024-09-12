@@ -1,5 +1,5 @@
 import "./page.css"
-import React, { useCallback, useContext, useEffect, useMemo, useRef } from "react"
+import { memo, useCallback, useContext, useEffect, useMemo, useRef } from "react"
 import { PageContext, SetPageContext } from "../../context";
 import { components as pgs } from "./pages_data"
 import Page from "./single_page"
@@ -13,7 +13,7 @@ var swipeStartX = 0,
 	currentHover = 0;
 
 
-const Pages = React.memo(() => {
+const Pages = memo(() => {
 
 	const pageContextObj = useContext(PageContext);
 	const setPageContextObj = useContext(SetPageContext);
@@ -25,39 +25,34 @@ const Pages = React.memo(() => {
 
 		let v = `calc(-${(obj.hover).toFixed(3)} * ( var(--mini-w) + var(--gap)) )`;
 
-		// if (!obj.open)
-			// v = `calc(-${obj.hover} * ( 100vw + var(--gap)) )`
-
 		cntnr.current.style.translate = `${v} 0`;
-		
-		// cntnr.current.style.transition = `translate 1.2s cubic-bezier(0.19, 1, 0.22, 1)`;
-
 	}, []);
 	
 	
 	const handleOpenWheel = useCallback((e) => {
-		let max = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
-		let move = map(Math.abs(max), 0, 100, 0, 0.1);
-		setPageContextObj(prev => ({
-			...prev,
-			hover: max < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, pgs.length-1),
-		}));
-	}, []);
-	
-	
 
-	const handleOpenSwipe = useCallback((e) => {
+		if (e.deltaY !== undefined) {
+			let max = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+			let move = map(Math.abs(max), 0, 100, 0, 0.1);
+			setPageContextObj(prev => ({
+				...prev,
+				hover: max < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, pgs.length-1)
+			}));
+			return;	
+		}
+
 		let deltaX = e.touches[0].clientX - swipeStartX;		
 		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 5);
-		setPageContextObj((prev) => ({
-			...prev,
-			hover: deltaX > 0 ? Math.max(currentHover - move, 0) : Math.min(currentHover + move, pgs.length-1),
-		}));
-	}, []);
-	
+		let newPos = deltaX > 0 ? Math.max(currentHover - move, 0) : Math.min(currentHover + move, pgs.length-1);
 		
-	
-	
+		setPageContextObj(prev => ({
+			...prev,
+			hover: newPos,
+		}));
+		
+	}, []);
+
+		
 	useEffect(() => {
 		centerCont(pageContextObj);
 		
@@ -83,18 +78,16 @@ const Pages = React.memo(() => {
 
 		(async () => {
 			await new Promise(r => setTimeout(r, 300));
-			window.addEventListener("touchmove", handleOpenSwipe, {passive: true});
+			window.addEventListener("touchmove", handleOpenWheel, {passive: true});
 			window.addEventListener("wheel",handleOpenWheel,{passive: true});
 		})();
 
 		return () => {
-			window.removeEventListener("touchmove", handleOpenSwipe);
+			window.removeEventListener("touchmove", handleOpenWheel);
 			window.removeEventListener("wheel",handleOpenWheel);
 		}
 
 	}, [pageContextObj.open]);
-	
-	
 	
 	
 	
@@ -113,7 +106,6 @@ const Pages = React.memo(() => {
 				{pageList}
 				
 			</div>
-			{/* <Backg/> */}
 		</>
 
 

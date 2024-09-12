@@ -1,12 +1,11 @@
-import React, { useCallback, useContext, useEffect, useRef } from "react"
+import { memo, useCallback, useContext, useEffect, useRef, useState } from "react"
 import { components as pgs , icons } from "./pages_data"
 import { PageContext, SetPageContext } from "../../context";
 import Backg from "./background/background"
 
 var swipeStartY = 0;
 
-
-const Page = React.memo (({Element, i}) => {
+const Page = memo (({Element, i}) => {
 		
 	const pageContextObj = useContext(PageContext);
 	const setPageContextObj = useContext(SetPageContext);
@@ -15,6 +14,7 @@ const Page = React.memo (({Element, i}) => {
 	const pageContRef = useRef(null);
 	const pageIconRef = useRef(null);
 
+	const [showBg, setShowBg] = useState(window.innerWidth > 800);
 	
 	const centerPageContent = useCallback((n) => {
 		let relativePos = Number((n - i).toFixed(3));
@@ -23,23 +23,11 @@ const Page = React.memo (({Element, i}) => {
 		
 		pageIconRef.current.style.translate = `${ relativePos * 100 }%`;
 	}, []);
-	
-	
-
-	const pageClicked = useCallback((e, obj) => {
-		if (obj.open) {
-			centerPageContent(i);
-			setPageContextObj({hover: i,open: false});
-		} else {
-			return;
-			let next = e.clientX < window.innerWidth / 2 ?
-				Math.max(obj.hover - 1, 0)
-			: Math.min(obj.hover + 1, pgs.length - 1);
-			setPageContextObj({hover: next,open: false});
-		}
+		
+	const pageClicked = useCallback(() => {
+		centerPageContent(i);
+		setPageContextObj({hover: i,open: false});
 	}, []);
-	
-
 	
 	const handleOverScroll = useCallback((e) => {
 		let target = (e.deltaY !== undefined) ?
@@ -56,36 +44,40 @@ const Page = React.memo (({Element, i}) => {
 		}
 	}, []);
 
+	
+	useEffect(() => {
+
+		const handleResize = () => {
+			setShowBg(window.innerWidth > 800);
+		};
+	
+		const updateTouches = (e) => {
+			swipeStartY = e.touches[0].clientY;
+		};
+		
+		window.addEventListener("touchstart", updateTouches);
+		window.addEventListener("resize", handleResize);
+		
+		return () => {
+			window.removeEventListener("touchstart", updateTouches)
+			window.removeEventListener("resize", handleResize);
+		}
+	}, []);
 
 
 	useEffect(() => {
 
 		centerPageContent(pageContextObj.hover);
-		
-		const removablePageClicked = (e) => {
-			pageClicked(e, pageContextObj);
-		}
 
-		const updateTouches = (e) => {
-			swipeStartY = e.touches[0].clientY;
-		}
+	}, [pageContextObj.hover]);
 
-		window.addEventListener("touchstart", updateTouches);
-		
-		pageRef.current?.addEventListener("click", removablePageClicked);
-		
-		return () => {
-			window.removeEventListener("touchstart", updateTouches);
-			pageRef.current?.removeEventListener("click", removablePageClicked);
-		}
-	}, [pageContextObj]);
-	
-	
 	
 	useEffect(() => {
 
-		if (pageContextObj.open)
+		if (pageContextObj.open) {
+			pageRef.current?.addEventListener("click", pageClicked);
 			return;
+		}
 
 		const pageContNode = pageContRef.current;
 		
@@ -94,6 +86,7 @@ const Page = React.memo (({Element, i}) => {
 		
 		return () => {
 			
+			pageRef.current?.removeEventListener("click", pageClicked);
 			pageContNode?.removeEventListener("wheel", handleOverScroll);
 			pageContNode?.removeEventListener("touchmove", handleOverScroll);
 		}
@@ -108,7 +101,7 @@ const Page = React.memo (({Element, i}) => {
 			className={ `page ${ (pageContextObj.hover === i && !pageContextObj.open) ? "open-page" : "" }` }
 		>
 		
-			{window.innerWidth > 800 && <Backg/>}
+			{showBg && <Backg/>}
 			
 			<div
 				className="page-icon"

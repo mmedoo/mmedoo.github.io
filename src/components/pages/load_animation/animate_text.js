@@ -1,8 +1,8 @@
 import "./animate_text.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, memo } from "react";
 
 
-function Animated_Text({style, text, i}) {
+const Animated_Text = memo(({style, text, i}) => {
 
 	const animatedDiv = useRef(null);
 	const contRef = useRef(null);
@@ -43,7 +43,7 @@ function Animated_Text({style, text, i}) {
 			</span>
 		</span>
 	)
-}
+})
 
 
 export default Animated_Text
