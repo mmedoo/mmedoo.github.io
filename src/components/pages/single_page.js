@@ -50,7 +50,7 @@ const Page = React.memo (({Element, i}) => {
 		if (
 			(scrolled == 0 && target < 0)
 			||
-			(scrolled >= 1 && target > 0)
+			(scrolled >= 0.99 && target > 0)
 		){
 			setPageContextObj(prev => ({ ...prev, open: true }));
 		}
