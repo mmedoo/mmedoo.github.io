@@ -1,4 +1,4 @@
-import { memo, useCallback, useContext, useEffect, useRef, useState } from "react"
+import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { components as pgs , icons } from "./pages_data"
 import { PageContext, SetPageContext } from "../../context";
 import Backg from "./background/background"
@@ -94,6 +94,8 @@ const Page = memo (({Element, i}) => {
 	}, [pageContextObj.open]);
 	
 	
+	const BackgMe = useMemo(() => <Backg/>, []);
+	
 
 	return (
 		<div
@@ -101,7 +103,7 @@ const Page = memo (({Element, i}) => {
 			className={ `page ${ (pageContextObj.hover === i && !pageContextObj.open) ? "open-page" : "" }` }
 		>
 		
-			{showBg && <Backg/>}
+			{showBg && !pageContextObj.open && pageContextObj.hover === i && BackgMe}
 			
 			<div
 				className="page-icon"

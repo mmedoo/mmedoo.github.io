@@ -2,21 +2,19 @@
 	overflow-y: hidden;
 	overflow-x: visible;
 	display: block;
-	/* white-space: nowrap; */
-	/* margin: 5px 0; */
 }
 
 .text_wrap {
-	
 	font: inherit;
 	font-size: 100%;
 	display: block;
-	transform: translate(0, 110%);
+	position: relative;
+	top: 250px;
 	transition: 0.5s;
 	transition-delay: 0s;
 }
 
 .text_wrap_appear {
+	top: 0;
 	transition-delay: calc(var(--order) * 0.05s);
-	transform: none;
 }
