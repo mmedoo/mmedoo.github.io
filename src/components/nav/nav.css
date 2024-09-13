@@ -22,7 +22,7 @@
 
 
 .nav .item {
-	border: 1px solid rgba(175, 175, 175);
+	border: 1px solid rgba(255, 255, 255,0.25);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -117,7 +117,7 @@
 	--current-radius: var(--opened-radius);
 	--current-angle: var(--angle);
 	pointer-events: all;
-	backdrop-filter: blur(3px) brightness(1.5);
+	backdrop-filter: blur(20px) brightness(1.5);
 }
 
 
@@ -126,5 +126,5 @@
 }
 
 .openNav .item:not(.fix):hover {
-	backdrop-filter: blur(3px) brightness(0.7);
+	backdrop-filter: blur(20px) brightness(0.7);
 }
