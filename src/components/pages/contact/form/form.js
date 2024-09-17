@@ -1,8 +1,6 @@
 import "./form.css";
 import ANIMATED_TEXT from "../../load_animation/animate_text";
 
-
-
 function focusInp(e) {
 	e.target.parentElement.classList.add("focus");
 }
@@ -19,19 +17,14 @@ function submitMessage(e) {
 	formData.append('template_id', 'port');
 	formData.append('user_id', 'VlIZlX3XpFdgpVYZR');
 
-	// for (let input of e.currentTarget.elements) {
-	// 	if (input.type !== "submit") {
-	// 		// console.log(input.name, input.value);
-	// 		formData.append(input.name, input.value);
-	// 	}
-	// }
-
 	const submit_button = e.currentTarget.querySelector("input[type='submit']");
 
 	submit_button.disabled = true;
+
+	const controler = new AbortController();
 	
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'https://api.emailjs.com/api/v1.0/email/send-form');
+	xhr.open('POST', 'https://api.emailjs.com/api/v1.0/email/send-form', controler.signal);
 	xhr.onload = function () {
 		if (xhr.status === 200) {
 			alert('Your mail is sent!');
