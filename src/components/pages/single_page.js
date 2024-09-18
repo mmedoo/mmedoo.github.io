@@ -42,7 +42,6 @@ const Page = (({ Element, i }) => {
 		window.addEventListener("resize", handleResize);
 
 		const pageClicked = () => {
-			centerPageContent(i);
 			setPageContextObj({ hover: i, open: false });
 		};
 
@@ -52,28 +51,23 @@ const Page = (({ Element, i }) => {
 			let target = (e.deltaY !== undefined) ?
 				e.deltaY
 				: (swipeStartY - e.touches[0].clientY);
+
 			let scrolled = pageContRef.current?.scrollTop / (pageContRef.current?.scrollHeight - pageContRef.current?.offsetHeight);
 
-			if (
-				(scrolled == 0 && target < 0)
-				||
-				(scrolled >= 0.99 && target > 0)
-			) {
-				setPageContextObj(prev => ({ ...prev, open: true }));
-			}
+			( (scrolled == 0 && target < 0) || (scrolled >= 0.99 && target > 0) )
+			&&
+			setPageContextObj(prev => ({ ...prev, open: true }));
 		};
 
-		const pageContNode = pageContRef.current;
-
-		pageContNode?.addEventListener("wheel", handleOverScroll);
-		pageContNode?.addEventListener("touchmove", handleOverScroll);
+		pageContRef.current?.addEventListener("wheel", handleOverScroll);
+		pageContRef.current?.addEventListener("touchmove", handleOverScroll);
 
 		return () => {
 			window.removeEventListener("touchstart", updateTouches)
 			window.removeEventListener("resize", handleResize);
 			pageRef.current?.removeEventListener("click", pageClicked);
-			pageContNode?.removeEventListener("wheel", handleOverScroll);
-			pageContNode?.removeEventListener("touchmove", handleOverScroll);
+			pageContRef.current?.removeEventListener("wheel", handleOverScroll);
+			pageContRef.current?.removeEventListener("touchmove", handleOverScroll);
 		}
 
 	}, []);
@@ -85,7 +79,7 @@ const Page = (({ Element, i }) => {
 			className={`page ${(pageContextObj.hover === i && !pageContextObj.open) ? "open-page" : ""}`}
 		>
 
-			{showBg && !pageContextObj.open && pageContextObj.hover === i && <Backg/>}
+			{showBg && !pageContextObj.open && pageContextObj.hover === i && <Backg />}
 
 			<div
 				className="page-icon"

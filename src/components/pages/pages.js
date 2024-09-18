@@ -19,21 +19,23 @@ const Pages = memo(() => {
 	const setPageContextObj = useContext(SetPageContext);
 	const cntnr = useRef(null);
 
-	const updateTouches = useCallback((e) => {
-		swipeStartX = e.touches[0].clientX;
-		setPageContextObj((prev) => {
-			currentHover = prev.hover;
-			return prev;
-		})
-	}, []);
 
 	useEffect(() => {
+
+		const updateTouches = (e) => {
+			swipeStartX = e.touches[0].clientX;
+			setPageContextObj((prev) => {
+				currentHover = prev.hover;
+				return prev;
+			})
+		};
+
 		window.addEventListener("touchstart", updateTouches);
 
 		return () => {
 			window.removeEventListener("touchstart", updateTouches);
 		}
-	}, [])
+	}, []);
 
 
 
@@ -53,15 +55,15 @@ const Pages = memo(() => {
 	const handleOpenWheel = useCallback((e) => {
 
 		if (e.deltaY !== undefined) {
-			
+
 			let max = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
 			let move = map(Math.abs(max), 0, 100, 0, 0.1);
-			
+
 			setPageContextObj(prev => ({
 				...prev,
 				hover: max < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, pgs.length - 1)
 			}));
-			
+
 			return;
 		}
 
