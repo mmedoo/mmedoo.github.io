@@ -4,7 +4,7 @@ import { PageContext, SetPageContext } from "../../context";
 import { components as pgs } from "./pages_data"
 import Page from "./single_page"
 
-function map(value, start1, stop1, start2, stop2){
+function map(value, start1, stop1, start2, stop2) {
 	return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
 }
 
@@ -17,98 +17,95 @@ const Pages = memo(() => {
 
 	const pageContextObj = useContext(PageContext);
 	const setPageContextObj = useContext(SetPageContext);
-
 	const cntnr = useRef(null);
 
+	const updateTouches = useCallback((e) => {
+		swipeStartX = e.touches[0].clientX;
+		setPageContextObj((prev) => {
+			currentHover = prev.hover;
+			return prev;
+		})
+	}, []);
 
-	const centerCont = useCallback((obj) => {	
+	useEffect(() => {
+		window.addEventListener("touchstart", updateTouches);
 
-		let v = `calc(-${(obj.hover).toFixed(3)} * ( var(--mini-w) + var(--gap)) )`;
+		return () => {
+			window.removeEventListener("touchstart", updateTouches);
+		}
+	}, [])
+
+
+
+	const centerCont = useCallback((hover) => {
+
+		let v = `calc(-${(hover).toFixed(3)} * ( var(--mini-w) + var(--gap)) )`;
 
 		cntnr.current.style.translate = `${v} 0`;
 	}, []);
-	
-	
+
+	useEffect(() => {
+		centerCont(pageContextObj.hover);
+	}, [pageContextObj.hover]);
+
+
+
 	const handleOpenWheel = useCallback((e) => {
 
 		if (e.deltaY !== undefined) {
+			
 			let max = Math.abs(e.deltaY) > Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
 			let move = map(Math.abs(max), 0, 100, 0, 0.1);
+			
 			setPageContextObj(prev => ({
 				...prev,
-				hover: max < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, pgs.length-1)
+				hover: max < 0 ? Math.max(prev.hover - move, 0) : Math.min(prev.hover + move, pgs.length - 1)
 			}));
-			return;	
+			
+			return;
 		}
 
-		let deltaX = e.touches[0].clientX - swipeStartX;		
+		let deltaX = e.touches[0].clientX - swipeStartX;
 		let move = map(Math.abs(deltaX), 0, window.innerWidth, 0, 5);
-		let newPos = deltaX > 0 ? Math.max(currentHover - move, 0) : Math.min(currentHover + move, pgs.length-1);
-		
+		let newPos = deltaX > 0 ? Math.max(currentHover - move, 0) : Math.min(currentHover + move, pgs.length - 1);
+
 		setPageContextObj(prev => ({
 			...prev,
 			hover: newPos,
 		}));
-		
+
 	}, []);
 
-		
-	useEffect(() => {
-		centerCont(pageContextObj);
-		
-		const updateTouches = (e) => {
-			swipeStartX = e.touches[0].clientX;
-			currentHover = pageContextObj.hover;
-		}
-
-		window.addEventListener("touchstart", updateTouches);
-		
-		return () => {
-			window.removeEventListener("touchstart", updateTouches);
-		}
-		
-	}, [pageContextObj]);
-	
-	
 
 	useEffect(() => {
 
-		if (!pageContextObj.open)
-			return;
+		if (pageContextObj.open) {
 
-		(async () => {
-			await new Promise(r => setTimeout(r, 300));
-			window.addEventListener("touchmove", handleOpenWheel, {passive: true});
-			window.addEventListener("wheel",handleOpenWheel,{passive: true});
-		})();
+			(async () => {
+				await new Promise(r => setTimeout(r, 300));
+				window.addEventListener("touchmove", handleOpenWheel, { passive: true });
+				window.addEventListener("wheel", handleOpenWheel, { passive: true });
+			})();
+		}
 
 		return () => {
 			window.removeEventListener("touchmove", handleOpenWheel);
-			window.removeEventListener("wheel",handleOpenWheel);
+			window.removeEventListener("wheel", handleOpenWheel);
 		}
-
 	}, [pageContextObj.open]);
-	
-	
-	
-	const pageList = useMemo(() => {
 
+
+	const pageList = useMemo(() => {
 		return pgs.map((comp, i) =>
-			
 			<Page Element={comp} i={i} key={i} />
 		);
 	}, []);
-	
-	
+
+
 	return (
-		<>
-			<div ref={cntnr} className="pages-cont">
-				{pageList}
-				
-			</div>
-		</>
-
-
+		<div ref={cntnr} className="pages-cont">
+			{pageList}
+		</div>
 	)
 });
 

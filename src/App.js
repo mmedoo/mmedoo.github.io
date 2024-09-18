@@ -1,7 +1,7 @@
 import "./style.css"
 import Pages from "./components/pages/pages"
 import { PageContext, SetPageContext } from "./context"
-import { useState, useEffect, useCallback, memo } from "react"
+import { useState, useEffect, memo } from "react"
 import Nav from "./components/nav/nav"
 
 const bgnum = (() => {
@@ -20,11 +20,11 @@ const App = memo(() => {
 		
 	const [showNav, setShowNav] = useState(window.innerWidth > 800);
 
-	const handleResize = useCallback(() => {
-		setShowNav(window.innerWidth > 800);
-	}, []);
-
+	
 	useEffect(() => {
+		const handleResize = () => {
+			setShowNav(window.innerWidth > 800);
+		};
 		
 		window.addEventListener("resize", handleResize);
 		
