@@ -1,4 +1,4 @@
-import { memo, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useContext, useEffect, useRef, useState } from "react"
 import { components as pgs, icons } from "./pages_data"
 import { PageContext, SetPageContext } from "../../context";
 import Backg from "./background/background"
