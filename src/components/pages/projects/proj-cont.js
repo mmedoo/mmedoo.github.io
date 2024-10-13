@@ -15,7 +15,7 @@ const Project = memo((props) => {
 					<div className="pjt-link">
 						<a href={props.link} target="_blank" rel="noreferrer">
 							<div>
-								Link
+								GitHub
 							</div>
 						</a>
 					</div>

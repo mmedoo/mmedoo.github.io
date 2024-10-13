@@ -54,7 +54,7 @@ const Page = (({ Element, i }) => {
 
 			let scrolled = pageContRef.current?.scrollTop / (pageContRef.current?.scrollHeight - pageContRef.current?.offsetHeight);
 
-			( (scrolled == 0 && target < 0) || (scrolled >= 0.99 && target > 0) )
+			( (scrolled === 0 && target < 0) || (scrolled >= 0.99 && target > 0) )
 			&&
 			setPageContextObj(prev => ({ ...prev, open: true }));
 		};

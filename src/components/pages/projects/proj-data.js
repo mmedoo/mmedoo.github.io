@@ -15,15 +15,16 @@ const data = [
 	{
 		title: "Serverless URL Shortener",
 		link: "https://github.com/mmedoo/serverless-url-shortener",
-		description: "Simple Serverless RESTful URL Shortening Nodejs App.",
+		description: "Single located serverless URL shortener. Uses Sequelize as ORM.",
 		tags: ["Node", "Express", "Sequelize", "PostgreSQL", "EJS"],
 		preview: "https://shrtnurl.vercel.app"
 	},
 	{
-		title: "Django URL Shortener",
-		link: "https://github.com/mmedoo/django-url-shortener",
-		description: "Simple RESTful URL Shortening Django App.",
-		tags: ["ORM", "Django", "SQLite"]
+		title: "Edge-based URL Shortener",
+		link: "https://github.com/mmedoo/url-shortener",
+		description: "Uses Edge Functions and PostgreSQL with hash indexing. Sharded database into 6 around the globe. DB queries are routed to first responding DB.",
+		tags: ["Node", "Edge Functions", "PostgreSQL"],
+		preview: "https://mmedoo.github.io/url"
 	},
 	{
 		title: "Build React Action",
@@ -37,7 +38,8 @@ const data = [
 		description: "Simple yet efficient end-to-end encrypted Mailbox to import and export messages securely.",
 		tags: ["crypto-js", "Express", "PostgreSQL", "React.js"],
 		preview: "https://serverless-mailbox.vercel.app"
-	},{
+	},
+	{
 		title: "Basic Todo App",
 		link: "https://github.com/mmedoo/todo-app",
 		description: "Basic Todo list app with documented API using Swagger.",
