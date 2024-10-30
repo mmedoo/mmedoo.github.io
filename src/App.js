@@ -5,8 +5,9 @@ import { useState, useEffect, memo } from "react"
 import Nav from "./components/nav/nav"
 
 const bgnum = (() => {
-	let n = Math.floor((Math.random() * 11)) + 1;
-	if (n > 11) n = 11;
+	let max = 8;
+	let n = Math.floor((Math.random() * max)) + 1;
+	if (n > max) n = max;
 	return n;
 })();
 
