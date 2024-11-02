@@ -54,11 +54,20 @@ const Page = (({ Element, i }) => {
 
 			let scrolled = pageContRef.current?.scrollTop / (pageContRef.current?.scrollHeight - pageContRef.current?.offsetHeight);
 
-			( (scrolled === 0 && target < 0) || (scrolled >= 0.99 && target > 0) )
-			&&
-			setPageContextObj(prev => ({ ...prev, open: true }));
-		};
+			let isBottomEdge = (scrolled === 1 && target > 0);
+			let isTopEdge = (scrolled === 0 && target < 0);
 
+			if (!isBottomEdge && !isTopEdge) {
+				return;
+			}
+			
+			pageContRef.current.scrollTo({
+				top: isBottomEdge ? pageContRef.current.scrollHeight : 0,
+				behavior: 'smooth'
+			});			
+			setPageContextObj(prev => ({ ...prev, open: true }))
+		}
+			
 		pageContRef.current?.addEventListener("wheel", handleOverScroll);
 		pageContRef.current?.addEventListener("touchmove", handleOverScroll);
 
