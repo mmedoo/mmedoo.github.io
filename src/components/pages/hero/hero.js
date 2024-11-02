@@ -17,7 +17,7 @@ function Hero() {
 						textAlign: 'left'
 					}}>
 						<ANIM_TEXT text="I'm" i={1} />
-						<ANIM_TEXT text="Mohmaed" i={2} />
+						<ANIM_TEXT text="Mohamed" i={2} />
 					</span>
 				</div>
 			</div>
