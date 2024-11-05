@@ -33,6 +33,12 @@ const data = [
 		tags: ["GitHub Actions", "React.js", "CI/CD"]
 	},
 	{
+		title: "Caching Proxy CLI",
+		link: "https://github.com/mmedoo/caching-proxy",
+		description: "Modular, Ready to use Caching Proxy CLI with LRU eviction policy.",
+		tags: ["CLI", "LRU", "Caching"],
+	},
+	{
 		title: "Serverless E2EE Mailbox",
 		link: "https://github.com/mmedoo/serverless-e2ee-mailbox",
 		description: "Simple yet efficient end-to-end encrypted Mailbox to import and export messages securely.",
