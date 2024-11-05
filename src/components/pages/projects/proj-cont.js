@@ -3,7 +3,7 @@ import ANIMATED_TEXT from "../load_animation/animate_text"
 import data from "./proj-data"
 
 const Project = memo((props) => {
-	
+
 	return (
 		<div className="project">
 			<div className="pjt-header">
@@ -11,30 +11,38 @@ const Project = memo((props) => {
 				{props.title}
 
 				<div className="pjt-link-wrapper">
-					
-					<div className="pjt-link">
-						<a href={props.link} target="_blank" rel="noreferrer">
-							<div>
-								GitHub
-							</div>
-						</a>
-					</div>
-					
+
 					{
 						props.preview
 						&&
 						<div className="pjt-link">
 							<a href={props.preview} target="_blank" rel="noreferrer">
 								<div>
-									Preview
+									{/* Preview */}
+									<svg id={Date.now()}>
+										<use xlinkHref="./icons/live.svg#live" />
+									</svg>
 								</div>
 							</a>
 						</div>
 					}
-					
+
+					<div className="pjt-link">
+						<a href={props.link} target="_blank" rel="noreferrer">
+							<div>
+								{/* GitHub */}
+								<svg id={Date.now()}>
+									<use xlinkHref="./icons/github.svg#github" />
+								</svg>
+							</div>
+						</a>
+					</div>
+
+
+
 				</div>
 			</div>
-			
+
 			<div className="pjt-desc">{props.description}</div>
 			<div className="pjt-tags">
 				{

@@ -7,10 +7,9 @@
 	border-radius: 10px;
 	padding: 0 10%;
 	margin-bottom: 30px;
-}
-
-.project > div {
-	margin: 10px 0;
+	& > div {
+		margin: 10px 0;
+	}
 }
 
 .pjt-header {
@@ -31,23 +30,32 @@
 
 .pjt-link {
 	margin-left: 10px;
-	border: 3px solid #fff;
-	padding: 0 10px;
-	border-radius: 10px;
+	/* border: 2px solid #aaa; */
+	/* padding: 0 10px; */
+	border-radius: 50%;
 	cursor: pointer;
-}
-
-.pjt-link a {
-	text-decoration: none;
-	color: white;
-}
-
-.pjt-link > * {
-	mix-blend-mode: difference;
-}
-
-.pjt-link:hover {
-	background-color: #fff;
+	display: flex;
+	align-items: center;
+	/* opacity: 0.7; */
+	& div {
+		display: flex;
+		align-items: center;
+	}
+	& svg {
+		transition: 0.15s;
+		fill: #aaa;
+		height: 50px;
+		width: 50px;
+	}
+	& a {
+		text-decoration: none;
+		color: white;	
+	}
+	&:hover svg {
+		fill: #fff;
+		/* opacity: 1; */
+		/* background-color: #fff; */
+	}
 }
 
 .pjt-desc {
