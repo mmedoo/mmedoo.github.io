@@ -35,7 +35,7 @@ const data = [
 	{
 		title: "Caching Proxy CLI",
 		link: "https://github.com/mmedoo/caching-proxy",
-		description: "Modular, Ready to use Caching Proxy CLI with LRU eviction policy.",
+		description: "Modular, Ready to use, Read-through Caching Proxy CLI with LRU eviction policy.",
 		tags: ["CLI", "LRU", "Caching"],
 	},
 	{
