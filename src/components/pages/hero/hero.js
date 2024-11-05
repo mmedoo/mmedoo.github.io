@@ -6,7 +6,7 @@ import Course from "./sub_views/course"
 import Know from "./sub_views/know"
 import Stack from "./sub_views/stack"
 import Tools from "./sub_views/tools"
-
+import Edu from "./sub_views/education";
 
 function Hero() {
 	return (
@@ -33,11 +33,12 @@ function Hero() {
 				</div>
 			</div>
 			
-			<Lang/>
+			<Edu/>
 			<Course/>
-			<Know/>
+			<Lang/>
+			{/* <Know/> */}
 			<Stack/>
-			<Tools/>
+			{/* <Tools/> */}
 
 			<div className="view">
 				<div className="view_content">

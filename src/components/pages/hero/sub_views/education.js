@@ -1,14 +1,12 @@
 import ANIM_TEXT from "../../load_animation/animate_text";
 
-
-
-export default function Tools(){
+function Edu(){
 	return (
 		<div className="view">
 				<div className="view_content">
 					<div className="lang">
 						<ANIM_TEXT
-							text={"TOOLS"}
+							text={"EDUCATION"}
 							i={1}
 						/>
 						<ANIM_TEXT
@@ -22,15 +20,17 @@ export default function Tools(){
 						/>
 					</div>
 
-					<div className="credits cw">
+					<div  className="credits cw">
 						<div>
-							<ANIM_TEXT text={"VSCODE"} i={4}/>
-							<ANIM_TEXT text={"Git & GitHub"} i={3}/>
-							<ANIM_TEXT text={"GitHub Actions"} i={5}/>
-							<ANIM_TEXT text={"Linux"} i={6}/>
+							<ANIM_TEXT text={"Faculty of Sciences"} i={1}/>
+							<ANIM_TEXT text={"Computer Science and Statistics"} i={2}/>
+							<ANIM_TEXT text={"University of Ain Shams"} i={3}/>
+							<ANIM_TEXT text={"Cairo, Egypt"} i={4}/>
 						</div>
 					</div>
 				</div>
 			</div>
-	);
+	)
 }
+
+export default Edu;

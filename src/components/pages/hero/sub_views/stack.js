@@ -7,7 +7,7 @@ function Stack (){
 				<div className="view_content">
 					<div className="lang">
 						<AnimatedText
-							text={"STACK"}
+							text={"SKILLS"}
 							i={1}
 						/>
 						<AnimatedText
@@ -23,10 +23,14 @@ function Stack (){
 
 					<div className="credits cw">
 						<div>
-							<AnimatedText text={"MySQL"} i={3}/>
-							<AnimatedText text={"Django"} i={4}/>
-							<AnimatedText text={"React"} i={5}/>
-							<AnimatedText text={"Node"} i={6}/>
+							<AnimatedText text={"MySQL, PostgreSQL"} i={1}/>
+							<AnimatedText text={"Node.js"} i={2}/>
+							<AnimatedText text={"React.js"} i={3}/>
+							<AnimatedText text={"RESTful API Design"} i={4}/>
+							<AnimatedText text={"Object-Relational Mapping (ORM)"} i={5}/>
+							<AnimatedText text={"Good Knowledge of System Design"} i={6}/>
+							<AnimatedText text={"Git & GitHub"} i={7}/>
+							<AnimatedText text={"GitHub Actions"} i={8}/>
 						</div>
 					</div>
 				</div>
