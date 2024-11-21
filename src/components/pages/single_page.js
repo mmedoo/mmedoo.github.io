@@ -54,7 +54,7 @@ const Page = (({ Element, i }) => {
 
 			let scrolled = pageContRef.current?.scrollTop / (pageContRef.current?.scrollHeight - pageContRef.current?.offsetHeight);
 
-			let isBottomEdge = (scrolled === 1 && target > 0);
+			let isBottomEdge = (scrolled >= 0.99 && target > 0);
 			let isTopEdge = (scrolled === 0 && target < 0);
 
 			if (!isBottomEdge && !isTopEdge) {
