@@ -45,12 +45,12 @@ const data = [
 		tags: ["crypto-js", "Express", "PostgreSQL", "React.js"],
 		preview: "https://serverless-mailbox.vercel.app"
 	},
-	{
-		title: "Basic Todo App",
-		link: "https://github.com/mmedoo/todo-app",
-		description: "Basic Todo list app with documented API using Swagger.",
-		tags: ["Swagger", "Express", "SQLite", "React.js", "Express", "Sequelize.js"]
-	}
+	// {
+		// title: "Basic Todo App",
+		// link: "https://github.com/mmedoo/todo-app",
+		// description: "Basic Todo list app with documented API using Swagger.",
+		// tags: ["Swagger", "Express", "SQLite", "React.js", "Express", "Sequelize.js"]
+	// }
 ];
 
 export default data;
