@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useContext, useEffect, useMemo, useRef, useState } from "react";
 import "./nav.css";
 import data from "./nav_data"
 import { SetPageContext } from "../../context";
@@ -18,7 +18,7 @@ function rToAngle(r) {
 	return r * 180 / (Math.PI * openedRadius);
 }
 
-function Nav() {
+export default memo(function Nav() {
 
 	const [navOpen, setNavOpen] = useState(false);
 	const setPageObj = useContext(SetPageContext);
@@ -74,7 +74,7 @@ function Nav() {
 			></div>
 		</div>
 	);
-}
+})
 
 
 
@@ -99,11 +99,11 @@ function NavItem({ data, i, setPageObj, setNavOpen }) {
 			setNavOpen(false);
 		}
 
-		itemRef.current?.addEventListener("mouseover", hoverPage);
+		itemRef.current?.addEventListener("mouseenter", hoverPage);
 		itemRef.current?.addEventListener("click", openPage);
 
 		return () => {
-			itemRef.current?.removeEventListener("mouseover", hoverPage);
+			itemRef.current?.removeEventListener("mouseenter", hoverPage);
 			itemRef.current?.removeEventListener("click", openPage);
 		}
 
@@ -133,5 +133,3 @@ function NavItem({ data, i, setPageObj, setNavOpen }) {
 		</div>
 	)
 }
-
-export default Nav;

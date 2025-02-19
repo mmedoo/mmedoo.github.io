@@ -1,14 +1,6 @@
 import "./form.css";
 import ANIMATED_TEXT from "../../load_animation/animate_text";
 
-function focusInp(e) {
-	e.target.parentElement.classList.add("focus");
-}
-function focusOut(e) {
-	e.target.parentElement.classList.remove("focus");
-}
-
-
 function submitMessage(e) {
 	e.preventDefault();
 	const formData = new FormData(e.currentTarget);
@@ -50,8 +42,6 @@ function Form() {
 				<div>
 					<label htmlFor="name">Name:</label>
 					<input
-						onFocus={focusInp}
-						onBlur={focusOut}
 						required
 						type="text"
 						name="name"
@@ -61,8 +51,6 @@ function Form() {
 				<div>
 					<label htmlFor="email">Email:</label>
 					<input
-						onFocus={focusInp}
-						onBlur={focusOut}
 						required
 						type="email"
 						name="email"
@@ -72,8 +60,6 @@ function Form() {
 				<div>
 					<label htmlFor="subject">Subject:</label>
 					<input
-						onFocus={focusInp}
-						onBlur={focusOut}
 						required
 						type="text"
 						name="subject"
@@ -82,7 +68,7 @@ function Form() {
 				</div>
 				<div id="mess">
 					<label htmlFor="message">Message</label>
-					<textarea onFocus={focusInp} onBlur={focusOut} required type="text" name="message" id="message"></textarea>
+					<textarea required type="text" name="message" id="message"></textarea>
 				</div>
 				<div id="submit">
 					<input

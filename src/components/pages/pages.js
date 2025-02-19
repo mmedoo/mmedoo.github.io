@@ -4,8 +4,8 @@ import { PageContext, SetPageContext } from "../../context";
 import { components as pgs } from "./pages_data"
 import Page from "./single_page"
 
-function map(value, start1, stop1, start2, stop2) {
-	return start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1));
+function map(value, min1, max1, min2, max2) {
+	return min2 + (max2 - min2) * ((value - min1) / (max1 - min1));
 }
 
 
@@ -18,7 +18,6 @@ const Pages = memo(() => {
 	const pageContextObj = useContext(PageContext);
 	const setPageContextObj = useContext(SetPageContext);
 	const cntnr = useRef(null);
-
 
 	useEffect(() => {
 
