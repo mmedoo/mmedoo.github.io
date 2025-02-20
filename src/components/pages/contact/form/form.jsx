@@ -9,7 +9,7 @@ function Form() {
 	useEffect(() => {
 		const controller = new AbortController();
 
-		formRef.current.addEventListener("submit", (e) => {
+		formRef.current?.addEventListener("submit", (e) => {
 			e.preventDefault();
 			const formData = new FormData(e.currentTarget);
 
@@ -48,7 +48,7 @@ function Form() {
 		<section className="contact-form">
 			<ANIMATED_TEXT text="Contact" i={2} />
 			<br />
-			<form onSubmit={submitMessage}>
+			<form>
 				<div>
 					<label htmlFor="name">Name:</label>
 					<input
