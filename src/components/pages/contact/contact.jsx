@@ -2,6 +2,7 @@ import CIRCLE from "./circle/circle"
 import ANIMATED_TEXT from "../load_animation/animate_text";
 import Form from "./form/form";
 import "./contact.css";
+import React from "react"
 
 function Contact() {
 	return (

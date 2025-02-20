@@ -1,3 +1,4 @@
+import React from "react"
 import "./page.css"
 import { memo, useCallback, useContext, useEffect, useMemo, useRef } from "react"
 import { PageContext, SetPageContext } from "../../context";

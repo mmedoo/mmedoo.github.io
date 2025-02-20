@@ -1,5 +1,6 @@
+import React from "react"
 import { useCallback, useContext, useEffect, useRef, useState } from "react"
-import { components as pgs, icons } from "./pages_data"
+import { components, icons } from "./pages_data"
 import { PageContext, SetPageContext } from "../../context";
 import Backg from "./background/background"
 
@@ -19,7 +20,7 @@ const Page = (({ Element, i }) => {
 	const centerPageContent = useCallback((n) => {
 		let relativePos = Number((n - i).toFixed(3));
 
-		pageContRef.current.style.translate = `calc(${relativePos * 20 / (pgs.length - 1)}% - 50%) -50%`;
+		pageContRef.current.style.translate = `calc(${relativePos * 20 / (components.length - 1)}% - 50%) -50%`;
 
 		pageIconRef.current.style.translate = `${relativePos * 100}%`;
 	}, []);

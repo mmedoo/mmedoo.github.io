@@ -1,6 +1,7 @@
 import "./about.css"
+import React from "react"
 
-function Hero() {
+function About() {
 	return (
 		<div className="view">
 			<div className="view_content">
@@ -11,4 +12,4 @@ function Hero() {
 }
 
 
-export default Hero;
+export default About;

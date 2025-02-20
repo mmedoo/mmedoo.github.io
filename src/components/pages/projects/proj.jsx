@@ -1,5 +1,6 @@
 import Cont from "./proj-cont"
 import "./proj.css"
+import React from "react"
 
 
 function Proj() {

@@ -1,0 +1,59 @@
+[
+	{
+		"header": "EDUCATION",
+		"lines": [
+			"Faculty of Sciences",
+			"Computer Science and Statistics",
+			"University of Ain Shams",
+			"Cairo, Egypt"
+		]
+	},
+	{
+		"header": "COURSEWORK",
+		"lines": [
+			"C++",
+			"OOP",
+			"Data Structure & Algorithms",
+			"Relational DBMS (MySQL)",
+			"Cryptography",
+			"Complexity Analysis",
+			"Operating Systems",
+			"Linear Programming",
+			"Web Development",
+			"Operations Research",
+			"Pure Statisics",
+			"Computer Networks"
+		]
+	},
+	{
+		"header": "LANGUAGES",
+		"cols": 2,
+		"lines": [
+			[
+				"Advanced",
+				"C++"
+			],
+			[
+				"Advanced",
+				"Javascript"
+			],
+			[
+				"Intermediate",
+				"Python"
+			]
+		]
+	},
+	{
+		"header": "STACK",
+		"lines": [
+			"MySQL, PostgreSQL",
+			"Node.js",
+			"React.js",
+			"RESTful API Design",
+			"Object-Relational Mapping (ORM)",
+			"Good Knowledge of System Design",
+			"Git & GitHub",
+			"GitHub Actions"
+		]
+	}
+]

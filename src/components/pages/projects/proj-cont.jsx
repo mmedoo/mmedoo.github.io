@@ -1,6 +1,7 @@
+import React from "react"
 import { useMemo, memo } from "react";
 import ANIMATED_TEXT from "../load_animation/animate_text"
-import data from "./proj-data"
+import data from "./proj-data.json"
 
 const Project = memo((props) => {
 

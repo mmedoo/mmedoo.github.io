@@ -1,5 +1,6 @@
 import { useMemo, useRef } from "react";
 import "./circle.css";
+import React from "react"
 
 const data = [
 	{

@@ -15,9 +15,7 @@
 }
 
 .pages-cont {
-	/* --mini-w: calc(100vw * 0.45); */
-	/* --mini-h: calc(100vh * 0.55); */
-	--mini-w: calc(100vw * 0.15);
+	--mini-w: calc(100vw * 0.45);
 	--mini-h: calc(100vh * 0.55);
 	--gap: 30px;
 }

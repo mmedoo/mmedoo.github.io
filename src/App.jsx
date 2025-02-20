@@ -1,3 +1,4 @@
+import React from "react"
 import "./style.css"
 import Pages from "./components/pages/pages"
 import { PageContext, SetPageContext } from "./context"

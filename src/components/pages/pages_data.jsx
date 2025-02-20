@@ -2,6 +2,7 @@ import Hero from "./hero/hero"
 import Proj from "./projects/proj"
 import Contect from "./contact/contact"
 // import About from "./about/about"
+import React from "react"
 
 
 const components = [

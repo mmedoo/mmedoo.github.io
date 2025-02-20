@@ -1,5 +1,6 @@
 import "./animate_text.css";
 import { useEffect, useRef, memo } from "react";
+import React from "react"
 
 
 const Animated_Text = memo(({style, text, i}) => {

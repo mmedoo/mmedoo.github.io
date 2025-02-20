@@ -1,6 +1,7 @@
+import React from "react"
 import { memo, useContext, useEffect, useMemo, useRef, useState } from "react";
 import "./nav.css";
-import data from "./nav_data"
+import data from "./nav_data.json"
 import { SetPageContext } from "../../context";
 
 
@@ -51,7 +52,7 @@ export default memo(function Nav() {
 
 	const items = useMemo(() =>
 		data.map((data, i) =>
-			<NavItem data={data} i={i} setPageObj={setPageObj} setNavOpen={setNavOpen} key={i} />
+			<NavItem data={data} i={i} setNavOpen={setNavOpen} key={i} />
 		)
 		, []);
 
@@ -78,9 +79,10 @@ export default memo(function Nav() {
 
 
 
-function NavItem({ data, i, setPageObj, setNavOpen }) {
+const NavItem = memo(function ({ data, i, setNavOpen }) {
 
 	const itemRef = useRef(null);
+	const setPageObj = useContext(SetPageContext);
 
 	useEffect(() => {
 
@@ -132,4 +134,4 @@ function NavItem({ data, i, setPageObj, setNavOpen }) {
 			</div>
 		</div>
 	)
-}
+})
