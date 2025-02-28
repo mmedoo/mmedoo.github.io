@@ -28,17 +28,20 @@ const Project = memo((props) => {
 						</div>
 					}
 
-					<div className="pjt-link">
-						<a href={props.link} target="_blank" rel="noreferrer">
-							<div>
-								{/* GitHub */}
-								<svg id={Date.now()}>
-									<use xlinkHref="./icons/github.svg#github" />
-								</svg>
-							</div>
-						</a>
-					</div>
-
+					{
+						props.link
+						&&
+						<div className="pjt-link">
+							<a href={props.link} target="_blank" rel="noreferrer">
+								<div>
+									{/* GitHub */}
+									<svg id={Date.now()}>
+										<use xlinkHref="./icons/github.svg#github" />
+									</svg>
+								</div>
+							</a>
+						</div>
+					}
 
 
 				</div>
