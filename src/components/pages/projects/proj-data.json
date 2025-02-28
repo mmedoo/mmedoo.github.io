@@ -28,7 +28,6 @@
 	},
 	{
 		"title": "YouCaption: Chrome Extension",
-		"link": "https://chromewebstore.google.com/detail/lefdgeoknkjoombcbolekfeaghodhbec",
 		"description": "Chrome Extension for better YouTube captions readability.",
 		"tags": ["React.js", "Chrome API"],
 		"preview": "https://chromewebstore.google.com/detail/lefdgeoknkjoombcbolekfeaghodhbec"
