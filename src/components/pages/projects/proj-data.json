@@ -27,6 +27,13 @@
 		"preview": "https://mmedoo.github.io/url"
 	},
 	{
+		"title": "YouCaption: Chrome Extension",
+		"link": "https://chromewebstore.google.com/detail/lefdgeoknkjoombcbolekfeaghodhbec",
+		"description": "Chrome Extension for better YouTube captions readability.",
+		"tags": ["React.js", "Chrome API"],
+		"preview": "https://chromewebstore.google.com/detail/lefdgeoknkjoombcbolekfeaghodhbec"
+	},
+	{
 		"title": "Build React Action",
 		"link": "https://github.com/mmedoo/build-react-on-push",
 		"description": "A GitHub Action to build React app on every push and publishes it to a branch and directory of user's choice.",
