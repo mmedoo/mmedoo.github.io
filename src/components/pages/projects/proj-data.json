@@ -20,8 +20,8 @@
 		"preview": "https://mmedoo.github.io/url"
 	},
 	{
-		"title": "YouCaption: Chrome Extension",
-		"description": "Chrome Extension for better YouTube captions readability.",
+		"title": "YouCaption: Browser Extension",
+		"description": "Browser Extension for better YouTube captions readability.",
 		"tags": ["React.js", "Chrome API"],
 		"preview": "https://chromewebstore.google.com/detail/lefdgeoknkjoombcbolekfeaghodhbec"
 	},
