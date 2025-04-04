@@ -1,9 +1,9 @@
 import React from "react"
-import { memo, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useContext, useMemo, useRef, useState } from "react";
 import "./nav.css";
 import data from "./nav_data.json"
 import { SetPageContext } from "../../context";
-
+import { useAddEventListener } from "../../hooks";
 
 const itemsNo = data.length;
 const openedRadius = 90;
@@ -26,30 +26,18 @@ export default memo(function Nav() {
 	const cntnrRef = useRef(null);
 	const fixedControlRef = useRef(null);
 
-	useEffect(() => {
+	useAddEventListener(cntnrRef, "focusout", () => {
+		setNavOpen(false);
+	});
 
-		const setNavOpenFalse = () => {
-			setNavOpen(false);
-		}
-
-		const setNavOpenTrue = () => {
-			setNavOpen(true);
-			setPageObj(prev => ({
-				...prev,
-				open: true,
-			}));
-		}
-
-		cntnrRef.current?.addEventListener("focusout", setNavOpenFalse);
-		fixedControlRef.current?.addEventListener("click", setNavOpenTrue);
-
-		return () => {
-			cntnrRef.current?.removeEventListener("focusout", setNavOpenFalse);
-			fixedControlRef.current?.removeEventListener("click", setNavOpenTrue);
-		}
-
-	}, []);
-
+	useAddEventListener(fixedControlRef, "click", () => {
+		setNavOpen(true);
+		setPageObj(prev => ({
+			...prev,
+			open: true,
+		}));
+	});
+	
 	const items = useMemo(() =>
 		data.map((data, i) =>
 			<NavItem data={data} i={i} setNavOpen={setNavOpen} key={i} />
@@ -79,38 +67,26 @@ export default memo(function Nav() {
 
 
 
-const NavItem = memo(function ({ data, i, setNavOpen }) {
+const NavItem = memo(function Item({ data, i, setNavOpen }) {
 
 	const itemRef = useRef(null);
 	const setPageObj = useContext(SetPageContext);
 
-	useEffect(() => {
-
-		const hoverPage = () => {
-			setPageObj(prev => ({
-				...prev,
-				hover: i,
-			}))
-		}
-
-		const openPage = () => {
-			setPageObj({
-				hover: i,
-				open: false,
-			});
-			setNavOpen(false);
-		}
-
-		itemRef.current?.addEventListener("mouseenter", hoverPage);
-		itemRef.current?.addEventListener("click", openPage);
-
-		return () => {
-			itemRef.current?.removeEventListener("mouseenter", hoverPage);
-			itemRef.current?.removeEventListener("click", openPage);
-		}
-
-	}, []);
-
+	useAddEventListener(itemRef, "mouseenter", () => {
+		setPageObj(prev => ({
+			...prev,
+			hover: i,
+		}))
+	})
+	
+	useAddEventListener(itemRef, "click", () => {
+		setPageObj({
+			hover: i,
+			open: false,
+		});
+		setNavOpen(false);
+	})
+	
 	return (
 		<div
 			ref={itemRef}

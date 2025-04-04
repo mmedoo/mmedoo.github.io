@@ -20,6 +20,13 @@
 		"preview": "https://mmedoo.github.io/url"
 	},
 	{
+		"title": "useEventer: React Hook for Adding Listeners Efficiently",
+		"description": "Available as an npm package and a GitHub Gist.",
+		"link": "https://github.com/mmedoo/use-eventer",
+		"tags": ["React Hooks", "npm"],
+		"preview": "https://www.npmjs.com/package/use-eventer"
+	},
+	{
 		"title": "YouCaption: Browser Extension",
 		"description": "Browser Extension for better YouTube captions readability.",
 		"tags": ["React.js", "Chrome API"],

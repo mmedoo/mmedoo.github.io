@@ -2,8 +2,9 @@ import React from "react"
 import "./style.css"
 import Pages from "./components/pages/pages"
 import { PageContext, SetPageContext } from "./context"
-import { useState, useEffect, memo } from "react"
+import { useState, memo } from "react"
 import Nav from "./components/nav/nav"
+import { useAddEventListener } from "./hooks"
 
 const bgnum = (() => {
 	let max = 8;
@@ -22,18 +23,10 @@ const App = memo(() => {
 		
 	const [showNav, setShowNav] = useState(window.innerWidth > 800);
 
-	
-	useEffect(() => {
-		const handleResize = () => {
-			setShowNav(window.innerWidth > 800);
-		};
-		
-		window.addEventListener("resize", handleResize);
-		
-		return () => 
-			window.removeEventListener("resize", handleResize);
-	}, []);
-		
+	useAddEventListener({current: window}, "resize", () => {
+		setShowNav(window.innerWidth > 800);
+	})
+
 	return (
 		<>
 

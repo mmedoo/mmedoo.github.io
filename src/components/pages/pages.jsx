@@ -37,19 +37,11 @@ const Pages = memo(() => {
 		}
 	}, []);
 
-
-
-	const centerCont = useCallback((hover) => {
-
-		let v = `calc(-${(hover).toFixed(3)} * ( var(--mini-w) + var(--gap)) )`;
-
-		cntnr.current.style.translate = `${v} 0`;
-	}, []);
-
+	
 	useEffect(() => {
-		centerCont(pageContextObj.hover);
+		let v = `calc(-${(pageContextObj.hover).toFixed(3)} * ( var(--mini-w) + var(--gap)) )`;
+		cntnr.current.style.translate = `${v} 0`;
 	}, [pageContextObj.hover]);
-
 
 
 	const handleOpenWheel = useCallback((e) => {

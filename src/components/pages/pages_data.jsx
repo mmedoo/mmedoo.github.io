@@ -13,15 +13,15 @@ const components = [
 ];
 
 const icons = [
-	<svg>
+	<svg key={"about"}>
 		<use xlinkHref="icons/about.svg#about"/>
 	</svg>
 	,
-	<svg>
+	<svg key={"rocket"}>
 		<use xlinkHref="icons/rocket.svg#rocket"/>
 	</svg>
 	,
-	<svg>
+	<svg key={"send"}>
 		<use xlinkHref="icons/send.svg#send"/>
 	</svg>
 ];
