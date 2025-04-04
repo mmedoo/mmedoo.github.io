@@ -16,7 +16,7 @@
 		"title": "Edge-based URL Shortener",
 		"link": "https://github.com/mmedoo/url-shortener",
 		"description": "Uses Edge Functions and PostgreSQL with hash indexing. Sharded database into 6 around the globe. DB queries are routed to first responding DB.",
-		"tags": ["Edge Functions"],
+		"tags": ["Edge Functions", "PostgreSQL"],
 		"preview": "https://mmedoo.github.io/url"
 	},
 	{
@@ -29,14 +29,14 @@
 	{
 		"title": "YouCaption: Browser Extension",
 		"description": "Browser Extension for better YouTube captions readability.",
-		"tags": ["React.js", "Chrome API"],
+		"tags": ["React", "Chrome API"],
 		"preview": "https://chromewebstore.google.com/detail/lefdgeoknkjoombcbolekfeaghodhbec"
 	},
 	{
 		"title": "Build React Action",
 		"link": "https://github.com/mmedoo/build-react-on-push",
 		"description": "A GitHub Action to build React app on every push and publishes it to a branch and directory of user's choice.",
-		"tags": ["GitHub Actions", "React.js", "CI/CD"]
+		"tags": ["GitHub Actions", "React", "CI/CD"]
 	},
 	{
 		"title": "Caching Proxy CLI",
