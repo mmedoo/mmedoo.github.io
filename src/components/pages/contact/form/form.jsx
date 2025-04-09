@@ -40,7 +40,9 @@ function Form() {
 			
 		}, { signal: controller.signal });
 
-		return () => controller.abort();
+		return () => {
+			controller.abort();
+		}
 
 	}, [])
 
@@ -48,7 +50,7 @@ function Form() {
 		<section className="contact-form">
 			<ANIMATED_TEXT text="Contact" i={2} />
 			<br />
-			<form>
+			<form ref={formRef}>
 				<div>
 					<label htmlFor="name">Name:</label>
 					<input
