@@ -34,7 +34,7 @@ export function useAddEventListener(ref, event, callback, dependencies = [], opt
 
 		if (!product) {
 			for (let i = 0; i < refs.length; i++) {
-				refs[i]?.current?.addEventListener(events[i], handlers[i], { signal: controller.signal });
+				refs[i]?.current?.addEventListener(events[i], handlers[i], controller);
 			}
 			return () => controller.abort();			
 		}
@@ -42,7 +42,7 @@ export function useAddEventListener(ref, event, callback, dependencies = [], opt
 		for (let rf of refs) {
 			for (let e of events) {
 				for (let handler of handlers) {
-					rf?.current?.addEventListener(e, handler, { signal: controller.signal });
+					rf?.current?.addEventListener(e, handler, controller);
 				}
 			}
 		}

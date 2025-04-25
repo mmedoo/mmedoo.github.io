@@ -21,8 +21,6 @@ function Form() {
 
 			submit_button.disabled = true;
 
-			const controler = new AbortController();
-
 			var xhr = new XMLHttpRequest();
 			xhr.open('POST', 'https://api.emailjs.com/api/v1.0/email/send-form', controler.signal);
 			xhr.onload = function () {
@@ -38,7 +36,7 @@ function Form() {
 			};
 			xhr.send(formData);
 			
-		}, { signal: controller.signal });
+		}, controller);
 
 		return () => {
 			controller.abort();
