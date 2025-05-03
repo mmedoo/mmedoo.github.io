@@ -46,12 +46,11 @@
 	{
 		"header": "STACK",
 		"lines": [
-			"MySQL, PostgreSQL",
+			"Relational Databases",
 			"Node.js",
+			"Expressjs",
 			"React.js",
-			"RESTful API Design",
-			"Object-Relational Mapping (ORM)",
-			"Good Knowledge of System Design",
+			"Redux toolkit",
 			"Git & GitHub",
 			"GitHub Actions"
 		]
