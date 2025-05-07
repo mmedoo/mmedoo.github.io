@@ -20,6 +20,12 @@
 		"preview": "https://mmedoo.github.io/url"
 	},
 	{
+		"title": "Nagwa: Full-Stack Task Managment App",
+		"link": "https://github.com/mmedoo/nagwa",
+		"description": "Feature-rich task management application built with React, Express.js and TypeScript.",
+		"tags": ["React", "Redux", "React-Router", "Express.js", "Sequelize.js (ORM)", "SQLite"]
+	},
+	{
 		"title": "useEventer: React Hook for Adding Listeners Efficiently",
 		"description": "Available as an npm package and a GitHub Gist.",
 		"link": "https://github.com/mmedoo/use-eventer",
