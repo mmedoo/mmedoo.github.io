@@ -30,15 +30,11 @@ const App = memo(() => {
 	return (
 		<>
 
-			<div
-				id="bodybg"
-			>
+			<div id="bodybg">
 				<picture>
 					<source type="image/avif" srcSet={`./imgs/bgs/${bgnum}.avif`} />
 					<img src={`./imgs/bgs/${bgnum}.jpg`} alt="background" />
 				</picture>
-				
-				
 			</div>
 
 			<div className="bg-credits">

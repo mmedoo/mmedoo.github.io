@@ -104,7 +104,7 @@ const basicSketch = (p) => {
 };
 
 
-const P5Wrapper = memo(() => {
+const P5Wrapper = memo(({ ...props }) => {
 	const canvasRef = useRef();
 
 	useEffect(() => {
@@ -124,6 +124,7 @@ const P5Wrapper = memo(() => {
 				"zIndex": "-10000",
 				inset: "0",
 			}}
+			{ ...props }
 		>
 		</div>
 	);

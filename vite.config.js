@@ -6,8 +6,5 @@ import compression from "vite-plugin-compression"
 export default defineConfig({
 	plugins: [
 		react({ jsxRuntime: 'classic' }),
-		compression({
-			algorithm: 'brotliCompress'
-		})
 	],
 })
